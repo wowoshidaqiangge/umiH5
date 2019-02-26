@@ -12,6 +12,12 @@ export default class Contract extends Component {
   }
 
 
+
+  componentWillMount(){
+    this.props.dispatch({type:'contract/getJoinIn'})
+  }
+
+
   render() {
     return (
       <div className={styles.contract}>
@@ -55,19 +61,19 @@ export default class Contract extends Component {
 
         <div className={styles.footer}>
           <div className={styles.firstPart}>
-            <div>甲方：杭州蓝后网络科技有限公司</div>
-            <div className={styles.address}>联系地址：<input type="text" style={{border:'none'}}/></div>
-            <div>联系电话：<input type="text" maxLength="11" style={{border:'none'}}/></div>
-            <div>甲方代表签字/盖章：<input type="text" maxLength="4" style={{border:'none',width:'25%'}}/></div>
-            <div>日期：{moment().format('YYYY年MM月DD日')}</div>
+            <div>甲方:杭州蓝后网络科技有限公司</div>
+            <div className={styles.address}>联系地址:杭州经济技术开发区下沙街道金乔街583号金湾创业大厦二区五幢722室</div>
+            <div>联系电话:13336069956</div>
+            <div>甲方代表签字/盖章:</div>
+            <div>日期:{moment().format('YYYY年MM月DD日')}</div>
           </div>
 
           <div className={styles.secondPart}>
             <div>乙方:<input type="text" style={{border:'none',width:'75%'}}/></div>
-            <div className={styles.address}>联系地址：<input type="text" style={{border:'none',width:'55%'}}/></div>
-            <div>联系电话：<input type="text" maxLength="11" style={{border:'none',width:'50%'}}/></div>
-            <div>乙方代表签字/盖章：<input type="text" maxLength="4" style={{border:'none',width:'10%'}}/></div>
-            <div>日期：{moment().format('YYYY年MM月DD日')}</div>
+            <div className={styles.address}>联系地址:<input type="text" style={{border:'none',width:'55%'}}/></div>
+            <div>联系电话:<input type="text" maxLength="11" style={{border:'none',width:'50%'}}/></div>
+            <div>乙方代表签字/盖章:<input type="text" maxLength="4" style={{border:'none',width:'10%'}}/></div>
+            <div>日期:{moment().format('YYYY年MM月DD日')}</div>
           </div>
         </div>
 

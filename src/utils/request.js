@@ -12,7 +12,7 @@ const sysParams = {
 };
 //获取token的方法
 function getToken() {
-  const token1 = '123';//window.location.search('token'); //地址栏
+  const token1 = 'ea7b727690dae766793f4e196828edbf';//window.location.search('token'); //地址栏
   const token2 = '435';//window.localStorage.getItem('token'); //本地的
   const token3 = ''; //从app获取到的
   return token1 || token2 || token3;
@@ -22,34 +22,14 @@ function getToken() {
 //接口列表
 const api = {
   join:{
-    return:'{$testUrl}/api/shop/applyReturn',//申请退还押金
-    getBill:'{$testUrl}/api/shop/getJoinBill',//加盟商账单
-    getMonthBill:'{$testUrl}/api/shop/getMonthBill',//加盟商筛选年月的消费趋势
+    return:`${testUrl}api/shop/applyReturn`,//申请退还押金
+    getBill:`${testUrl}api/shop/getJoinBill`,//加盟商账单
+    getMonthBill:`${testUrl}api/shop/getMonthBill`,//加盟商筛选年月的消费趋势
   },
 };
 //封装请求
 const request = async function request(url,params){
-  params.concat(sysParams);
-  return axios.post(url,params).then((res)=>{
-    if(res.status==200){
-      if(res.data.code==1){
-        return res.data.data;
-      }else if(res.data.code==-2){
-        Toast.fail(res.data.message,3);
-        return;
-        //暂时不处理登陆过期的情况
-      }else{
-        Toast.fail(res.data.message,3);
-        return;
-      }
-    }else{
-      Toast.fail('系统出现一个了错误咯',3);
-      return;
-    }
-  })
+  return axios.post(url,params);
 };
 
-export default {
-  api,
-  request
-};
+export default {api, request,sysParams};

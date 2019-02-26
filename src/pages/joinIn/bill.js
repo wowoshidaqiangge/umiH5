@@ -1,24 +1,17 @@
 import React, {Component} from 'react'
-// import echarts from 'echarts'
 import {Button,Picker,List,Toast} from 'antd-mobile'
 import styles from './index.less'
 import axios from 'axios'
 import {connect} from 'dva'
-import { MiniArea } from 'ant-design-pro/lib/Charts';
-import moment from 'moment';
-
+import { Bar } from 'ant-design-pro/lib/Charts';
 import {api,request} from '../../utils/request'
 
-const visitData = [];
-const beginDay = new Date().getTime();
-for (let i = 0; i < 20; i += 1) {
-  visitData.push({
-    x: moment(new Date(beginDay + (1000 * 60 * 60 * 24 * i))).format('YYYY-MM-DD'),
-    y: Math.floor(Math.random() * 100) + 10,
-  });
-}
-
-const xAxis = ['1月','2月','3月','4月','5月']
+const salesData = [{x: "1月", y: 38},
+  {x: "2月", y: 52},
+  {x: "3月",y: 61},
+  {x: "4月",y: 145},
+  {x: "5月", y: 48},
+  {x: "6月", y: 38}];
 
 class Bill extends Component {
   constructor(props) {
@@ -32,6 +25,13 @@ class Bill extends Component {
       monthValue: ['上半年'],
       monthArr:['2019','2018','2017','2016'],
     }
+  }
+
+  componentWillMount(){
+    const {dispatch} = this.props
+    const params = {'time': new Date().getTime()}
+    dispatch({type:'bill/getJoinBill', payload:params})
+    console.log('sssssssssssssssssss2',this.props.location.search)
   }
 
   onChangeYear (year) {
@@ -48,7 +48,7 @@ class Bill extends Component {
 
   returnMoney(){
     const params = [];
-    this.props.dispatch('bill/returnMoney',params)
+    this.props.dispatch({type:'bill/returnMoney',payload:params})
 
     // console.log(api);
     // const res = request(api.join.return,params);
@@ -66,7 +66,9 @@ class Bill extends Component {
 
   render() {
     const{monthValue,yearValue} = this.state
-    const{history} = this.props
+    const{history,bill} = this.props
+    const {costData} = bill
+    console.log('cccc',bill,costData)
 
     const yearStyle = {
       display: 'inline-block',
@@ -86,6 +88,7 @@ class Bill extends Component {
       {label: (<div key= '0'><span style={{ ...yearStyle }}/><span>上半年</span></div>), value: '上半年',},
       {label: (<div key= '1'><span style={{ ...yearStyle}}/><span>下半年</span></div>), value: '下半年',},
     ];
+
     return (
       <div className={styles.bill}>
         <div className={styles.inner}>
@@ -120,13 +123,12 @@ class Bill extends Component {
 
             </div>
 
-            <div style={{width:'100%',height:'240px'}}>
-              <MiniArea
-                line
-                color="#FF67E8"
-                height={45}
-                data={visitData}
-                xAxis={xAxis}
+            <div className={styles.bar}>
+              <Bar autoLabel
+                height={200}
+                title="￥20000.00"
+                data={salesData}
+                color='#FFBFC9'
               />
 
             </div>
