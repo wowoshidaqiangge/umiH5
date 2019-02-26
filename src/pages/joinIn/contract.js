@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import styles from './index.less'
-import {InputItem} from 'antd-mobile'
+// import {InputItem} from 'antd-mobile'
 import moment from 'moment'
 
 

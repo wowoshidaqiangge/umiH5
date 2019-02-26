@@ -1,95 +1,267 @@
-.joinInfo{
-  .href{
+.joinInfo {
+  .href {
     display: flex;
     line-height: 43px;
-    margin-left: 15px;
-    .circle{
-      width: 13px;
-      height: 13px;
-      border-radius: 50% ;
-      border: 1px solid #666666;
-      margin-top: 14px;
-    }
+    //margin-left: 15px;
+    :global{
+      .am-checkbox-wrapper, .am-checkbox-agree-label{
+        font-size: 11px;
+        .am-checkbox-inner{
+          width: 13px;
+          height: 13px;
 
-    .right{
-      .read{
-        font-size:11px;
-        color:#FF4E4E;
-        margin-left: 5px;
-      }
+        }
 
-      a{
-        font-size:11px;
-        color:#FF4E4E;
-        padding-right: 120px;
-        width: 80%;
-        text-decoration:underline
+        .am-checkbox-inner::after{
+          right: 3px !important;
+          height: 7px;
+        }
       }
     }
 
+    .read {
+      font-size: 11px !important;
+      color: #FF4E4E;
+      margin-left: 5px;
+    }
 
+    a {
+      font-size: 11px;
+      color: #FF4E4E;
+      padding-right: 120px;
+      width: 80%;
+      text-decoration: underline
+    }
 
   }
 
-  .button{
+  .button {
     margin: 20px 15px 0px 15px;
   }
 
 }
 
-.contract{
+.contract {
   background-color: #fff;
   padding-top: 20px;
-  .title{
+  .title {
     color: #333333;
     font-size: 20px;
     line-height: 20px;
     paddding-top: 20px;
     margin-bottom: 15px;
+    width: 100%;
   }
 
-  .content{
+  .content {
     margin: 0px 18px auto 16px;
     text-align: left;
     font-size: 12px;
-    color:#666666;
+    color: #666666;
     line-height: 20px;
 
-    .timeFill{
+    .timeFill {
       border: none;
       width: 30px;
     }
   }
 
-  .footer{
+  .footer {
     display: flex;
     font-size: 10px;
-    color:#666666;
+    color: #666666;
     line-height: 20px;
     margin-left: 15px;
     padding-top: 25px;
     padding-bottom: 26px;
-    .firstPart,.secondPart{
+    .firstPart, .secondPart {
       text-align: left;
-      .timeFill{
+      .timeFill {
         border: none;
         width: 30px;
       }
-      .address{
+      .address {
         display: flex;
       }
     }
 
-    .firstPart{
+    .firstPart {
       width: 57%;
     }
 
-    .secondPart{
+    .secondPart {
       width: 40%;
     }
   }
 }
 
-.bill{
+.bill {
+  .inner {
+    margin: 15px 15px;
+    .header, .shopping, .month, .wholeCost {
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 8px;
+      .title {
+        display: flex;
+        justify-content: space-between;
+        .left {
+          font-family: PingFang-SC-Regular;
+          color: #333333;
+          line-height: 40px;
+          font-size: 18px;
+          margin-left: 15px;
+        }
+      }
+    }
 
+    .header {
+      height: 100%;
+      margin-top: 15px;
+      img {
+        width: 100%;
+      }
+      .headerBottom {
+        width: 100%;
+        .pay {
+          color: #333333;
+          font-size: 30px;
+          margin-top: 20px;
+        }
+        .payInfo {
+          color: #333333;
+          font-size: 14px;
+          margin-top: 15px;
+          margin-bottom: 20px;
+          font-family: PingFang-SC-Regular;
+          text-align: center;
+        }
+      }
+    }
+
+    .shopping {
+      margin-top: 15px;
+
+      .title {
+        display: flex;
+        justify-content: space-between;
+        .right {
+          display: flex;
+          justify-content: space-between;
+          line-height: 40px;
+          //font-size: 13px;
+          //color: #FF3C64;
+          margin-right: 6px;
+
+
+        }
+      }
+    }
+
+    .picker {
+      //border: 1px solid;
+      display: flex;
+      img {
+        width: 11px;
+        height: 6px;
+        line-height: 40px;
+        margin-top: 18px
+      }
+      :global {
+        .am-list-item, .am-list-item-middle {
+          //background-color: green;
+          .am-list-line{
+            padding-right: 0px !important;
+            .am-list-content {
+              color: #FF3C64;
+              font-size: 13px;
+            }
+            .am-list-extra {
+              display: none !important;
+            }
+          }
+
+        }
+      }
+    }
+
+
+    .month,.wholeCost {
+      margin-top: 15px;
+      height: 100%;
+      .content {
+        margin: 0px 4vw 4vw 4vw;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        .total, .success, .return, .effective {
+          background-repeat: no-repeat;
+          //-webkit-background-size: 100%;
+          //background-size: 48%;
+          background-size: 100% auto;
+          width: 40.3vw;
+          height: 24.18vw;
+          margin: 2vw 0;
+          .title, .amount {
+            width: 48%;
+            color: #fff;
+          }
+          .title {
+            width: 75%;
+            font-size: 14px;
+            padding-top: 15px;
+            margin-left: 15px;
+          }
+          .amount {
+            font-size: 18px;
+            margin-left: 30px;
+            margin-top: 15px;
+            width: 70%;
+            text-align: left;
+          }
+        }
+
+        .total {
+          background-image: url("../../assets/img/bill/join-red.png");
+          //height: calc(~"(100% - 210px) / 2");
+        }
+
+        .effective {
+          background-image: url("../../assets/img/bill/join-purple.png");
+        }
+
+        .success {
+          background-image: url("../../assets/img/bill/join-orange.png");
+        }
+
+        .return {
+          background-image: url("../../assets/img/bill/join-blue.png");
+        }
+      }
+
+    }
+
+    .link {
+      margin-top: 15px;
+      font-size: 13px;
+      text-align: left;
+      a {
+        color: #FF7878
+      }
+
+    }
+
+  }
+
+}
+
+:global{
+  .am-picker-popup-content{
+    .am-picker-popup-header{
+      color:red;
+      .am-picker-popup-item, .am-picker-popup-header-left{
+        color:red;
+      }
+    }
+  }
 }
