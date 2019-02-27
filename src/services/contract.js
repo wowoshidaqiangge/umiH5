@@ -1,7 +1,9 @@
 import axios from 'axios'
+import sys from '../utils/request'
 
-export async function returnMoney(payload) {
-  console.log('00000',payload)
-  return axios.post('https://testnp.napin.com/api/shop/applyReturn', payload)
+const sysParams = sys.sysParams
+
+export async function getJoinIn() {
+  return axios.post(sys.api.contract.getJoinIn, sysParams)
 }
 

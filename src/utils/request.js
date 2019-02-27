@@ -26,6 +26,10 @@ const api = {
     getBill:`${testUrl}api/shop/getJoinBill`,//加盟商账单
     getMonthBill:`${testUrl}api/shop/getMonthBill`,//加盟商筛选年月的消费趋势
   },
+
+  contract:{
+    getJoinIn:`${testUrl}api/shop/getJoinIn`,//获取加盟者信息
+  }
 };
 //封装请求
 const request = async function request(url,params){

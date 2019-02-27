@@ -1,24 +1,26 @@
 import React, {Component} from 'react'
 import styles from './index.less'
 // import {InputItem} from 'antd-mobile'
+import {connect} from 'dva'
 import moment from 'moment'
 
-
-export default class Contract extends Component {
+class Contract extends Component {
   constructor(props) {
     super(props)
     this.state = {
+
     }
   }
-
-
 
   componentWillMount(){
     this.props.dispatch({type:'contract/getJoinIn'})
   }
 
-
   render() {
+    const{contract} = this.props
+    const {endTime,isJoin,joinMoney,signImage,signTime,startTime} =contract
+    console.log(isJoin)
+
     return (
       <div className={styles.contract}>
         <div className={styles.title}>供应链战略合作协议</div>
@@ -81,3 +83,5 @@ export default class Contract extends Component {
     )
   }
 }
+
+export default connect(({contract}) => ({contract}))(Contract)
