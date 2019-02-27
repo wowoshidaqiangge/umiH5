@@ -1,9 +1,9 @@
 import * as service from '../services/index'
+import {Toast} from 'antd-mobile'
 
 export default {
   namespace: 'index',
   state: {
-    name:'zs'
 
   },
   reducers: {
@@ -12,6 +12,15 @@ export default {
     }
   },
   effects: {
+    *joinIn({payload},{call,put}){
+      const{data} = yield call (service.joinIn,payload)
+      if(data.code !== 1){
+        Toast.info('请输入完整信息',3)
+
+      }
+    }
+
+
 
 
   },

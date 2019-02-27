@@ -2,8 +2,10 @@ import React, {Component} from 'react'
 import {Button, List, InputItem, Checkbox, Toast} from "antd-mobile"
 import {createForm} from 'rc-form'
 import styles from './index.less'
-// import axios from 'axios'
+import axios from 'axios'
 import {connect} from 'dva'
+import Link from 'umi/link'
+import sys from '../../utils/request'
 
 const AgreeItem = Checkbox.AgreeItem;
 
@@ -12,15 +14,11 @@ class JoinInfo extends Component {
     super(props)
     this.state = {
       checked: false
+
+
+
+      
     }
-  }
-
-  showToast() {
-    Toast.info('请填写完整信息', 1)
-  }
-
-  showReadContract() {
-    Toast.info('请阅读合同信息', 1)
   }
 
   handleAccept() {
@@ -29,14 +27,17 @@ class JoinInfo extends Component {
 
     if (this.state.checked) {
       validateFields((error, value) => {
-        if (error) {
-          this.showToast()
-          return
+        let param = {
+          name:value.name,    //姓名
+          add:value.address,   //联系地址
+          phone:value.phone,   //电话号码
+          card:value.ID,        //身份证号码
+          company:value.companyName
         }
-
+        dispatch.post({type:'index/joinIn',payload:param})
       })
     } else {
-      this.showReadContract()
+      Toast.info('请仔细阅读并同意《纳品网加盟合作服务协议》',3)
 
     }
   }
@@ -56,6 +57,7 @@ class JoinInfo extends Component {
       return false
     }
     return true
+
   }
 
   checkPhone(rule, value, callback) {
@@ -94,27 +96,28 @@ class JoinInfo extends Component {
                 this.checkName(rule, value, callback)
               }
             }]
-          })} error={!!getFieldError('name')} maxLength={20}>姓名:</InputItem>
+          })} error={!!getFieldError('name')} maxLength={20} placeholder='请输入姓名'>姓名:</InputItem>
 
           <InputItem {...getFieldProps('ID', {
-            rules: [{required: true}, {validator: (rule, value, callback) => this.checkId(rule, value, callback)}]
-          })} error={!!getFieldError('ID')}>身份证:</InputItem>
+            rules: [{required: true,message:'请输入身份证信息'},
+              {validator: (rule, value, callback) => this.checkId(rule, value, callback)}]
+          })} error={!!getFieldError('ID')} placeholder='请输入身份证信息'>身份证:</InputItem>
 
           <InputItem {...getFieldProps('companyName', {
             rules: [{required: true}, {validator: (rule, value, callback) => this.checkCompanyName(rule, value, callback)}]
-          })} error={!!getFieldError('companyName')}>公司名称:</InputItem>
+          })} error={!!getFieldError('companyName')}placeholder='请输入公司名称'>公司名称:</InputItem>
 
 
           <InputItem {...getFieldProps('phone', {
             rules: [{required: true}, {validator: (rule, value, callback) => this.checkPhone(rule, value, callback)}]
-          })} error={!!getFieldError('phone')}>联系电话:</InputItem>
+          })} error={!!getFieldError('phone')} placeholder='请输入联系电话'>联系电话:</InputItem>
 
           <InputItem {...getFieldProps('address', {
             rules: [{required: true}, {validator: (rule, value, callback) => this.checkAddress(rule, value, callback)}]
-          })} error={!!getFieldError('address')}>联系地址:</InputItem>
+          })} error={!!getFieldError('address')} placeholder='请输入联系地址'>联系地址:</InputItem>
 
           <div style={{justifyContent: 'space-between', display: 'flex'}}>
-            <div style={{fontSize: '17px', paddingLeft: '15px', lineHeight: '44px'}}>保证金:</div>
+            <div style={{fontSize: '17px', paddingLeft: '15px', lineHeight: '44px',color:'#000'}}>保证金:</div>
             <div><InputItem disabled={true} style={{color: 'red', textAlign: 'right'}} {...getFieldProps('money', {
               initialValue: '￥20000.00'
             })} >
@@ -126,15 +129,9 @@ class JoinInfo extends Component {
         <div className={styles.href}>
 
           <AgreeItem key={'ture'} style={{fontSize: '11px'}}
-                     onChange={() => this.setState({checked: true})}
-            // checked={this.props.agreement}
-            // onChange={() => this.props.dispatch({
-            //   type: 'mobile/setState',
-            //   payload: {agreement: !this.props.agreement}
-            // })}
-          >
+                     onChange={() => this.setState({checked: true})}>
             <span className={styles.read}>请仔细阅读并同意</span>
-            <a href=''>《纳品网加盟合作服务协议》</a>
+            <Link to='joinIn/contract'>《纳品网加盟合作服务协议》</Link>
           </AgreeItem>
         </div>
 

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import {Toast} from 'antd-mobile'
 const testUrl = 'https://testnp.napin.com/'; //api请求路径
 // const testUrl = 'https://super.napin.com/'; //api请求路径
 //系统请求参数
@@ -22,14 +21,13 @@ function getToken() {
 //接口列表
 const api = {
   join:{
-    return:`${testUrl}api/shop/applyReturn`,//申请退还押金
-    getBill:`${testUrl}api/shop/getJoinBill`,//加盟商账单
-    getMonthBill:`${testUrl}api/shop/getMonthBill`,//加盟商筛选年月的消费趋势
+    return:`${testUrl}api/shop/applyReturn`,          //申请退还押金
+    getBill:`${testUrl}api/shop/getJoinBill`,         //加盟商账单
+    getMonthBill:`${testUrl}api/shop/getMonthBill`,   //加盟商筛选年月的消费趋势
+    getJoinIn:`${testUrl}api/shop/getJoinIn`,         //获取加盟者信息
+    joinIn:`${testUrl}api/shop/joinIn`,               //加盟
   },
 
-  contract:{
-    getJoinIn:`${testUrl}api/shop/getJoinIn`,//获取加盟者信息
-  }
 };
 //封装请求
 const request = async function request(url,params){
