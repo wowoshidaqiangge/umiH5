@@ -8,8 +8,11 @@ export default {
     ['umi-plugin-react', {
       antd: true,
       dva: true,
-      dynamicImport: false,
+      // dynamicImport: false,
       title: 'napinweb',
+      dynamicImport: {
+          loadingComponent: "./components/pageLoading/index"
+      },
       dll: false,
       routes: {
         exclude: [
