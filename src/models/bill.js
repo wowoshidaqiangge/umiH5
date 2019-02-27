@@ -10,9 +10,8 @@ export default {
     monthData:'',  //月消费分析
     dayConsume:'',  //年份
     nextMonth:'',   //月份
-    yearValue:[],   //默认的年的值
+    yearValue:'',   //默认的年的值
     monthValue:[],  //默认的月份值
-
   },
   reducers: {
     setState(state, action){
@@ -47,7 +46,7 @@ export default {
     },
 
     *setMonthValue({payload},{call,put}){
-      console.log(payload,'ppppp')
+      console.log('ppppp',payload,)
       yield  put ({type:'setState',payload:{monthValue:payload}})
     },
 

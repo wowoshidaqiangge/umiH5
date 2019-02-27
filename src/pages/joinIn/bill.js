@@ -22,21 +22,23 @@ class Bill extends Component {
   onChangeYear (year) {
     const {dispatch,bill} = this.props
     const{monthValue} = bill
+    console.log('yyyyy',year)
+    console.log(monthValue,)
+    let is_next = monthValue==='上半年'? 0 :1
     dispatch({type:'bill/setYearValue',payload:year})
-    dispatch({type:'bill/getMonthBill',payload:{year:year,is_next:monthValue}})
+    dispatch({type:'bill/getMonthBill',payload:{year:year,is_next:is_next}})
   }
 
   onChangeMonth(month){
     console.log('mmmm',month)
     const {dispatch,bill} = this.props
-    const{yearValue} = bill
+    // const{yearValue} = bill
     dispatch({type:'bill/setMonthValue',payload:month})
-    dispatch({type:'bill/getMonthBill',payload:{year:yearValue,is_next:month}})
+    // dispatch({type:'bill/getMonthBill',payload:{year:yearValue,is_next:month}})
   }
 
-  seeContract(){
-    const {history,bill} = this.props
-    history.push('contract')
+  seeServiceContract(){
+    console.log('跳转服务协议页面')
   }
 
   returnMoney(){
@@ -45,10 +47,9 @@ class Bill extends Component {
   }
 
   render() {
-
     const{history,bill} = this.props
     const {costData,joinMoney,allData,monthData,dayConsume,nextMonth,yearValue, monthValue} = bill
-    console.log('cccc', nextMonth,monthValue,yearValue)
+    console.log('cccc', nextMonth,dayConsume)
 
     //重新放入图表数据,后台得到的是month,money,图表要求是x,y
     let data = []
@@ -58,35 +59,25 @@ class Bill extends Component {
 
     const yearStyle = {display: 'inline-block', verticalAlign: 'middle', width: '16px', height: '16px', marginRight: '10px',}
 
-
-    //
-    // const months = []
-    // nextMonth && nextMonth.map((item)=>{
-    //   let value= item.is_next
-    //   months.push({label: (<div key= {value}><span style={{ ...yearStyle }}/><span>{item.name}</span></div>), value: {value}})
-    // })
-
-
     const years= [
       {label: (<div key= '2'><span style={{ ...yearStyle}}/><span>2018</span></div>), value: 2018,},
     ];
 
     dayConsume && dayConsume.map((item)=>{
-      years.push({label: (<div key= {item}><span style={{ ...yearStyle }}/><span>{item}</span></div>), value: {item}})
+      years.push({label: (<div key= {item}><span style={{ ...yearStyle }}/><span>{item}</span></div>), value: item})
     })
-
 
 
     const month = [
-      // {label: (<div key= '0'><span style={{ ...yearStyle }}/><span>上半年</span></div>), value: '上半年',},
-      // {label: (<div key= '下半年'><span style={{ ...yearStyle}}/><span>2018</span></div>), value: '2018',},
-    ];
+      // {label: (<div key= '下半年'><span style={{ ...yearStyle}}/><span>下半年</span></div>), value:'下半年',},
+    ]
 
     nextMonth && nextMonth.map((item,index)=>{
       let value = item
-      console.log(value,'vvvv')
-      month.push({label: (<div key= {index}><span style={{ ...yearStyle }}/><span>{item}</span></div>), value: {item}})
+      month.push({label: (<div key= {item}><span style={{ ...yearStyle }}/><span>{item}</span></div>), value: item})
     })
+
+    console.log('month',month)
 
 
     return (
@@ -126,7 +117,7 @@ class Bill extends Component {
             <div className={styles.bar}>
               <Bar autoLabel
                 height={200}
-                title="￥20000.00"
+                title="￥"
                 data={data}
                 color='#FFBFC9'
               />
@@ -197,7 +188,7 @@ class Bill extends Component {
 
           </div>
 
-          <div className={styles.link} onClick={()=>this.seeContract()}>
+          <div className={styles.link} onClick={()=>this.seeServiceContract()}>
             点此了解 <a href='#'>《纳品网加盟商合作服务协议》</a>
           </div>
         </div>
