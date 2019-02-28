@@ -16,7 +16,7 @@ class Index extends Component {
                 <div className={styles.welcome}/>
                 <ul className={styles.list}>
                     <li>To get started, edit <code>src/pages/index.js</code> and save to reload.</li>
-                    <li><a href="/joinIn">Getting Started</a></li>
+                    <li><a href="./joinIn">Getting Started</a></li>
                 </ul>
             </div>
         )

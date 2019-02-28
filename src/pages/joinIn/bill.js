@@ -196,7 +196,7 @@ class Bill extends Component {
           </div>
 
           <div className={styles.link}>
-            点此了解 <Link to='contract'>《纳品网加盟商合作服务协议》</Link>
+            点此了解 <Link to='joinIn-contract'>《纳品网加盟商合作服务协议》</Link>
           </div>
         </div>
 

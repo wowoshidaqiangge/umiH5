@@ -21,7 +21,7 @@ class GetJoin extends Component {
     const {getJoin, dispatch} = this.props
     const {isJoin} = getJoin
     if (isJoin === 1 || isJoin === 2) {
-      dispatch(routerRedux.push({pathname: '/joinIn/contract'}))
+      dispatch(routerRedux.push({pathname: '/joinIn-contract'}))
     } else if (isJoin === 0) {
       dispatch(routerRedux.push({pathname: '/joinIn'}))
     }

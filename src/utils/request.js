@@ -17,6 +17,11 @@ function getToken() {
   const token2 = window.localStorage.getItem('token'); //本地的
   const token3 = getAppToken(); //从app获取到的
   const final_token = token1 || token2 || token3;
+  //往本地存一次token  防止跳转页面式获取不到token的问题
+  if(!token2){
+    window.localStorage.setItem('token',final_token);
+  }
+
   return final_token;
 }
 
