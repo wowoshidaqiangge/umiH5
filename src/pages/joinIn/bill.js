@@ -212,22 +212,17 @@ class Bill extends Component {
           </div>
         </div>
 
+        {/*<div className={styles.button}>*/}
+          {/*<Button type="warning" onClick={() => this.returnMoney()}>*/}
+            {/*{returnInfo.return_font}*/}
+          {/*</Button>*/}
+        {/*</div>*/}
+
         {
           num === 0 ? void[0] : (num === 1 ? <div className={styles.button}>
-            <Button type="warning" onClick={() => this.returnMoney()}
-                    style={{backgroundColor: '#FF7878', borderRadius: '0px'}}>
-              申请退还押金
-            </Button>
-          </div> : (num === 3 ? <div className={styles.button}>
-            <Button type="warning" style={{backgroundColor: '#FF7878', borderRadius: '0px'}}>
-              已申请退还
-            </Button>
-          </div> : (num === 4 ? <div className={styles.button}>
-            <Button type="warning"
-                    style={{backgroundColor: '#FF7878', borderRadius: '0px'}}>
-              押金已退还到余额
-            </Button>
-          </div> : void[0])))
+            <Button type="warning" onClick={() => this.returnMoney()}>{returnInfo.return_font}</Button></div> :
+            (num === 3 ? <div className={styles.button}><Button type="warning">{returnInfo.return_font}</Button></div> :
+              (num === 4 ? <div className={styles.button}> <Button type="warning">{returnInfo.return_font}</Button></div> : void[0])))
         }
 
 

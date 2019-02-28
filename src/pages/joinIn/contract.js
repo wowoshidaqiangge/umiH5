@@ -3,6 +3,7 @@ import styles from './style/contract.less'
 import {Modal,TextArea} from 'antd-mobile'
 import {connect} from 'dva'
 import moment from 'moment'
+import $ from 'jquery'
 
 class Contract extends Component {
   constructor(props) {
@@ -17,34 +18,6 @@ class Contract extends Component {
   componentWillMount() {
     this.props.dispatch({type: 'contract/getJoinIn'})
   }
-
-  saveSignature(){
-    console.log('baocun ')
-    document.getElementById('#signature').empty();
-    var dataUrl = document.getElementsByClassName('.js-signature').eq(1).jqSignature('getDataURL');
-    var img = document.getElementsByTagName('<img>').attr('src', dataUrl);
-    // document.getElementById('#signature').append($('<p>').text("Here's your signature:"));
-    document.getElementById('#signature').append(img);
-
-    this.setState({disabled:this.state.disabled})
-  }
-
-  clearCanvas(){
-    console.log('清空')
-  }
-
-  showSignature(){
-    document.getElementsByClassName('.js-signature').eq(1).on('jq.signature.changed', function() {
-      document.getElementById('#saveBtn').attr('disabled', false);
-    });
-  }
-
-
-
-
-  // $('.js-signature').eq(1).on('jq.signature.changed', function() {
-  //   $('#saveBtn').attr('disabled', false);
-  // });
 
   render() {
     const {contract} = this.props
@@ -98,40 +71,19 @@ class Contract extends Component {
             <div>联系电话:13336069956</div>
             <div>甲方代表签字/盖章:</div>
             {/*<img style= {{width:'40%'}}src= {require('../../assets/img/NPW.png')}/>*/}
-            <div>日期:{signTime && signTime.length > 0 ? signTime : moment().format('YYYY年MM月DD日')}</div>
+            <div>日期:{signTime}</div>
           </div>
 
           <div className={styles.secondPart}>
-            <div>乙方:{name && name.length>0 ? name : void[0]}</div>
-            <div className={styles.address}>联系地址:{addr && addr.legth>0 ? addr : void[0]}</div>
-            <div>联系电话:{phone && phone.length>0? phone : void[0]}</div>
-            <div>乙方代表签字/盖章:{signImage && signImage.length > 0 ? getImg : <button onClick={()=>{this.setState({showModal:true})}}>签名</button>
-              // <input type="text" maxLength="4" style={{border: 'none', width: '10%'}}/>
-
-            }</div>
-            <div>日期:{signTime && signTime.length > 0 ? signTime :void [0]}</div>
+            <div>乙方:{name}</div>
+            <div className={styles.address}>联系地址:{addr}</div>
+            <div>联系电话:{phone}</div>
+            <div>乙方代表签字/盖章:{name}
+            </div>
+            <div>日期:{signTime}</div>
           </div>
         </div>
 
-        <div>
-          <Modal visible={this.state.showModal} transparent
-                 maskClosable={false}>
-            <p>请在下面签名:</p>
-            <div className="js-signature" data-width="600" data-height="200" data-border="1px solid black"
-                 data-line-color="#bc0000" data-auto-fit="true"></div>
-            <div style={{display:'flex'}}>
-              <button id="clearBtn" className="btn btn-default" onClick={()=>this.clearCanvas()}>清除</button>
-              &nbsp;
-              <button id="saveBtn" className="btn btn-default" onClick={()=>this.saveSignature()} disabled>保存
-              </button>
-            </div>
-            <div id="signature">
-              <p><em>Your signature will appear here when you click "Save Signature"</em></p>
-            </div>
-
-          </Modal>
-
-        </div>
       </div>
     )
   }

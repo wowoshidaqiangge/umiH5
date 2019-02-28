@@ -1,11 +1,10 @@
 import * as service from '../services/index'
 import {Toast} from 'antd-mobile'
+import sys from "@/utils/request";
 
 export default {
   namespace: 'index',
-  state: {
-
-  },
+  state: {},
   reducers: {
     setState(state, action){
       return {...state, ...action}
@@ -13,9 +12,8 @@ export default {
   },
   effects: {
     *joinIn({payload},{call,put}){
-      console.log(payload,'加入的models层')
       const{data} = yield call (service.joinIn,payload)
-    }
+    },
 
   },
   subscriptions: {

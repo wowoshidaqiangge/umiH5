@@ -17,7 +17,10 @@ class JoinInfo extends Component {
       disabled: false  //按钮是否被禁用
     }
   }
-
+  componentWillMount() {
+    const {dispatch} = this.props
+    dispatch({type: 'getJoin/getJoinIn'})
+  }
   handleConfirm() {
     const {validateFields,getFieldsValue} = this.props.form
     if (this.state.checked) {
@@ -98,66 +101,72 @@ class JoinInfo extends Component {
 
 
   render() {
-    const {form} = this.props
-    const {disabled} = this.state
-    const {getFieldProps, getFieldError} = form
+    const {form} = this.props;
+    const {disabled} = this.state;
+    const {getFieldProps, getFieldError} = form;
+    const getMoney = '￥'+this.props.getJoin.joinMoney;
     return (
       <div className={styles.joinInfo}>
-        <form>
-          <List>
-            <InputItem {...getFieldProps('name', {
-              initialValue: localParams && localParams.name ? localParams.name : void(0),
-              rules: [{required: true,message:'请输入姓名'}, {
-                validator: (rule, value, callback) => {
-                  this.checkName(rule, value, callback)
-                }
-              }]
-            })} error={!!getFieldError('name')} maxLength={20}>姓名:</InputItem>
+        <div>
+          <form>
+            <List>
+              <InputItem {...getFieldProps('name', {
+                initialValue: localParams && localParams.name ? localParams.name : void(0),
+                rules: [{required: true,message:'请输入姓名'}, {
+                  validator: (rule, value, callback) => {
+                    this.checkName(rule, value, callback)
+                  }
+                }]
+              })} error={!!getFieldError('name')} maxLength={20}>姓名:</InputItem>
 
-            <InputItem {...getFieldProps('ID', {
-              initialValue: localParams && localParams.card ? localParams.card : void(0),
-              rules: [{required: true}, {validator: (rule, value, callback) => this.checkId(rule, value, callback)}]
-            })} error={!!getFieldError('ID')}>身份证:</InputItem>
+              <InputItem {...getFieldProps('ID', {
+                initialValue: localParams && localParams.card ? localParams.card : void(0),
+                rules: [{required: true}, {validator: (rule, value, callback) => this.checkId(rule, value, callback)}]
+              })} error={!!getFieldError('ID')}>身份证:</InputItem>
 
-            <InputItem {...getFieldProps('companyName', {
-              initialValue: localParams && localParams.companyName ? localParams.companyName : void(0),
-              rules: [{required: true}, {validator: (rule, value, callback) => this.checkCompanyName(rule, value, callback)}]
-            })} error={!!getFieldError('companyName')}>公司名称:</InputItem>
+              <InputItem {...getFieldProps('companyName', {
+                initialValue: localParams && localParams.companyName ? localParams.companyName : void(0),
+                rules: [{required: true}, {validator: (rule, value, callback) => this.checkCompanyName(rule, value, callback)}]
+              })} error={!!getFieldError('companyName')}>公司名称:</InputItem>
 
 
-            <InputItem {...getFieldProps('phone', {
-              initialValue: localParams && localParams.phone ? localParams.phone : void(0),
-              rules: [{required: true}, {validator: (rule, value, callback) => this.checkPhone(rule, value, callback)}]
-            })} error={!!getFieldError('phone')}>联系电话:</InputItem>
+              <InputItem {...getFieldProps('phone', {
+                initialValue: localParams && localParams.phone ? localParams.phone : void(0),
+                rules: [{required: true}, {validator: (rule, value, callback) => this.checkPhone(rule, value, callback)}]
+              })} error={!!getFieldError('phone')}>联系电话:</InputItem>
 
-            <InputItem {...getFieldProps('address', {
-              initialValue: localParams && localParams.addr ? localParams.addr : void(0),
-              rules: [{required: true}, {validator: (rule, value, callback) => this.checkAddress(rule, value, callback)}]
-            })} error={!!getFieldError('address')}>联系地址:</InputItem>
+              <InputItem {...getFieldProps('address', {
+                initialValue: localParams && localParams.addr ? localParams.addr : void(0),
+                rules: [{required: true}, {validator: (rule, value, callback) => this.checkAddress(rule, value, callback)}]
+              })} error={!!getFieldError('address')}>联系地址:</InputItem>
 
-            <div style={{justifyContent: 'space-between', display: 'flex'}}>
-              <div style={{fontSize: '17px', paddingLeft: '15px', lineHeight: '44px',color:'#000'}}>保证金:</div>
-              <div><InputItem disabled={true} style={{color: 'red', textAlign: 'right'}} {...getFieldProps('money', {
-                initialValue: '￥20000.00'
-              })} >
-              </InputItem></div>
+              <div style={{justifyContent: 'space-between', display: 'flex'}}>
+                <div style={{fontSize: '17px', paddingLeft: '15px', lineHeight: '44px',color:'#000'}}>保证金:</div>
+                <div><InputItem disabled={true} style={{color: 'red', textAlign: 'right'}} {...getFieldProps('money', {
+                  initialValue: getMoney
+                })} >
+                </InputItem></div>
+              </div>
+            </List>
+          </form>
+
+          <div className={styles.href}>
+            <AgreeItem key={'ture'} style={{fontSize: '11px'}}
+                       onChange={() => this.setState({checked: true})}>
+            </AgreeItem>
+            <div style={{display:'flex',lineHeight:'35px'}}>
+              <div className={styles.read}>请仔细阅读并同意</div>
+              <div className={styles.contract} onClick={()=>this.goContract()}>《纳品网加盟合作服务协议》</div>
             </div>
-          </List>
-        </form>
-
-        <div className={styles.href}>
-          <AgreeItem key={'ture'} style={{fontSize: '11px'}}
-                     onChange={() => this.setState({checked: true})}>
-          </AgreeItem>
-          <div style={{display:'flex',lineHeight:'35px'}}>
-            <div className={styles.read}>请仔细阅读并同意</div>
-            <div className={styles.contract} onClick={()=>this.goContract()}>《纳品网加盟合作服务协议》</div>
           </div>
+
+          <div className={styles.button}>
+            <Button type={'primary'} onClick={() => this.handleConfirm()} disabled={disabled}>确认</Button>
+          </div>
+
+
         </div>
 
-        <div className={styles.button}>
-          <Button type={'primary'} onClick={() => this.handleConfirm()} disabled={disabled}>确认</Button>
-        </div>
       </div>
     )
   }
@@ -200,4 +209,4 @@ function getApp(params,money) {
 }
 
 JoinInfo = createForm()(JoinInfo)
-export default connect(({index}) => ({index}))(JoinInfo)
+export default connect(({getJoin}) => ({getJoin}))(JoinInfo)

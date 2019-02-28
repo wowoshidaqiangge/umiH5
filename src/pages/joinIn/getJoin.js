@@ -23,7 +23,7 @@ class GetJoin extends Component {
     if (isJoin === 1 || isJoin === 2) {
       dispatch(routerRedux.push({pathname: '/joinIn-contract'}))
     } else if (isJoin === 0) {
-      dispatch(routerRedux.push({pathname: '/joinIn',query: {joinMoney: joinMoney}}))
+      dispatch(routerRedux.push({pathname: '/joinIn'}))
     }
   }
   getImg(){
