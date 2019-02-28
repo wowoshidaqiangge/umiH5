@@ -73,24 +73,27 @@ function getAppParams() {
 
 function getApp() {
     var client = getClient();
-    var params = {"join_info":{"name":"123","company":"","phone":"18782559175","addr":"张三李四王麻子","card":"123456789789789"}};
+    var params = {"name":"123","company":"","phone":"18782559175","addr":"张三李四王麻子","card":"123456789789789"};
+    params = JSON.stringify(params);
     console.log(params);
+    var money = "2000";
+    console.log(money);
     if(client){
         //安卓
         try {
-            window.android.joinMerchant(params);
+            window.android.joinMerchant(params,money);
         } catch (e) {
-            alert("安卓 this is error ");
+            // alert("安卓 this is error ");
             console.log(e)
         }
     }else{
         //IOS
         try {
             window.webkit.messageHandlers.joinMerchant.postMessage
-            (params)
+            (params,money)
             // window.webkit.messageHandlers.JAMS__mark.postMessage(params)
         } catch (e) {
-            alert("IOS this is error ");
+            // alert("IOS this is error ");
             console.log(e)
         }
     }
