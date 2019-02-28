@@ -1,8 +1,6 @@
 import axios from 'axios'
 import sys from '../utils/request'
 
-// const obj = Object.assign(sys.sysParams,param);
-
 export async function getJoinBill() {
   const obj = Object.assign(sys.sysParams);
   return axios.post(sys.api.join.getBill,obj)

@@ -12,6 +12,7 @@ export default {
     nextMonth:'',   //月份
     yearValue:'',   //默认的年的值
     monthValue:[],  //默认的月份值
+    // data:[],
   },
   reducers: {
     setState(state, action){
@@ -46,15 +47,13 @@ export default {
     },
 
     *setMonthValue({payload},{call,put}){
-      console.log('ppppp',payload,)
       yield  put ({type:'setState',payload:{monthValue:payload}})
     },
 
     *getMonthBill({payload},{call,put}){
-      console.log(payload,'getMonthBill')
       const {data} = yield call (service.getMonthBill,payload)
       if(data.code === 1){
-        yield put({type: 'setState', payload: {monthData: data.data.data[0]}})
+        yield put({type: 'setState', payload: {costData: data.data}})
       }
     }
 

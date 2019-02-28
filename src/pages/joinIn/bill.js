@@ -1,10 +1,11 @@
 import React, {Component} from 'react'
-import {Button,Picker,List,Toast} from 'antd-mobile'
+import {Button,Picker,List} from 'antd-mobile'
 import styles from './index.less'
-// import axios from 'axios'
 import {connect} from 'dva'
 import { Bar } from 'ant-design-pro/lib/Charts'
-// import {api,request} from '../../utils/request'
+import Link from 'umi/link'
+
+const yearStyle = {display: 'inline-block', verticalAlign: 'middle', width: '16px', height: '16px', marginRight: '10px'}
 
 class Bill extends Component {
   constructor(props) {
@@ -12,7 +13,6 @@ class Bill extends Component {
     this.state = {
     }
   }
-  // console.log('sssssssssssssssssss2',this.props.location.search)
 
   componentWillMount(){
     const {dispatch} = this.props
@@ -24,19 +24,19 @@ class Bill extends Component {
     const{monthValue} = bill
     let is_next = monthValue==='上半年'? 0 :1
     dispatch({type:'bill/setYearValue',payload:year})
-    dispatch({type:'bill/getMonthBill',payload:{year:year,is_next:is_next}})
+    let newYear = year[0]
+    dispatch({type:'bill/getMonthBill',payload:{year:newYear,is_next:is_next}})
+    this.getNewData()
   }
 
   onChangeMonth(month){
-    console.log('mmmm',month)
     const {dispatch,bill} = this.props
-    // const{yearValue} = bill
+    const{yearValue} = bill
+    let str = month[0]
+    let newYear = yearValue
+    let isNext = str === '上半年' ? 0:1
     dispatch({type:'bill/setMonthValue',payload:month})
-    // dispatch({type:'bill/getMonthBill',payload:{year:yearValue,is_next:month}})
-  }
-
-  seeServiceContract(){
-    console.log('跳转服务协议页面')
+    dispatch({type:'bill/getMonthBill',payload:{year:newYear,is_next:isNext}})
   }
 
   returnMoney(){
@@ -44,44 +44,48 @@ class Bill extends Component {
     this.props.dispatch({type:'bill/returnMoney',payload:params})
   }
 
-  render() {
-    const{history,bill} = this.props
-    const {costData,joinMoney,allData,monthData,dayConsume,nextMonth,yearValue, monthValue} = bill
-    console.log('cccc', nextMonth,dayConsume,monthValue)
-
+  getNewData(){
     //重新放入图表数据,后台得到的是month,money,图表要求是x,y
+    const {costData} = this.props.bill
     let data = []
     costData && costData.map((item)=>{
       data.push({x:item.month,y:item.money})
     })
+    return data
+  }
 
-    const yearStyle = {display: 'inline-block', verticalAlign: 'middle', width: '16px', height: '16px', marginRight: '10px',}
-
-    const years= [
-      {label: (<div key= '2'><span style={{ ...yearStyle}}/><span>2018</span></div>), value: 2018,},
-    ];
-
+  years(){
+    const {dayConsume} = this.props.bill
+    const years= []
     dayConsume && dayConsume.map((item)=>{
       years.push({label: (<div key= {item}><span style={{ ...yearStyle }}/><span>{item}</span></div>), value: item})
     })
+    return years
+  }
 
-
-    // const month = [
-    //   // {label: (<div key= '下半年'><span style={{ ...yearStyle}}/><span>下半年</span></div>), value:'下半年',},
-    // ]
-
+  month(){
+    const {nextMonth} = this.props.bill
     const month = [
-      {label: (<div key= '0'><span style={{ ...yearStyle }}/><span>上半年</span></div>), value: '0',},
-      {label: (<div key= '1'><span style={{ ...yearStyle}}/><span>下半年</span></div>), value: '1',},
-    ];
+      // {label: (<div key= '3'><span style={{ ...yearStyle }}/><span>上半年</span></div>), value: '上半年',},
+      // {label: (<div key= '2'><span style={{ ...yearStyle}}/><span>下半年</span></div>), value: '下半年',},
+    ]
 
-    // nextMonth && nextMonth.map((item,index)=>{
-    //   let value = item
-    //   month.push({label: (<div key= {item}><span style={{ ...yearStyle }}/><span>{item}</span></div>), value: item})
-    // })
+    nextMonth && nextMonth.map((item,index)=>{
+      let value = item
+      month.push({label: (<div key= {index}><span style={{ ...yearStyle }}/><span>{item}</span></div>), value: item})
+    })
+    return month
+  }
 
-    console.log('month',month)
+  newMonthValue(){
+    let newMonthValue = []
+    newMonthValue.push(this.props.bill.monthValue)
+    return newMonthValue
+  }
 
+  render() {
+    const{bill} = this.props
+    const {joinMoney,allData,monthData,yearValue} = bill
 
     return (
       <div className={styles.bill}>
@@ -100,19 +104,19 @@ class Bill extends Component {
               <div className={styles.right}>
 
                 <div className={styles.picker}>
-                  <Picker data={years} value={yearValue} cols={1} onChange={(year)=>this.onChangeYear(year)}>
+                  <Picker data={this.years()} value={yearValue} cols={1} onChange={(year)=>this.onChangeYear(year)}>
                     <List.Item>{yearValue}年</List.Item>
                   </Picker>
                   <img src={require('../../assets/img/bill/down.png')}></img>
                 </div>
 
+
                 <div className={styles.picker}>
-                  <Picker data={month} value={monthValue} cols={1} onChange={(month)=>this.onChangeMonth(month)}>
-                    <List.Item >{monthValue}</List.Item>
+                  <Picker data={this.month()} value={this.newMonthValue()} cols={1} onChange={(month)=>this.onChangeMonth(month)}>
+                    <List.Item >{this.newMonthValue()}</List.Item>
                   </Picker>
                   <img src={require('../../assets/img/bill/down.png')}></img>
                 </div>
-
               </div>
 
             </div>
@@ -120,8 +124,8 @@ class Bill extends Component {
             <div className={styles.bar}>
               <Bar autoLabel
                 height={200}
-                title="￥"
-                data={data}
+                // title="￥"
+                data={this.getNewData()}
                 color='#FFBFC9'
               />
 
@@ -191,8 +195,8 @@ class Bill extends Component {
 
           </div>
 
-          <div className={styles.link} onClick={()=>this.seeServiceContract()}>
-            点此了解 <a href='#'>《纳品网加盟商合作服务协议》</a>
+          <div className={styles.link}>
+            点此了解 <Link to='contract'>《纳品网加盟商合作服务协议》</Link>
           </div>
         </div>
 

@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
 import styles from './index.less'
-// import {InputItem} from 'antd-mobile'
 import {connect} from 'dva'
 import moment from 'moment'
-
 
 class Contract extends Component {
   constructor(props) {
@@ -17,7 +15,7 @@ class Contract extends Component {
 
   render() {
     const {contract} = this.props
-    const {endTime, isJoin, joinMoney, signImage, signTime, startTime, name, year, addr, phone} = contract
+    const {endTime,joinMoney, signImage, signTime, startTime, name, year, addr, phone} = contract
     const getImg = signImage && signImage.length > 0 ? require(signImage) : void[0];
 
     return (

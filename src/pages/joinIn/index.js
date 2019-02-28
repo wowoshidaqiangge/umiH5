@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Button, List, InputItem, Checkbox, Toast} from "antd-mobile"
 import {createForm} from 'rc-form'
 import styles from './index.less'
-// import axios from 'axios'
 import {connect} from 'dva'
 import Link from 'umi/link'
 
@@ -16,20 +15,20 @@ class JoinInfo extends Component {
     }
   }
 
-  handleAccept() {
-    const {form, dispatch} = this.props
-    const {validateFields,getFieldsValue} = form
+  handleConfirm() {
+    const {validateFields,getFieldsValue} = this.props.form
     if (this.state.checked) {
       validateFields({force:true},(error)=>{
         if(!error){
-          console.log(getFieldsValue())
           let params = {
             name:getFieldsValue().name,
             addr:getFieldsValue().address,
             phone:getFieldsValue().phone,
             card:getFieldsValue().ID
           }
-          dispatch({type:'index/joinIn',payload:params})
+          console.log(params)
+         //todo
+
         }else{
           Toast.info('请将信息填写完整')
         }
@@ -131,7 +130,7 @@ class JoinInfo extends Component {
         </div>
 
         <div className={styles.button}>
-          <Button type={'primary'} onClick={() => this.handleAccept()}>确认</Button>
+          <Button type={'primary'} onClick={() => this.handleConfirm()}>确认</Button>
         </div>
       </div>
     )
