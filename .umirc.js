@@ -2,7 +2,7 @@ import pageRoutes from './config/router.config'
 
 // ref: https://umijs.org/config/
 export default {
-  base:'/joinMerchant',//部署到非根目录时需要配置
+  base:'/joinMerchant/',//部署到非根目录时需要配置
   treeShaking: true,
   plugins: [
     // ref: https://umijs.org/plugin/umi-plugin-react.html
