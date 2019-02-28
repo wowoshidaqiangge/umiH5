@@ -1,4 +1,6 @@
 import * as service from '../services/getJoin'
+import sys from '../utils/request'
+
 
 export default {
   namespace: 'getJoin',
@@ -22,6 +24,8 @@ export default {
           }
         })
       }
+
+      sys.responseCode(data)
     },
   },
   subscriptions: {

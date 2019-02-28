@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {Toast} from 'antd-mobile'
 
 const testUrl = 'https://testnp.napin.com/'; //api请求路径
 // const testUrl = 'https://super.napin.com/'; //api请求路径
@@ -84,4 +85,13 @@ const request = async function request(url, params) {
   return axios.post(url, params);
 };
 
-export default {api, request, sysParams};
+//封装相应
+const responseCode = function responseCode(data){
+  if(data.code === -1){
+    Toast.fail(data.message,3)
+  }else if(data.code === -2){
+    Toast.fail(data.message,3)
+  }
+}
+
+export default {api, request,responseCode, sysParams};

@@ -1,113 +1,8 @@
-.joinInfo {
-  .href {
-    display: flex;
-    line-height: 43px;
-    //margin-left: 15px;
-    :global{
-      .am-checkbox-wrapper, .am-checkbox-agree-label{
-        font-size: 11px;
-        .am-checkbox-inner{
-          width: 13px;
-          height: 13px;
-
-        }
-
-        .am-checkbox-inner::after{
-          right: 3px !important;
-          height: 7px;
-        }
-      }
-    }
-
-    .read {
-      font-size: 11px !important;
-      color: #FF4E4E;
-      margin-left: 5px;
-    }
-
-    a {
-      font-size: 11px;
-      color: #FF4E4E;
-      padding-right: 120px;
-      width: 80%;
-      text-decoration: underline
-    }
-
-  }
-
-  .button {
-    margin: 20px 15px 0px 15px;
-  }
-
-}
-
-.contract {
-  background-color: #fff;
-  padding-top: 20px;
-  .title {
-    color: #333333;
-    font-size: 20px;
-    line-height: 20px;
-    paddding-top: 20px;
-    margin-bottom: 15px;
-    width: 100%;
-    text-align: center;
-  }
-
-  .content {
-    margin: 0px 18px auto 16px;
-    text-align: left;
-    font-size: 12px;
-    color: #666666;
-    line-height: 20px;
-
-    .timeFill {
-      border: none;
-      width: 30px;
-    }
-  }
-
-  .footer {
-    display: flex;
-    font-size: 10px;
-    color: #666666;
-    line-height: 20px;
-    margin-left: 15px;
-    padding-top: 25px;
-    padding-bottom: 26px;
-    .firstPart, .secondPart {
-      text-align: left;
-      .timeFill {
-        border: none;
-        width: 30px;
-      }
-      .address {
-        display: flex;
-      }
-    }
-
-    .firstPart {
-      width: 50%;
-      background-image: url("../../assets/img/NPW.png");
-      background-size:80%;
-      background-repeat: no-repeat;
-    }
-
-    .secondPart {
-      width: 55%;
-      margin-left: 10px;
-    }
-  }
-}
-
-//body{
-//  background-color: pink;
-//}
-
 
 .bill {
+  background-color: rgb(245,245,245);
   .inner {
-    margin: 15px 15px;
+    padding: 15px 15px 15px 15px;
     .header, .shopping, .month, .wholeCost {
       width: 100%;
       background-color: #ffffff;
@@ -127,7 +22,7 @@
 
     .header {
       height: 100%;
-      margin-top: 15px;
+      //margin-top: 15px;
       img {
         width: 100%;
       }
@@ -241,20 +136,20 @@
         }
 
         .total {
-          background-image: url("../../assets/img/bill/join-red.png");
+          background-image: url("../../../assets/img/bill/join-red.png");
           //height: calc(~"(100% - 210px) / 2");
         }
 
         .effective {
-          background-image: url("../../assets/img/bill/join-purple.png");
+          background-image: url("../../../assets/img/bill/join-purple.png");
         }
 
         .success {
-          background-image: url("../../assets/img/bill/join-orange.png");
+          background-image: url("../../../assets/img/bill/join-orange.png");
         }
 
         .return {
-          background-image: url("../../assets/img/bill/join-blue.png");
+          background-image: url("../../../assets/img/bill/join-blue.png");
         }
       }
 
@@ -272,7 +167,20 @@
 
   }
 
+  .button{
+    :global{
+      a:active{
+        color:#ffffff !important;
+      }
+
+      a:hover{
+        color:#ffffff !important;
+      }
+    }
+  }
 }
+
+
 
 :global{
   .am-picker-popup-content{

@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import styles from './index.css'
+import styles from './style/getJoin.css'
 import {routerRedux} from 'dva/router'
 import {connect} from 'dva'
 
@@ -20,7 +20,6 @@ class GetJoin extends Component {
   handleNextUrl() {
     const {getJoin, dispatch} = this.props
     const {isJoin,joinMoney} = getJoin
-    console.log(joinMoney,'mmoney')
     if (isJoin === 1 || isJoin === 2) {
       dispatch(routerRedux.push({pathname: '/joinIn-contract'}))
     } else if (isJoin === 0) {
@@ -29,6 +28,7 @@ class GetJoin extends Component {
   }
 
   render() {
+    console.log()
     return (
       <div className={styles.imgBanner}>
         <img className={styles.img} src={merchantImg}/>

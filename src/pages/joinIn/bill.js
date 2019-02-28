@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
-import {Button,Picker,List} from 'antd-mobile'
-import styles from './index.less'
+import {Button, Picker, List} from 'antd-mobile'
+import styles from './style/bill.less'
 import {connect} from 'dva'
-import { Bar } from 'ant-design-pro/lib/Charts'
+import {Bar} from 'ant-design-pro/lib/Charts'
 import Link from 'umi/link'
 
 const yearStyle = {display: 'inline-block', verticalAlign: 'middle', width: '16px', height: '16px', marginRight: '10px'}
@@ -10,92 +10,93 @@ const yearStyle = {display: 'inline-block', verticalAlign: 'middle', width: '16p
 class Bill extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
   }
 
-  componentWillMount(){
+  componentWillMount() {
     const {dispatch} = this.props
-    dispatch({type:'bill/getJoinBill'})
+    dispatch({type: 'bill/getJoinBill'})
+    console.log('return', this.props.bill.returnInfo)
   }
 
-  onChangeYear (year) {
-    const {dispatch,bill} = this.props
-    const{monthValue} = bill
-    let  is_next = null
-    if(typeof (monthValue) === 'string'){
-      is_next = monthValue==='上半年'? 0 :1
-    }else{
-      is_next = monthValue[0]==='上半年'? 0 :1
+  onChangeYear(year) {
+    const {dispatch, bill} = this.props
+    const {monthValue} = bill
+    let is_next = null
+    if (typeof (monthValue) === 'string') {
+      is_next = monthValue === '上半年' ? 0 : 1
+    } else {
+      is_next = monthValue[0] === '上半年' ? 0 : 1
     }
-    dispatch({type:'bill/setYearValue',payload:year})
+    dispatch({type: 'bill/setYearValue', payload: year})
     let newYear = year[0]
-    dispatch({type:'bill/getMonthBill',payload:{year:newYear,is_next:is_next}})
+    dispatch({type: 'bill/getMonthBill', payload: {year: newYear, is_next: is_next}})
     this.getNewData()
   }
 
-  onChangeMonth(month){
-    const {dispatch,bill} = this.props
-    const{yearValue} = bill
+  onChangeMonth(month) {
+    const {dispatch, bill} = this.props
+    const {yearValue} = bill
     let str = month[0]
-    let isNext = str === '上半年' ? 0:1
+    let isNext = str === '上半年' ? 0 : 1
     let newYear = null
-    if(typeof (yearValue) === 'number'){
+    if (typeof (yearValue) === 'number') {
       newYear = yearValue
-    }else{
+    } else {
       newYear = yearValue[0]
     }
-    dispatch({type:'bill/setMonthValue',payload:month})
-    dispatch({type:'bill/getMonthBill',payload:{year:newYear,is_next:isNext}})
+    dispatch({type: 'bill/setMonthValue', payload: month})
+    dispatch({type: 'bill/getMonthBill', payload: {year: newYear, is_next: isNext}})
   }
 
-  returnMoney(){
+  returnMoney() {
     const params = [];
-    this.props.dispatch({type:'bill/returnMoney',payload:params})
+    this.props.dispatch({type: 'bill/returnMoney', payload: params})
   }
 
-  getNewData(){
+  getNewData() {
     //重新放入图表数据,后台得到的是month,money,图表要求是x,y
     const {costData} = this.props.bill
     let data = []
-    costData && costData.map((item)=>{
-      data.push({x:item.month,y:item.money})
+    costData && costData.map((item) => {
+      data.push({x: item.month, y: item.money})
     })
     return data
   }
 
-  years(){
+  years() {
     const {dayConsume} = this.props.bill
-    const years= []
-    dayConsume && dayConsume.map((item)=>{
-      years.push({label: (<div key= {item}><span style={{ ...yearStyle }}/><span>{item}</span></div>), value: item})
+    const years = []
+    dayConsume && dayConsume.map((item) => {
+      years.push({label: (<div key={item}><span style={{...yearStyle}}/><span>{item}</span></div>), value: item})
     })
     return years
   }
 
-  month(){
+  month() {
     const {nextMonth} = this.props.bill
     const month = [
       // {label: (<div key= '3'><span style={{ ...yearStyle }}/><span>上半年</span></div>), value: '上半年',},
       // {label: (<div key= '2'><span style={{ ...yearStyle}}/><span>下半年</span></div>), value: '下半年',},
     ]
 
-    nextMonth && nextMonth.map((item,index)=>{
+    nextMonth && nextMonth.map((item, index) => {
       let value = item
-      month.push({label: (<div key= {index}><span style={{ ...yearStyle }}/><span>{item}</span></div>), value: item})
+      month.push({label: (<div key={index}><span style={{...yearStyle}}/><span>{item}</span></div>), value: item})
     })
     return month
   }
 
-  newMonthValue(){
+  newMonthValue() {
     let newMonthValue = []
     newMonthValue.push(this.props.bill.monthValue)
     return newMonthValue
   }
 
   render() {
-    const{bill} = this.props
-    const {joinMoney,allData,monthData,yearValue} = bill
+    const {bill} = this.props
+    const {joinMoney, allData, monthData, yearValue, returnInfo} = bill
+    const num = returnInfo.is_return
 
     return (
       <div className={styles.bill}>
@@ -114,7 +115,7 @@ class Bill extends Component {
               <div className={styles.right}>
 
                 <div className={styles.picker}>
-                  <Picker data={this.years()} value={yearValue} cols={1} onChange={(year)=>this.onChangeYear(year)}>
+                  <Picker data={this.years()} value={yearValue} cols={1} onChange={(year) => this.onChangeYear(year)}>
                     <List.Item>{yearValue}年</List.Item>
                   </Picker>
                   <img src={require('../../assets/img/bill/down.png')}></img>
@@ -122,8 +123,9 @@ class Bill extends Component {
 
 
                 <div className={styles.picker}>
-                  <Picker data={this.month()} value={this.newMonthValue()} cols={1} onChange={(month)=>this.onChangeMonth(month)}>
-                    <List.Item >{this.newMonthValue()}</List.Item>
+                  <Picker data={this.month()} value={this.newMonthValue()} cols={1}
+                          onChange={(month) => this.onChangeMonth(month)}>
+                    <List.Item>{this.newMonthValue()}</List.Item>
                   </Picker>
                   <img src={require('../../assets/img/bill/down.png')}></img>
                 </div>
@@ -133,10 +135,10 @@ class Bill extends Component {
 
             <div className={styles.bar}>
               <Bar autoLabel
-                height={200}
+                   height={200}
                 // title="￥"
-                data={this.getNewData()}
-                color='#FFBFC9'
+                   data={this.getNewData()}
+                   color='#FFBFC9'
               />
 
             </div>
@@ -155,12 +157,12 @@ class Bill extends Component {
               </div>
 
               <div className={styles.effective}>
-                <div className={styles.title} >有效消费(元)</div>
+                <div className={styles.title}>有效消费(元)</div>
                 <div className={styles.amount}>{monthData.eff_money}</div>
               </div>
 
               <div className={styles.success}>
-                <div className={styles.title} >成功订单(笔)</div>
+                <div className={styles.title}>成功订单(笔)</div>
                 <div className={styles.amount}>{monthData.eff_count}</div>
               </div>
 
@@ -186,12 +188,12 @@ class Bill extends Component {
               </div>
 
               <div className={styles.effective}>
-                <div className={styles.title} >有效消费(元)</div>
+                <div className={styles.title}>有效消费(元)</div>
                 <div className={styles.amount}>{allData.eff_money}</div>
               </div>
 
               <div className={styles.success}>
-                <div className={styles.title} >成功订单(笔)</div>
+                <div className={styles.title}>成功订单(笔)</div>
                 <div className={styles.amount}>{allData.eff_count}</div>
               </div>
 
@@ -210,13 +212,24 @@ class Bill extends Component {
           </div>
         </div>
 
+        {
+          num === 0 ? void[0] : (num === 1 ? <div className={styles.button}>
+            <Button type="warning" onClick={() => this.returnMoney()}
+                    style={{backgroundColor: '#FF7878', borderRadius: '0px'}}>
+              申请退还押金
+            </Button>
+          </div> : (num === 3 ? <div className={styles.button}>
+            <Button type="warning" style={{backgroundColor: '#FF7878', borderRadius: '0px'}}>
+              已申请退还
+            </Button>
+          </div> : (num === 4 ? <div className={styles.button}>
+            <Button type="warning"
+                    style={{backgroundColor: '#FF7878', borderRadius: '0px'}}>
+              押金已退还到余额
+            </Button>
+          </div> : void[0])))
+        }
 
-        <div>
-          <Button type="warning"  onClick={()=>this.returnMoney()}
-                  style={{backgroundColor: '#FF7878', borderRadius: '0px'}}>
-            申请退还押金
-          </Button>
-        </div>
 
       </div>
     )

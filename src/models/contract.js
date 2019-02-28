@@ -1,4 +1,6 @@
 import * as service from '../services/contract'
+import sys from "@/utils/request";
+
 
 export default {
   namespace: 'contract',
@@ -37,6 +39,7 @@ export default {
           }
         })
       }
+      sys.responseCode(data)
     },
   },
   subscriptions: {

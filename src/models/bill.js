@@ -1,5 +1,6 @@
 import * as service from '../services/bill'
 import {Toast} from 'antd-mobile'
+import sys from '../utils/request'
 
 export default {
   namespace: 'bill',
@@ -12,6 +13,7 @@ export default {
     nextMonth:'',   //月份
     yearValue:'',   //默认的年的值
     monthValue:[],  //默认的月份值
+    returnInfo:'',  //退款信息
     // data:[],
   },
   reducers: {
@@ -30,9 +32,11 @@ export default {
             dayConsume:data.data.day_consume,
             nextMonth:data.data.next_month,
             yearValue: data.data.day_consume[0],
-            monthValue: data.data.next_month[0]
+            monthValue: data.data.next_month[0],
+            returnInfo: data.data.return_info
           }})
       }
+      sys.responseCode(data)
     },
 
     *returnMoney({payload}, {call, put}){
@@ -40,6 +44,7 @@ export default {
       if(data.code === 1){
         Toast.success(data.message,3)
       }
+      sys.responseCode(data)
     },
 
     *setYearValue({payload},{call,put}){
@@ -55,6 +60,7 @@ export default {
       if(data.code === 1){
         yield put({type: 'setState', payload: {costData: data.data}})
       }
+      sys.responseCode(data)
     }
 
   },
