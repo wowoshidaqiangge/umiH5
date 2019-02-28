@@ -13,10 +13,22 @@ const sysParams = {
 
 //获取token的方法
 function getToken() {
-  const token1 = 'ea7b727690dae766793f4e196828edbf';//window.location.search('token'); //地址栏
-  const token2 = '435';//window.localStorage.getItem('token'); //本地的
+  const token1 = GetQueryString('token');//地址栏
+  const token2 = window.localStorage.getItem('token'); //本地的
   const token3 = getAppToken(); //从app获取到的
-  return token1 || token2 || token3;
+  const final_token = token1 || token2 || token3;
+  //往本地存一次token  防止跳转页面式获取不到token的问题
+  if(!token2){
+    window.localStorage.setItem('token',final_token);
+  }
+  return final_token;
+}
+
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
 }
 
 //获取app的token

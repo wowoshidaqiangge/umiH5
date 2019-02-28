@@ -123,7 +123,7 @@ class JoinInfo extends Component {
           <AgreeItem key={'ture'} style={{fontSize: '11px'}}
                      onChange={() => this.setState({checked: true})}>
             <span className={styles.read}>请仔细阅读并同意</span>
-            <Link to='joinIn/contract'>《纳品网加盟合作服务协议》</Link>
+            <Link to='joinIn-contract'>《纳品网加盟合作服务协议》</Link>
           </AgreeItem>
         </div>
 

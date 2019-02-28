@@ -22,7 +22,7 @@ class GetJoin extends Component {
     const {isJoin,joinMoney} = getJoin
     console.log(joinMoney,'mmoney')
     if (isJoin === 1 || isJoin === 2) {
-      dispatch(routerRedux.push({pathname: '/joinIn/contract'}))
+      dispatch(routerRedux.push({pathname: '/joinIn-contract'}))
     } else if (isJoin === 0) {
       dispatch(routerRedux.push({pathname: '/joinIn',query: {joinMoney: joinMoney}}))
     }
