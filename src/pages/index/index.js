@@ -90,7 +90,7 @@ function getApp() {
         //IOS
         try {
             window.webkit.messageHandlers.joinMerchant.postMessage
-            (params,money)
+            ({"join_info":params,"money":money})
             // window.webkit.messageHandlers.JAMS__mark.postMessage(params)
         } catch (e) {
             // alert("IOS this is error ");
