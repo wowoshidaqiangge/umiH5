@@ -26,7 +26,16 @@ class GetJoin extends Component {
       dispatch(routerRedux.push({pathname: '/joinIn',query: {joinMoney: joinMoney}}))
     }
   }
-
+  getImg(){
+    if(this.props.getJoin.isJoin === 1){
+      var doimg = require('../../assets/img/join-look.png');
+    }else if(this.props.getJoin.isJoin === 2){
+      var doimg = require('../../assets/img/join-complete.png');
+    }else{
+      var doimg = require('../../assets/img/join-do.png');
+    }
+    return doimg;
+  }
   render() {
     console.log()
     return (
@@ -34,7 +43,7 @@ class GetJoin extends Component {
         <img className={styles.img} src={merchantImg}/>
         <div className={styles.imgBackground}>
           <div onClick={() => this.handleNextUrl()}>
-            <img className={styles.img} src={doimg}/>
+            <img className={styles.img} src={this.getImg()}/>
           </div>
         </div>
       </div>
