@@ -1,5 +1,11 @@
 export default [
     {
+        path: "/",
+        component: "../pages/index/index.js",
+        name: "加盟",
+        title:"加盟"
+    },
+    {
         path: "/joinIn",
         component: '../pages/joinIn/index.js',
         name: "加盟",
