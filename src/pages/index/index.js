@@ -66,18 +66,15 @@ function getAppParams() {
         }else{
             alert("IOS没有获取到Token");
         }
-
     }
 }
 
 
-function getApp() {
+function getApp(params,money) {
     var client = getClient();
-    var params = {"name":"123","company":"","phone":"18782559175","addr":"张三李四王麻子","card":"123456789789789"};
+    // var params = {"name":"123","company":"","phone":"18782559175","addr":"张三李四王麻子","card":"123456789789789"};
     params = JSON.stringify(params);
-    console.log(params);
-    var money = "2000";
-    console.log(money);
+    // var money = "2000";
     if(client){
         //安卓
         try {

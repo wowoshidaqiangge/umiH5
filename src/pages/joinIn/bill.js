@@ -22,7 +22,12 @@ class Bill extends Component {
   onChangeYear (year) {
     const {dispatch,bill} = this.props
     const{monthValue} = bill
-    let is_next = monthValue==='上半年'? 0 :1
+    let  is_next = null
+    if(typeof (monthValue) === 'string'){
+      is_next = monthValue==='上半年'? 0 :1
+    }else{
+      is_next = monthValue[0]==='上半年'? 0 :1
+    }
     dispatch({type:'bill/setYearValue',payload:year})
     let newYear = year[0]
     dispatch({type:'bill/getMonthBill',payload:{year:newYear,is_next:is_next}})
@@ -33,8 +38,13 @@ class Bill extends Component {
     const {dispatch,bill} = this.props
     const{yearValue} = bill
     let str = month[0]
-    let newYear = yearValue
     let isNext = str === '上半年' ? 0:1
+    let newYear = null
+    if(typeof (yearValue) === 'number'){
+      newYear = yearValue
+    }else{
+      newYear = yearValue[0]
+    }
     dispatch({type:'bill/setMonthValue',payload:month})
     dispatch({type:'bill/getMonthBill',payload:{year:newYear,is_next:isNext}})
   }

@@ -66,13 +66,13 @@ class Contract extends Component {
           </div>
 
           <div className={styles.secondPart}>
-            <div>乙方:{name ? name : <input type="text" style={{border: 'none', width: '75%'}}/>}</div>
+            <div>乙方:{name && name.length>0 ? name : void[0]}</div>
             <div className={styles.address}>联系地址:{addr ? addr :
               <input type="text" style={{border: 'none', width: '55%'}}/>}</div>
-            <div>联系电话:{phone ? phone : <input type="text" maxLength="11" style={{border: 'none', width: '50%'}}/>}</div>
+            <div>联系电话:{phone && phone.length>0? phone : void[0]}</div>
             <div>乙方代表签字/盖章:{signImage && signImage.length > 0 ? getImg :
               <input type="text" maxLength="4" style={{border: 'none', width: '10%'}}/>}</div>
-            <div>日期:{signTime && signTime.length > 0 ? signTime : moment().format('YYYY年MM月DD日')}</div>
+            <div>日期:{signTime && signTime.length > 0 ? signTime :void [0]}</div>
           </div>
         </div>
       </div>

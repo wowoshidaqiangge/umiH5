@@ -13,18 +13,10 @@ const sysParams = {
 
 //获取token的方法
 function getToken() {
-  const token1 = GetQueryString('token'); //地址栏
-  const token2 = window.localStorage.getItem('token'); //本地的
+  const token1 = 'ea7b727690dae766793f4e196828edbf';//window.location.search('token'); //地址栏
+  const token2 = '435';//window.localStorage.getItem('token'); //本地的
   const token3 = getAppToken(); //从app获取到的
-  const final_token = token1 || token2 || token3;
-  return final_token;
-}
-
-function GetQueryString(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
-    var r = window.location.search.substr(1).match(reg);
-    if (r != null) return unescape(r[2]);
-    return null;
+  return token1 || token2 || token3;
 }
 
 //获取app的token
@@ -36,7 +28,7 @@ function getAppToken() {
   let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)  //ios终端
   let token, device_id, version, platform = ''
   if (isAndroid) {
-    console.log(window.android)   //需要一个android的开发环境
+    //需要一个android的开发环境
     if (window.android) {
       if (window.android != null && typeof (window.android) != 'undefined') {
         let tokenStr = window.android.callUserInfo()   //安卓自带方法获取用户信息

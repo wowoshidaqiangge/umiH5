@@ -3,7 +3,7 @@ import styles from './index.css'
 import {routerRedux} from 'dva/router'
 import {connect} from 'dva'
 
-
+const doimg = require('../../assets/img/join-do.png');
 const merchantImg = require('../../assets/img/join-Merchant.jpg');
 
 class GetJoin extends Component {
@@ -13,29 +13,19 @@ class GetJoin extends Component {
   }
 
   componentWillMount() {
-    const {dispatch} = this.props;
+    const {dispatch} = this.props
     dispatch({type: 'getJoin/getJoinIn'})
   }
 
   handleNextUrl() {
     const {getJoin, dispatch} = this.props
-    const {isJoin} = getJoin
+    const {isJoin,joinMoney} = getJoin
+    console.log(joinMoney,'mmoney')
     if (isJoin === 1 || isJoin === 2) {
       dispatch(routerRedux.push({pathname: '/joinIn/contract'}))
     } else if (isJoin === 0) {
-      dispatch(routerRedux.push({pathname: '/joinIn'}))
+      dispatch(routerRedux.push({pathname: '/joinIn',query: {joinMoney: joinMoney}}))
     }
-  }
-
-  getImg(){
-      if(this.props.getJoin.isJoin === 1){
-          var doimg = require('../../assets/img/join-look.png');
-      }else if(this.props.getJoin.isJoin === 2){
-          var doimg = require('../../assets/img/join-complete.png');
-      }else{
-          var doimg = require('../../assets/img/join-do.png');
-      }
-      return doimg;
   }
 
   render() {
@@ -44,7 +34,7 @@ class GetJoin extends Component {
         <img className={styles.img} src={merchantImg}/>
         <div className={styles.imgBackground}>
           <div onClick={() => this.handleNextUrl()}>
-            <img className={styles.img} src={this.getImg()}/>
+            <img className={styles.img} src={doimg}/>
           </div>
         </div>
       </div>

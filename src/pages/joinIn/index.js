@@ -26,9 +26,7 @@ class JoinInfo extends Component {
             phone:getFieldsValue().phone,
             card:getFieldsValue().ID
           }
-          console.log(params)
-         //todo
-
+          getApp(params, this.props.location.query)
         }else{
           Toast.info('请将信息填写完整')
         }
@@ -134,6 +132,42 @@ class JoinInfo extends Component {
         </div>
       </div>
     )
+  }
+}
+function getClient(){
+  var u = navigator.userAgent;
+  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+  var isIos = u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+  if(isAndroid){
+    return 1;
+  }else if(isIos){
+    return 0;
+  }
+}
+
+function getApp(params,money) {
+  var client = getClient();
+  // var params = {"name":"123","company":"","phone":"18782559175","addr":"张三李四王麻子","card":"123456789789789"};
+  params = JSON.stringify(params);
+  // var money = "2000";
+  if(client){
+    //安卓
+    try {
+      window.android.joinMerchant(params,money);
+    } catch (e) {
+      // alert("安卓 this is error ");
+      console.log(e)
+    }
+  }else{
+    //IOS
+    try {
+      window.webkit.messageHandlers.joinMerchant.postMessage
+      ({"join_info":params,"money":money})
+      // window.webkit.messageHandlers.JAMS__mark.postMessage(params)
+    } catch (e) {
+      // alert("IOS this is error ");
+      console.log(e)
+    }
   }
 }
 
