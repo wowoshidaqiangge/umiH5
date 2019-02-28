@@ -1,3 +1,4 @@
+import pageRoutes from './config/router.config'
 
 // ref: https://umijs.org/config/
 export default {
@@ -9,7 +10,7 @@ export default {
       antd: true,
       dva: true,
       // dynamicImport: false,
-      title: 'napinweb',
+      title: '纳品网',
       dynamicImport: {
           loadingComponent: "./components/pageLoading/index"
       },
@@ -27,4 +28,6 @@ export default {
       },
     }],
   ],
+  // 路由配置
+  routes: pageRoutes,
 }
