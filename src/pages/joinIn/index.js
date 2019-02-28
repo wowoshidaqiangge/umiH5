@@ -4,6 +4,7 @@ import {createForm} from 'rc-form'
 import styles from './index.less'
 // import axios from 'axios'
 import {connect} from 'dva'
+import Link from 'umi/link'
 
 const AgreeItem = Checkbox.AgreeItem;
 
@@ -15,19 +16,20 @@ class JoinInfo extends Component {
     }
   }
 
-  showToast() {
-    Toast.info('请填写完整信息', 1)
-  }
-
-
   handleAccept() {
     const {form, dispatch} = this.props
     const {validateFields,getFieldsValue} = form
-
     if (this.state.checked) {
       validateFields({force:true},(error)=>{
         if(!error){
-          console.log(getFieldsValue)
+          console.log(getFieldsValue())
+          let params = {
+            name:getFieldsValue().name,
+            addr:getFieldsValue().address,
+            phone:getFieldsValue().phone,
+            card:getFieldsValue().ID
+          }
+          dispatch({type:'index/joinIn',payload:params})
         }else{
           Toast.info('请将信息填写完整')
         }
@@ -117,18 +119,14 @@ class JoinInfo extends Component {
               })} >
               </InputItem></div>
             </div>
-
           </List>
         </form>
 
-
         <div className={styles.href}>
-
           <AgreeItem key={'ture'} style={{fontSize: '11px'}}
-                     onChange={() => this.setState({checked: true})}
-          >
+                     onChange={() => this.setState({checked: true})}>
             <span className={styles.read}>请仔细阅读并同意</span>
-            <a href=''>《纳品网加盟合作服务协议》</a>
+            <Link to='joinIn/contract'>《纳品网加盟合作服务协议》</Link>
           </AgreeItem>
         </div>
 

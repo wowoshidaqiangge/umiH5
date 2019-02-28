@@ -22,8 +22,6 @@ class Bill extends Component {
   onChangeYear (year) {
     const {dispatch,bill} = this.props
     const{monthValue} = bill
-    console.log('yyyyy',year)
-    console.log(monthValue,)
     let is_next = monthValue==='上半年'? 0 :1
     dispatch({type:'bill/setYearValue',payload:year})
     dispatch({type:'bill/getMonthBill',payload:{year:year,is_next:is_next}})
@@ -49,7 +47,7 @@ class Bill extends Component {
   render() {
     const{history,bill} = this.props
     const {costData,joinMoney,allData,monthData,dayConsume,nextMonth,yearValue, monthValue} = bill
-    console.log('cccc', nextMonth,dayConsume)
+    console.log('cccc', nextMonth,dayConsume,monthValue)
 
     //重新放入图表数据,后台得到的是month,money,图表要求是x,y
     let data = []
@@ -68,14 +66,19 @@ class Bill extends Component {
     })
 
 
-    const month = [
-      // {label: (<div key= '下半年'><span style={{ ...yearStyle}}/><span>下半年</span></div>), value:'下半年',},
-    ]
+    // const month = [
+    //   // {label: (<div key= '下半年'><span style={{ ...yearStyle}}/><span>下半年</span></div>), value:'下半年',},
+    // ]
 
-    nextMonth && nextMonth.map((item,index)=>{
-      let value = item
-      month.push({label: (<div key= {item}><span style={{ ...yearStyle }}/><span>{item}</span></div>), value: item})
-    })
+    const month = [
+      {label: (<div key= '0'><span style={{ ...yearStyle }}/><span>上半年</span></div>), value: '0',},
+      {label: (<div key= '1'><span style={{ ...yearStyle}}/><span>下半年</span></div>), value: '1',},
+    ];
+
+    // nextMonth && nextMonth.map((item,index)=>{
+    //   let value = item
+    //   month.push({label: (<div key= {item}><span style={{ ...yearStyle }}/><span>{item}</span></div>), value: item})
+    // })
 
     console.log('month',month)
 
