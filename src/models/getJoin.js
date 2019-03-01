@@ -14,8 +14,8 @@ export default {
     }
   },
   effects: {
-    * getJoinIn({}, {call, put}) {
-      const {data} = yield call(service.getJoinIn)
+    * getJoinIn({payload}, {call, put}) {
+      const {data} = yield call(service.getJoinIn,payload)
       if (data.code === 1) {
         yield  put({
           type: 'setState', payload: {
