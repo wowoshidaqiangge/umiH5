@@ -73,6 +73,7 @@ function getAppToken() {
       }
     }
   }
+  alert(token)
   return token
 }
 
