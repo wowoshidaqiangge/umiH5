@@ -11,10 +11,10 @@ class Index extends Component {
     /**
      * IOS请求token
      */
-    getIosToken(){
-        window.webkit.messageHandlers.callUserInfo.postMessage
-        ({})
-    }
+    // getIosToken1(){
+    //     window.webkit.messageHandlers.callUserInfo.postMessage
+    //     ({})
+    // }
 
 
     getClient(){
@@ -48,7 +48,8 @@ class Index extends Component {
             }
         }else if(!client){
             if(window.webkit){
-                this.getIosToken(); //请求IOS的token
+                alert("2");
+                this.getIosToken1(); //请求IOS的token
                 window["callUserInfo"] = function(res) {
                     var tokenObj=JSON.parse(res);
                     token=tokenObj.token;
@@ -93,7 +94,7 @@ class Index extends Component {
     render() {
         var token = this.getAppParams();
         console.log('token',token);
-        this.getApp();
+        // this.getApp();
         return (
             <div className={styles.normal}>
                 <div className={styles.welcome}/>

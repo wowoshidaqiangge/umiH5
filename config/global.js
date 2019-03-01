@@ -21,7 +21,6 @@ function GetQueryString(name) {
  * IOS请求token
  */
 function getIosToken(){
-    alert(4);
     window.webkit.messageHandlers.callUserInfo.postMessage
     ({})
 }
@@ -34,7 +33,6 @@ function getAppToken() {
     let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)  //ios终端
     let token, device_id, version, platform = '';
     if (isAndroid) {
-        alert(2)
         //需要一个android的开发环境
         if (window.android) {
             if (window.android != null && typeof (window.android) != 'undefined') {
