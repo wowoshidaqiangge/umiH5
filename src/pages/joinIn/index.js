@@ -38,6 +38,9 @@ class JoinInfo extends Component {
           localStorage.removeItem('params')
           // this.props.form.restFields()
           getApp(params,this.props.getJoin.joinMoney)
+          setTimeout(()=>{
+            this.setState({disabled:true})
+          },1000)
         }else{
           Toast.info('请将信息填写完整')
         }
