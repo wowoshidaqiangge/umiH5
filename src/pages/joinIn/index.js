@@ -106,6 +106,7 @@ class JoinInfo extends Component {
     const {disabled} = this.state;
     const {getFieldProps, getFieldError} = form;
     const getMoney = '￥'+this.props.getJoin.joinMoney;
+    // joinPayNotice();
     return (
       <div className={styles.joinInfo}>
         <div>
@@ -183,9 +184,15 @@ function getClient(){
   }
 }
 
+/**
+ * 支付成功，APP通知前端去合同页面
+ */
+function joinPayNotice() {
+  alert("支付成功了");
+}
+
 function getApp(params,money) {
   let client = getClient();
-  // var params = {"name":"123","company":"","phone":"18782559175","addr":"张三李四王麻子","card":"123456789789789"};
   params = JSON.stringify(params);
   let newMoney = ''+money;
   if(client){
@@ -201,7 +208,6 @@ function getApp(params,money) {
     try {
       window.webkit.messageHandlers.joinMerchant.postMessage
       ({"join_info":params,"money":money})
-      // window.webkit.messageHandlers.JAMS__mark.postMessage(params)
     } catch (e) {
       // alert("IOS this is error ");
       console.log(e)
