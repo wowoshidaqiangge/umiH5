@@ -17,7 +17,6 @@ export default {
     * getJoinIn({}, {call, put}) {
       const {data} = yield call(service.getJoinIn)
       if (data.code === 1) {
-        console.log(data.data)
         yield  put({
           type: 'setState', payload: {
             isJoin: data.data.is_join,joinMoney: data.data.join_money

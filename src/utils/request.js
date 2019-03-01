@@ -18,10 +18,10 @@ function getToken() {
   const token2 = window.localStorage.getItem('token'); //本地的
   const token3 = getAppToken(); //从app获取到的
   const final_token = token1 || token2 || token3;
-  //往本地存一次token  防止跳转页面式获取不到token的问题
-  if(!token2 && final_token){
-    window.localStorage.setItem('token',final_token);
-  }
+  //往本地存一次token  防止跳转页面式获取不到token的问题  暂时不需要了
+  // if(!token2 && final_token){
+  //   window.localStorage.setItem('token',final_token);
+  // }
   return final_token;
 }
 
@@ -31,7 +31,13 @@ function GetQueryString(name) {
     if (r != null) return unescape(r[2]);
     return null;
 }
-
+/**
+ * IOS请求token
+ */
+function getIosToken(){
+  window.webkit.messageHandlers.callUserInfo.postMessage
+  ({})
+}
 //获取app的token
 
 function getAppToken() {
@@ -39,7 +45,8 @@ function getAppToken() {
   let u = navigator.userAgent
   let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1 //android终端
   let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)  //ios终端
-  let token, device_id, version, platform = ''
+  let token, device_id, version, platform = '';
+
   if (isAndroid) {
     //需要一个android的开发环境
     if (window.android) {
@@ -54,6 +61,7 @@ function getAppToken() {
       }
     } else if (isiOS) {
       if (window.webkit) {
+        this.getIosToken();
         window['callUserInfo'] = function (res) {
           let tokenStr = res
           let tokenObj = JSON.parse(tokenStr)
