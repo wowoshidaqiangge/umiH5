@@ -11,10 +11,10 @@ class Index extends Component {
     /**
      * IOS请求token
      */
-    // getIosToken1(){
-    //     window.webkit.messageHandlers.callUserInfo.postMessage
-    //     ({})
-    // }
+    getIosToken1(){
+        window.webkit.messageHandlers.callUserInfo.postMessage
+        ({})
+    }
 
 
     getClient(){
