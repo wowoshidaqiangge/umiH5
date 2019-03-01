@@ -14,6 +14,7 @@ const sysParams = {
 
 //获取token的方法
 function getToken() {
+  alert(6)
   const token1 = GetQueryString('token');//地址栏
   const token2 = window.localStorage.getItem('token'); //本地的
   const token3 = getAppToken(); //从app获取到的
@@ -26,6 +27,7 @@ function getToken() {
 }
 
 function GetQueryString(name) {
+  alert(3)
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     var r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(r[2]);
@@ -35,20 +37,22 @@ function GetQueryString(name) {
  * IOS请求token
  */
 function getIosToken(){
-  alert(2)
+  alert(4)
   window.webkit.messageHandlers.callUserInfo.postMessage
   ({})
+  alert(4)
 }
 //获取app的token
 
 function getAppToken() {
+  alert(0)
   let url = window.location.href
   let u = navigator.userAgent
   let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1 //android终端
   let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)  //ios终端
   let token, device_id, version, platform = '';
-  alert(0)
   if (isAndroid) {
+    alert(2)
     //需要一个android的开发环境
     if (window.android) {
       if (window.android != null && typeof (window.android) != 'undefined') {
