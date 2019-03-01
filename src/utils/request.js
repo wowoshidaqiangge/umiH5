@@ -13,7 +13,7 @@ const sysParams = {
 
 //获取token的方法
 function getToken() {
-  const token1 = '';//GetQueryString('token');//地址栏
+  const token1 = GetQueryString('token');//地址栏
   const token2 = window.localStorage.getItem('token'); //本地的
   const token3 = getAppToken(); //从app获取到的
   const final_token = token1 || token2 || token3;
