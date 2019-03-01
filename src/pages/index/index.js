@@ -53,15 +53,18 @@ function getAppParams() {
     }else if(!client){
         if(window.webkit){
             window["callUserInfo"] = function(res) {
-                var tokenStr=res;
-                var tokenObj=JSON.parse(tokenStr);
-                token=tokenObj.token;
-                device_id=tokenObj.device_id;
-                version=tokenObj.version;
-                platform=tokenObj.platform;
-                console.log("this is IOS++");
-                console.log(token,device_id,version,platform);
-                alert("IOS token:"+token);
+                alert(res);
+                console.log(res);
+                window.location.href = window.location.href+"?params="+JSON.stringify(res);
+                // var tokenStr=res;
+                // var tokenObj=JSON.parse(tokenStr);
+                // token=tokenObj.token;
+                // device_id=tokenObj.device_id;
+                // version=tokenObj.version;
+                // platform=tokenObj.platform;
+                // console.log("this is IOS++");
+                // console.log(token,device_id,version,platform);
+                // alert("IOS token:"+token);
             }
         }else{
             alert("IOS没有获取到Token");
