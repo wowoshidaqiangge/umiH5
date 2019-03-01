@@ -2,8 +2,8 @@ import React, {Component} from 'react'
 import {Button, Picker, List} from 'antd-mobile'
 import styles from './style/bill.less'
 import {connect} from 'dva'
-import {Bar} from 'ant-design-pro/lib/Charts'
 import Link from 'umi/link'
+import {Chart, Geom, Axis, Tooltip, Label} from "bizcharts";
 
 const yearStyle = {display: 'inline-block', verticalAlign: 'middle', width: '16px', height: '16px', marginRight: '10px'}
 
@@ -16,7 +16,6 @@ class Bill extends Component {
   componentWillMount() {
     const {dispatch} = this.props
     dispatch({type: 'bill/getJoinBill'})
-    console.log('return', this.props.bill.returnInfo)
   }
 
   onChangeYear(year) {
@@ -54,16 +53,6 @@ class Bill extends Component {
     this.props.dispatch({type: 'bill/returnMoney', payload: params})
   }
 
-  getNewData() {
-    //重新放入图表数据,后台得到的是month,money,图表要求是x,y
-    const {costData} = this.props.bill
-    let data = []
-    costData && costData.map((item) => {
-      data.push({x: item.month, y: item.money})
-    })
-    return data
-  }
-
   years() {
     const {dayConsume} = this.props.bill
     const years = []
@@ -95,9 +84,22 @@ class Bill extends Component {
 
   render() {
     const {bill} = this.props
-    const {joinMoney, allData, monthData, yearValue, returnInfo} = bill
+    const {joinMoney, allData, monthData, yearValue, returnInfo, costData} = bill
     const num = returnInfo.is_return
-    console.log(typeof (monthData.refund_money),'rrrr')
+
+    const newCols = {
+      sales: {
+        tickInterval: 20
+      }
+    }
+
+    const tooltipsDisplayTpl = `
+        <p class="chart-tooptip">
+            <span class="chart-tooptip-right">{money}</span>
+            <span>{value}</span>
+        </p>
+    `;
+
 
     return (
       <div className={styles.bill}>
@@ -135,15 +137,23 @@ class Bill extends Component {
             </div>
 
             <div className={styles.bar}>
-              <Bar autoLabel
-                   height={200}
-                // title="￥"
-                   data={this.getNewData()}
-                   color='#FFBFC9'
-              />
-
+              <Chart height={240} data={costData}
+                     scale={newCols} padding={[10, 'auto', 'auto', 'auto']}
+                     forceFit>
+                <Axis name="month" color='pink' grid={null} line={null} tickLine={null}/>
+                <Axis name="money" field grid={null} label={null}/>
+                <Tooltip
+                  crosshairs={{
+                    type: "y"
+                  }}
+                  // showTitle={ false }
+                  itemTpl={tooltipsDisplayTpl}
+                />
+                <Geom type="interval" position="month*money" color={'#FFBFC9'}>
+                  <Label content="money"/>
+                </Geom>
+              </Chart>
             </div>
-
           </div>
 
           <div className={styles.month}>
@@ -154,22 +164,22 @@ class Bill extends Component {
 
               <div className={styles.total}>
                 <div className={styles.title}>总消费(元)</div>
-                <div className={styles.amount}>{monthData.all_money === null ? 0.00:monthData.all_money}</div>
+                <div className={styles.amount}>{monthData.all_money === null ? 0.00 : monthData.all_money}</div>
               </div>
 
               <div className={styles.effective}>
                 <div className={styles.title}>有效消费(元)</div>
-                <div className={styles.amount}>{monthData.eff_money ===null ? 0.00: monthData.eff_money}</div>
+                <div className={styles.amount}>{monthData.eff_money === null ? 0.00 : monthData.eff_money}</div>
               </div>
 
               <div className={styles.success}>
                 <div className={styles.title}>成功订单(笔)</div>
-                <div className={styles.amount}>{monthData.eff_count === null ? 0: monthData.eff_count}</div>
+                <div className={styles.amount}>{monthData.eff_count === null ? 0 : monthData.eff_count}</div>
               </div>
 
               <div className={styles.return}>
                 <div className={styles.title}>退款(元)</div>
-                <div className={styles.amount}>{monthData.refund_money === null ? 0.00 :monthData.refund_money}</div>
+                <div className={styles.amount}>{monthData.refund_money === null ? 0.00 : monthData.refund_money}</div>
               </div>
             </div>
 
@@ -185,12 +195,12 @@ class Bill extends Component {
 
               <div className={styles.total}>
                 <div className={styles.title}>总消费(元)</div>
-                <div className={styles.amount}>{allData.all_money === null ? 0.00:allData.all_money}</div>
+                <div className={styles.amount}>{allData.all_money === null ? 0.00 : allData.all_money}</div>
               </div>
 
               <div className={styles.effective}>
                 <div className={styles.title}>有效消费(元)</div>
-                <div className={styles.amount}>{allData.eff_money === null ? 0.00: allData.eff_money}</div>
+                <div className={styles.amount}>{allData.eff_money === null ? 0.00 : allData.eff_money}</div>
               </div>
 
               <div className={styles.success}>
@@ -200,7 +210,7 @@ class Bill extends Component {
 
               <div className={styles.return}>
                 <div className={styles.title}>退款(元)</div>
-                <div className={styles.amount}>{allData.refund_money === null ? 0.00: allData.refund_money}</div>
+                <div className={styles.amount}>{allData.refund_money === null ? 0.00 : allData.refund_money}</div>
               </div>
 
             </div>
