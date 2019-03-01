@@ -9,6 +9,7 @@ import {routerRedux} from 'dva/router'
 const AgreeItem = Checkbox.AgreeItem
 
 const localParams = JSON.parse(localStorage.getItem('params'))
+
 class JoinInfo extends Component {
   constructor(props) {
     super(props)
@@ -49,7 +50,7 @@ class JoinInfo extends Component {
   checkName(rule, value, callback) {
     if (value && value.trim().length < 0) {
       callback(new Error('请输入姓名'))
-    }else{
+    } else {
       callback()
     }
   }
@@ -58,7 +59,7 @@ class JoinInfo extends Component {
     const id = /^[1-9]\d{5}(18|19|20)\d{2}((0[1-9])|(1[0-2]))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/
     if (value && !(id.test(value))) {
       callback(new Error('身份证格式错误'))
-    }else{
+    } else {
       callback()
     }
   }
@@ -66,7 +67,7 @@ class JoinInfo extends Component {
   checkPhone(rule, value, callback) {
     if (value && !(/^1[34578]\d{9}$/.test(value))) {
       callback(new Error('手机号码格式错误'))
-    }else{
+    } else {
       callback()
     }
   }
@@ -74,7 +75,7 @@ class JoinInfo extends Component {
   checkCompanyName(rule, value, callback) {
     if (value && value.trim().length < 0) {
       callback(new Error('请输入姓名'))
-    }else{
+    } else {
       callback()
     }
   }
@@ -82,22 +83,22 @@ class JoinInfo extends Component {
   checkAddress(rule, value, callback) {
     if (value && value.trim().length < 0) {
       callback(new Error('请输入联系地址'))
-    }else{
+    } else {
       callback()
     }
   }
 
-  goContract(){
-    const {validateFields,getFieldsValue} = this.props.form
+  goContract() {
+    const {validateFields, getFieldsValue} = this.props.form
     this.props.history.push('/joinIn-contract')
-        // let params = {
-        //   name:getFieldsValue().name,
-        //   addr:getFieldsValue().address,
-        //   phone:getFieldsValue().phone,
-        //   card:getFieldsValue().ID,
-        //   companyName:getFieldsValue().companyName,
-        // }
-        // localStorage.setItem('params',JSON.stringify(params))
+    // let params = {
+    //   name:getFieldsValue().name,
+    //   addr:getFieldsValue().address,
+    //   phone:getFieldsValue().phone,
+    //   card:getFieldsValue().ID,
+    //   companyName:getFieldsValue().companyName,
+    // }
+    // localStorage.setItem('params',JSON.stringify(params))
   }
 
 
@@ -106,7 +107,6 @@ class JoinInfo extends Component {
     const {disabled} = this.state;
     const {getFieldProps, getFieldError} = form;
     const getMoney = '￥'+this.props.getJoin.joinMoney;
-    // joinPayNotice();
     return (
       <div className={styles.joinInfo}>
         <div>
@@ -114,7 +114,7 @@ class JoinInfo extends Component {
             <List>
               <InputItem {...getFieldProps('name', {
                 initialValue: localParams && localParams.name ? localParams.name : void(0),
-                rules: [{required: true,message:'请输入姓名'}, {
+                rules: [{required: true, message: '请输入姓名'}, {
                   validator: (rule, value, callback) => {
                     this.checkName(rule, value, callback)
                   }
@@ -143,7 +143,7 @@ class JoinInfo extends Component {
               })} error={!!getFieldError('address')}>联系地址:</InputItem>
 
               <div style={{justifyContent: 'space-between', display: 'flex'}}>
-                <div style={{fontSize: '17px', paddingLeft: '15px', lineHeight: '44px',color:'#000'}}>保证金:</div>
+                <div style={{fontSize: '17px', paddingLeft: '15px', lineHeight: '44px', color: '#000'}}>保证金:</div>
                 <div><InputItem disabled={true} style={{color: 'red', textAlign: 'right'}} {...getFieldProps('money', {
                   initialValue: getMoney
                 })} >
@@ -156,9 +156,9 @@ class JoinInfo extends Component {
             <AgreeItem key={'ture'} style={{fontSize: '11px'}}
                        onChange={() => this.setState({checked: true})}>
             </AgreeItem>
-            <div style={{display:'flex',lineHeight:'35px'}}>
+            <div style={{display: 'flex', lineHeight: '35px'}}>
               <div className={styles.read}>请仔细阅读并同意</div>
-              <div className={styles.contract} onClick={()=>this.goContract()}>《纳品网加盟合作服务协议》</div>
+              <div className={styles.contract} onClick={() => this.goContract()}>《纳品网加盟合作服务协议》</div>
             </div>
           </div>
 
@@ -173,13 +173,14 @@ class JoinInfo extends Component {
     )
   }
 }
-function getClient(){
+
+function getClient() {
   var u = navigator.userAgent;
   var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
   var isIos = u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-  if(isAndroid){
+  if (isAndroid) {
     return 1;
-  }else if(isIos){
+  } else if (isIos) {
     return 0;
   }
 }
@@ -196,14 +197,15 @@ function getApp(params,money) {
   params = JSON.stringify(params);
   let newMoney = ''+money;
   if(client){
+
     //安卓
     try {
-      window.android.joinMerchant(params,newMoney);
+      window.android.joinMerchant(params, newMoney);
     } catch (e) {
       // alert("安卓 this is error ");
       console.log(e)
     }
-  }else{
+  } else {
     //IOS
     try {
       window.webkit.messageHandlers.joinMerchant.postMessage
@@ -214,6 +216,7 @@ function getApp(params,money) {
     }
   }
 }
+
 
 JoinInfo = createForm()(JoinInfo)
 export default connect(({getJoin}) => ({getJoin}))(JoinInfo)
