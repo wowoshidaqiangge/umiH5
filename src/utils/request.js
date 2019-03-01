@@ -101,7 +101,7 @@ const request = async function request(url, params) {
   return axios.post(url, params);
 };
 
-//封装相应
+//封装响应
 const responseCode = function responseCode(data){
   if(data.code === -1){
     Toast.fail(data.message,3)
