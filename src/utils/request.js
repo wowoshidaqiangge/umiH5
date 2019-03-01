@@ -59,7 +59,8 @@ function getAppToken() {
         platform = tokenObj.platform
       } else {
       }
-    } else if (isiOS) {
+    }
+  }else if (isiOS) {
       if (window.webkit) {
         this.getIosToken();
         window['callUserInfo'] = function (res) {
@@ -72,8 +73,9 @@ function getAppToken() {
         }
       }
     }
+    alert(token)
     return token
-  }
+
 }
 
 
