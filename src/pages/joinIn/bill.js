@@ -97,6 +97,7 @@ class Bill extends Component {
     const {bill} = this.props
     const {joinMoney, allData, monthData, yearValue, returnInfo} = bill
     const num = returnInfo.is_return
+    console.log(typeof (monthData.refund_money),'rrrr')
 
     return (
       <div className={styles.bill}>
@@ -153,22 +154,22 @@ class Bill extends Component {
 
               <div className={styles.total}>
                 <div className={styles.title}>总消费(元)</div>
-                <div className={styles.amount}>{monthData.all_money}</div>
+                <div className={styles.amount}>{monthData.all_money === null ? 0.00:monthData.all_money}</div>
               </div>
 
               <div className={styles.effective}>
                 <div className={styles.title}>有效消费(元)</div>
-                <div className={styles.amount}>{monthData.eff_money}</div>
+                <div className={styles.amount}>{monthData.eff_money ===null ? 0.00: monthData.eff_money}</div>
               </div>
 
               <div className={styles.success}>
                 <div className={styles.title}>成功订单(笔)</div>
-                <div className={styles.amount}>{monthData.eff_count}</div>
+                <div className={styles.amount}>{monthData.eff_count === null ? 0: monthData.eff_count}</div>
               </div>
 
               <div className={styles.return}>
                 <div className={styles.title}>退款(元)</div>
-                <div className={styles.amount}>{monthData.refund_money}</div>
+                <div className={styles.amount}>{monthData.refund_money === null ? 0.00 :monthData.refund_money}</div>
               </div>
             </div>
 
@@ -184,24 +185,23 @@ class Bill extends Component {
 
               <div className={styles.total}>
                 <div className={styles.title}>总消费(元)</div>
-                <div className={styles.amount}>{allData.all_money}</div>
+                <div className={styles.amount}>{allData.all_money === null ? 0.00:allData.all_money}</div>
               </div>
 
               <div className={styles.effective}>
                 <div className={styles.title}>有效消费(元)</div>
-                <div className={styles.amount}>{allData.eff_money}</div>
+                <div className={styles.amount}>{allData.eff_money === null ? 0.00: allData.eff_money}</div>
               </div>
 
               <div className={styles.success}>
                 <div className={styles.title}>成功订单(笔)</div>
-                <div className={styles.amount}>{allData.eff_count}</div>
+                <div className={styles.amount}>{allData.eff_count === null ? 0 : allData.eff_count}</div>
               </div>
 
               <div className={styles.return}>
                 <div className={styles.title}>退款(元)</div>
-                <div className={styles.amount}>{allData.refund_money}</div>
+                <div className={styles.amount}>{allData.refund_money === null ? 0.00: allData.refund_money}</div>
               </div>
-
 
             </div>
 
@@ -212,19 +212,13 @@ class Bill extends Component {
           </div>
         </div>
 
-        {/*<div className={styles.button}>*/}
-          {/*<Button type="warning" onClick={() => this.returnMoney()}>*/}
-            {/*{returnInfo.return_font}*/}
-          {/*</Button>*/}
-        {/*</div>*/}
-
         {
           num === 0 ? void[0] : (num === 1 ? <div className={styles.button}>
-            <Button type="warning" onClick={() => this.returnMoney()}>{returnInfo.return_font}</Button></div> :
+              <Button type="warning" onClick={() => this.returnMoney()}>{returnInfo.return_font}</Button></div> :
             (num === 3 ? <div className={styles.button}><Button type="warning">{returnInfo.return_font}</Button></div> :
-              (num === 4 ? <div className={styles.button}> <Button type="warning">{returnInfo.return_font}</Button></div> : void[0])))
+              (num === 4 ? <div className={styles.button}><Button type="warning">{returnInfo.return_font}</Button>
+              </div> : void[0])))
         }
-
 
       </div>
     )
