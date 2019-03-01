@@ -19,7 +19,7 @@ class GetJoin extends Component {
 
   handleNextUrl() {
     const {getJoin, dispatch} = this.props
-    const {isJoin,joinMoney} = getJoin
+    const {isJoin} = getJoin
     if (isJoin === 1 || isJoin === 2) {
       dispatch(routerRedux.push({pathname: '/joinIn-contract'}))
     } else if (isJoin === 0) {
