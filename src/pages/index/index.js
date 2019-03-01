@@ -8,107 +8,89 @@ class Index extends Component {
         this.state = {}
     }
 
-    /**
-     * IOS请求token
-     */
-    getIosToken1(){
-        window.webkit.messageHandlers.callUserInfo.postMessage
-        ({})
-    }
-
-
-    getClient(){
-        var u = navigator.userAgent;
-        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-        var isIos = u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-        if(isAndroid){
-            return 1;
-        }else if(isIos){
-            return 0;
-        }
-    }
-
-    getAppParams() {
-        var token = "this is empty";
-        var client = this.getClient();
-
-        if(client && window.android){
-            if(window.android!=null&&typeof(window.android)!="undefined"){
-                var tokenStr=window.android.callUserInfo();
-                var tokenObj=JSON.parse(tokenStr);
-                token=tokenObj.token;
-                var device_id=tokenObj.device_id;
-                var version=tokenObj.version;
-                var platform=tokenObj.platform;
-                console.log("this is 安卓++");
-                console.log(token,device_id,version,platform);
-                alert("安卓 token:"+token);
-            }else{
-                alert("安卓没有获取到Token");
-            }
-        }else if(!client){
-            if(window.webkit){
-                alert("2");
-                this.getIosToken1(); //请求IOS的token
-                window["callUserInfo"] = function(res) {
-                    var tokenObj=JSON.parse(res);
-                    token=tokenObj.token;
-                    device_id=tokenObj.device_id;
-                    version=tokenObj.version;
-                    platform=tokenObj.platform;
-                    alert("ios Token=="+token)
-                }
-            }else{
-                alert("IOS没有获取到Token");
-            }
-        }
-        return [token];
-    }
-
-    getApp(params,money) {
-        var client = this.getClient();
-        // var params = {"name":"123","company":"","phone":"18782559175","addr":"张三李四王麻子","card":"123456789789789"};
-        params = JSON.stringify(params);
-        // var money = "2000";
-        if(client){
-            //安卓
-            try {
-                window.android.joinMerchant(params,money);
-            } catch (e) {
-                // alert("安卓 this is error ");
-                console.log(e)
-            }
-        }else{
-            //IOS
-            try {
-                window.webkit.messageHandlers.joinMerchant.postMessage
-                ({"join_info":params,"money":money})
-                // window.webkit.messageHandlers.JAMS__mark.postMessage(params)
-            } catch (e) {
-                // alert("IOS this is error ");
-                console.log(e)
-            }
-        }
-    }
-
     render() {
-        var token = this.getAppParams();
-        console.log('token',token);
-        // this.getApp();
+        // const token = getToken();
         return (
             <div className={styles.normal}>
                 <div className={styles.welcome}/>
                 <ul className={styles.list}>
-                    <div id={'res'}>{this.state.res}</div>
-                    <div id={'res1'}>{this.state.res1}</div>
-                    <div id={'res2'}>{this.state.res2}</div>
-                    <li>token::{token}</li>
+                    {/*<li>this is token::::{token}</li>*/}
                     <li>To get started, edit <code>src/pages/index.js</code> and save to reload.</li>
-                    <li><a href="./joinIn">Getting Started</a></li>
+                    <li><a href="./joinIn">Getting Started aaa</a></li>
                 </ul>
             </div>
         )
     }
 }
+
+//
+// //获取token的方法
+// function getToken() {
+//     const token1 = GetQueryString('token');//地址栏
+//     const token2 = window.localStorage.getItem('token'); //本地的
+//     const token3 = getAppToken(); //从app获取到的
+//     const final_token = token1 || token2 || token3;
+//     //往本地存一次token  防止跳转页面式获取不到token的问题  暂时不需要了
+//     // if(!token2 && final_token){
+//     //   window.localStorage.setItem('token',final_token);
+//     // }
+//     return final_token;
+// }
+//
+// function GetQueryString(name) {
+//     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+//     var r = window.location.search.substr(1).match(reg);
+//     if (r != null) return unescape(r[2]);
+//     return null;
+// }
+// /**
+//  * IOS请求token
+//  */
+// // function getIosToken(){
+// //   window.webkit.messageHandlers.callUserInfo.postMessage
+// //   ({})
+// // }
+// //获取app的token
+//
+// function getAppToken() {
+//     let url = window.location.href
+//     let u = navigator.userAgent
+//     let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1 //android终端
+//     let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)  //ios终端
+//     let token, device_id, version, platform = '';
+//     if (isAndroid) {
+//         //需要一个android的开发环境
+//         if (window.android) {
+//             if (window.android != null && typeof (window.android) != 'undefined') {
+//                 let tokenStr = window.android.callUserInfo()   //安卓自带方法获取用户信息
+//                 let tokenObj = JSON.parse(tokenStr)            //将字符串转为json对象
+//                 token = tokenObj.token
+//                 device_id = tokenObj.device_id
+//                 version = tokenObj.version
+//                 platform = tokenObj.platform
+//             } else {
+//             }
+//         }
+//     }else if (isiOS) {
+//         if (window.webkit) {
+//             // this.getIosToken();
+//             window['callUserInfo'] = function (res) {
+//                 // alert("1111++");
+//                 let tokenStr = res;
+//                 let tokenObj = JSON.parse(tokenStr);
+//                 token = tokenObj.token;
+//                 // alert("哈哈哈++token:"+token);
+//                 device_id = tokenObj.device_id;
+//                 version = tokenObj.version;
+//                 platform = tokenObj.platform
+//             }
+//         }else{
+//             alert("not found token");
+//         }
+//     }else{
+//         alert("好像啥子都没得啊");
+//     }
+//     return token
+// }
 
 export default connect(({index}) => ({index}))(Index)
