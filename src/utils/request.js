@@ -72,9 +72,8 @@ function getAppToken() {
         }
       }
     }
+    return token
   }
-  alert(token)
-  return token
 }
 
 
