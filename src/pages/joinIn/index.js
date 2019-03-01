@@ -3,11 +3,8 @@ import {Button, List, InputItem, Checkbox, Toast} from "antd-mobile"
 import {createForm} from 'rc-form'
 import styles from './style/join.less'
 import {connect} from 'dva'
-import Link from 'umi/link'
-import {routerRedux} from 'dva/router'
 
 const AgreeItem = Checkbox.AgreeItem
-
 const localParams = JSON.parse(localStorage.getItem('params'))
 
 class JoinInfo extends Component {
