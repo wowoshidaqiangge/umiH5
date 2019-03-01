@@ -32,11 +32,12 @@ class JoinInfo extends Component {
             name:getFieldsValue().name,
             addr:getFieldsValue().address,
             phone:getFieldsValue().phone,
-            card:getFieldsValue().ID
-          }
+            card:getFieldsValue().ID,
+            company:getFieldsValue().companyName
+          };
           localStorage.removeItem('params')
-          this.props.form.restFields()
-          getApp(params, this.props.getJoin.joinMoney)
+          // this.props.form.restFields()
+          getApp(params,this.props.getJoin.joinMoney)
         }else{
           Toast.info('请将信息填写完整')
         }
@@ -188,8 +189,9 @@ function getApp(params, money) {
   let client = getClient();
   // var params = {"name":"123","company":"","phone":"18782559175","addr":"张三李四王麻子","card":"123456789789789"};
   params = JSON.stringify(params);
-  let newMoney = '' + money
-  if (client) {
+  let newMoney = ''+money;
+  if(client){
+
     //安卓
     try {
       window.android.joinMerchant(params, newMoney);
