@@ -21,11 +21,11 @@ class Contract extends Component {
 
   render() {
     const {contract} = this.props
-    const {endTime,joinMoney, signImage, signTime, startTime, name, year, addr, phone} = contract
+    const {endTime,joinMoney, signImage, signTime, startTime, name, year, addr, phone,isJoin} = contract
     const getImg = signImage && signImage.length > 0 ? require(signImage) : void[0];
     // console.log('canshu',this.props.query)
-    const _this= this
-    console.log('this',this)
+    const startValue = isJoin != 0 && year && year.length > 0
+    const endValue = isJoin !=0 && endTime && endTime.length > 0
 
     return (
       <div className={styles.contract}>
@@ -45,13 +45,13 @@ class Contract extends Component {
           6. 纳品网 APP 平台所有上架商品展现价格，均为不含税价。如乙方需要开发票，需额外承担 8%税点。<br/>
           7. 除次品退货以外的运费，均由乙方承担。<br/>
           二、协议的续签与解除<br/>
-          1. 平台入驻合作期为{year && year.length > 0 ? year : <input className={styles.timeFill}/>}年，
-          自 {startTime && startTime.length > 0 ? startTime.year : <input className={styles.timeFill} maxLength="4"/>}年
-          {startTime && startTime.length > 0 ? startTime.month : <input className={styles.timeFill} maxLength="2"/>}月
-          {startTime && startTime.length > 0 ? startTime.day : <input className={styles.timeFill} maxLength="2"/>}日 至
-          {endTime && endTime.length > 0 ? endTime.year : <input className={styles.timeFill} maxLength="4"/>}年
-          {endTime && endTime.length > 0 ? endTime.month : <input className={styles.timeFill} maxLength="2"/>}月
-          {endTime && endTime.length > 0 ? endTime.day : <input className={styles.timeFill} maxLength="2"/>}日，未退回的保证金予以退回。<br/>
+          1. 平台入驻合作期为{startValue ? year : <input className={styles.timeFill}/>}年，
+          自 {startValue ? startTime.year : <input className={styles.timeFill} maxLength="4"/>}年
+          {startValue ? startTime.month : <input className={styles.timeFill} maxLength="2"/>}月
+          {startValue ? startTime.day : <input className={styles.timeFill} maxLength="2"/>}日 至
+          {endValue ? endTime.year : <input className={styles.timeFill} maxLength="4"/>}年
+          {endValue ? endTime.month : <input className={styles.timeFill} maxLength="2"/>}月
+          {endValue ? endTime.day : <input className={styles.timeFill} maxLength="2"/>}日，未退回的保证金予以退回。<br/>
           2. 如有续签意向，应在合同到期前一个月内完成申请及续签合同相关工作，保证金未退回的，可以于续签的合同自动生效。保证金已经退回的，需要重新缴纳。<br/>
           3. 如遇不可抗力因素，包括但不限于自然灾害、战争、公司倒闭或者破产等。协议自然解除，双方互不承担责任。<br/>
           4. 甲乙双方如对协议条款规定的理解有异议，或者对与协议有关的事项发生争议，双方应本着友好合作的精神进行协商。如协商不能解决的，任何一方可向甲方所在地的法院诉讼。<br/>
