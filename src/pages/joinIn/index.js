@@ -15,30 +15,32 @@ class JoinInfo extends Component {
       disabled: false  //按钮是否被禁用
     }
   }
+
   componentWillMount() {
     const {dispatch} = this.props
     dispatch({type: 'getJoin/getJoinIn'})
   }
+
   handleConfirm() {
-    const {validateFields,getFieldsValue} = this.props.form
+    const {validateFields, getFieldsValue} = this.props.form
     if (this.state.checked) {
-      validateFields({force:true},(error)=>{
-        if(!error){
-          this.setState({disabled:true})
+      validateFields({force: true}, (error) => {
+        if (!error) {
+          this.setState({disabled: true})
           let params = {
-            name:getFieldsValue().name,
-            addr:getFieldsValue().address,
-            phone:getFieldsValue().phone,
-            card:getFieldsValue().ID,
-            company:getFieldsValue().companyName
+            name: getFieldsValue().name,
+            addr: getFieldsValue().address,
+            phone: getFieldsValue().phone,
+            card: getFieldsValue().ID,
+            company: getFieldsValue().companyName
           };
           localStorage.removeItem('params')
           // this.props.form.restFields()
-          getApp(params,this.props.getJoin.joinMoney)
-          setTimeout(()=>{
-            this.setState({disabled:true})
-          },1000)
-        }else{
+          getApp(params, this.props.getJoin.joinMoney)
+          setTimeout(() => {
+            this.setState({disabled: true})
+          }, 1000)
+        } else {
           Toast.info('请将信息填写完整')
         }
       })
@@ -48,10 +50,14 @@ class JoinInfo extends Component {
   }
 
   checkName(rule, value, callback) {
-    if (value && value.trim().length < 0) {
-      callback(new Error('请输入姓名'))
-    } else {
+    if (value && value.trim().length > 0) {
+      let reg=/^[\u4e00-\u9fa5a-z]+$/gi
+      if(!reg.test(value)){
+        callback(new Error('请输入正确的中文格式'))
+      }
       callback()
+    } else {
+      callback(new Error('请输入姓名'))
     }
   }
 
@@ -106,7 +112,7 @@ class JoinInfo extends Component {
     const {form} = this.props;
     const {disabled} = this.state;
     const {getFieldProps, getFieldError} = form;
-    const getMoney = '￥'+this.props.getJoin.joinMoney;
+    const getMoney = '￥' + this.props.getJoin.joinMoney;
     return (
       <div className={styles.joinInfo}>
         <div>
@@ -119,35 +125,69 @@ class JoinInfo extends Component {
                     this.checkName(rule, value, callback)
                   }
                 }]
-              })} error={!!getFieldError('name')} maxLength={20}>姓名:</InputItem>
+              })}
+                         error={!!getFieldError('name')}
+                         maxLength={20}
+                         onErrorClick={() => {
+                           Toast.info(getFieldError('name').join('、'), 2)
+                         }}
+                         type="text">姓名:</InputItem>
 
               <InputItem {...getFieldProps('ID', {
                 initialValue: localParams && localParams.card ? localParams.card : void(0),
-                rules: [{required: true}, {validator: (rule, value, callback) => this.checkId(rule, value, callback)}]
-              })} error={!!getFieldError('ID')}>身份证:</InputItem>
+                rules: [{required: true},
+                  {validator: (rule, value, callback) => this.checkId(rule, value, callback)}]
+              })}
+                         error={!!getFieldError('ID')}
+                         onErrorClick={() => {
+                           Toast.info(getFieldError('ID').join('、'), 2)
+                         }}
+                         type="text">身份证:</InputItem>
 
               <InputItem {...getFieldProps('companyName', {
                 initialValue: localParams && localParams.companyName ? localParams.companyName : void(0),
-                rules: [{required: true}, {validator: (rule, value, callback) => this.checkCompanyName(rule, value, callback)}]
-              })} error={!!getFieldError('companyName')}>公司名称:</InputItem>
+                rules: [{required: true},
+                  {validator: (rule, value, callback) => this.checkCompanyName(rule, value, callback)}]
+              })}
+                         error={!!getFieldError('companyName')}
+                         onErrorClick={() => {
+                           Toast.info(getFieldError('companyName').join('、'), 2)
+                         }}
+                         type="text">公司名称:</InputItem>
 
 
               <InputItem {...getFieldProps('phone', {
                 initialValue: localParams && localParams.phone ? localParams.phone : void(0),
-                rules: [{required: true}, {validator: (rule, value, callback) => this.checkPhone(rule, value, callback)}]
-              })} error={!!getFieldError('phone')}>联系电话:</InputItem>
+                rules: [{required: true},
+                  {validator: (rule, value, callback) => this.checkPhone(rule, value, callback)}]
+              })}
+                         error={!!getFieldError('phone')}
+                         onErrorClick={() => {
+                           Toast.info(getFieldError('phone').join('、'), 2)
+                         }}
+                         type="number">联系电话:</InputItem>
 
               <InputItem {...getFieldProps('address', {
                 initialValue: localParams && localParams.addr ? localParams.addr : void(0),
-                rules: [{required: true}, {validator: (rule, value, callback) => this.checkAddress(rule, value, callback)}]
-              })} error={!!getFieldError('address')}>联系地址:</InputItem>
+                rules: [{required: true},
+                  {validator: (rule, value, callback) => this.checkAddress(rule, value, callback)}]
+              })}
+                         error={!!getFieldError('address')}
+                         onErrorClick={() => {
+                           Toast.info(getFieldError('address').join('、'), 2)
+                         }}
+                         type="text">联系地址:</InputItem>
 
               <div style={{justifyContent: 'space-between', display: 'flex'}}>
                 <div style={{fontSize: '17px', paddingLeft: '15px', lineHeight: '44px', color: '#000'}}>保证金:</div>
-                <div><InputItem disabled={true} style={{color: 'red', textAlign: 'right'}} {...getFieldProps('money', {
-                  initialValue: getMoney
-                })} >
-                </InputItem></div>
+                <div>
+                  <InputItem disabled={true}
+                             style={{color: 'red', textAlign: 'right'}}
+                             {...getFieldProps('money', {
+                               initialValue: getMoney
+                             })} >
+                  </InputItem>
+                </div>
               </div>
             </List>
           </form>
@@ -192,11 +232,11 @@ function joinPayNotice() {
   alert("支付成功了");
 }
 
-function getApp(params,money) {
+function getApp(params, money) {
   let client = getClient();
   params = JSON.stringify(params);
-  let newMoney = ''+money;
-  if(client){
+  let newMoney = '' + money;
+  if (client) {
 
     //安卓
     try {
@@ -209,7 +249,7 @@ function getApp(params,money) {
     //IOS
     try {
       window.webkit.messageHandlers.joinMerchant.postMessage
-      ({"join_info":params,"money":money})
+      ({"join_info": params, "money": money})
     } catch (e) {
       // alert("IOS this is error ");
       console.log(e)

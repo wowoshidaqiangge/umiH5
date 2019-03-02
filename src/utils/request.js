@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {Toast} from 'antd-mobile'
-const testUrl = 'https://testnp.napin.com/'; //api请求路径
+const testUrl = 'https://testnp.napin.com/' //api请求路径
 // const testUrl = 'https://super.napin.com/'; //api请求路径
 //系统请求参数
 const sysParams = {
@@ -34,11 +34,10 @@ function GetQueryString(name) {
  * IOS请求token
  */
 function getIosToken(){
-  window.webkit.messageHandlers.callUserInfo.postMessage
-  ({})
+  window.webkit.messageHandlers.callUserInfo.postMessage({})
 }
-//获取app的token
 
+//获取app的token
 function getAppToken() {
   let url = window.location.href
   let u = navigator.userAgent
@@ -87,11 +86,24 @@ const api = {
     getJoinIn: `${testUrl}api/shop/getJoinIn`,         //获取加盟者信息
     joinIn: `${testUrl}api/shop/joinIn`,               //加盟
   },
-};
+}
+
+
+//app交互
+function toHetong(code){
+  //需要带支付是否成功的状态吗?
+  //成功之后回调合同页面
+  if(code === 1){
+    window.location.href ='/joinIn-contract'
+  }else{
+  }
+}
+
 //封装请求
 const request = async function request(url, params) {
   return axios.post(url, params);
-};
+}
+
 //封装响应
 const responseCode = function responseCode(data){
   if(data.code === -1){
@@ -99,5 +111,6 @@ const responseCode = function responseCode(data){
   }else if(data.code === -2){
     Toast.fail(data.message,3)
   }
-};
+}
+
 export default {api, request,responseCode, sysParams};
