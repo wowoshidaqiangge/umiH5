@@ -28,7 +28,7 @@ export default {
         yield  put({
           type: 'setState', payload: {
             endTime: data.data.end_time,
-            isJoin: 1,
+            isJoin: data.data.is_join,
             joinMoney: data.data.join_money,
             signImage: data.data.sign_image,
             signTime: data.data.sign_time,
