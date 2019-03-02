@@ -24,9 +24,8 @@ class Contract extends Component {
     const {endTime,joinMoney, signImage, signTime, startTime, name, year, addr, phone,isJoin} = contract
     const getImg = signImage && signImage.length > 0 ? require(signImage) : void[0];
     // console.log('canshu',this.props.query)
-    const startValue = isJoin != 0 && year && year.length > 0
-    const endValue = isJoin !=0 && endTime && endTime.length > 0
-
+    const startValue = isJoin != 0
+    const endValue = isJoin !=0
     return (
       <div className={styles.contract}>
         <div className={styles.title}>供应链战略合作协议</div>
