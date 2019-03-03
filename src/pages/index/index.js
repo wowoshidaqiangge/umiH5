@@ -28,9 +28,9 @@ function getPay() {
         //业务逻辑
         alert("我就是这样支付成功了~~~");
     };
-}
-function joinPayNotice() {
-    alert("这是安卓的弹出。。。");
+    window.joinPayNotice = ()=>{
+        alert("这是安卓需要的");
+    };
 }
 
 //

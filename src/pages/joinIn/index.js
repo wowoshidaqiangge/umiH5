@@ -109,6 +109,7 @@ class JoinInfo extends Component {
 
 
   render() {
+    getPay();//APP调用方法
     const {form} = this.props;
     const {disabled} = this.state;
     const {getFieldProps, getFieldError} = form;
@@ -224,12 +225,19 @@ function getClient() {
     return 0;
   }
 }
-
 /**
  * 支付成功，APP通知前端去合同页面
  */
-function joinPayNotice() {
-  alert("支付成功了");
+function getPay() {
+  //IOS
+  window["joinPayNotice"] = () => {
+    //业务逻辑
+    window.location.href = '/joinIn-contract';
+  };
+  //安卓
+  window.joinPayNotice = ()=>{
+    window.location.href = '/joinIn-contract';
+  };
 }
 
 function getApp(params, money) {
