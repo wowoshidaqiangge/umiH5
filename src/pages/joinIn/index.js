@@ -3,6 +3,7 @@ import {Button, List, InputItem, Checkbox, Toast} from "antd-mobile"
 import {createForm} from 'rc-form'
 import styles from './style/join.less'
 import {connect} from 'dva'
+import getToken from '../../utils/request';
 
 const AgreeItem = Checkbox.AgreeItem
 const localParams = JSON.parse(localStorage.getItem('params'))
@@ -108,6 +109,7 @@ class JoinInfo extends Component {
   }
 
   render() {
+    getPay();//APP调用方法
     const {form} = this.props;
     const {disabled} = this.state;
     const {getFieldProps, getFieldError} = form;
@@ -223,12 +225,23 @@ function getClient() {
     return 0;
   }
 }
-
 /**
  * 支付成功，APP通知前端去合同页面
  */
-function joinPayNotice() {
-  alert("支付成功了");
+function getPay() {
+  //IOS
+  window["joinPayNotice"] = () => {
+    //业务逻辑
+    var token = getToken.sysParams.token;
+    var url = '/joinMerchant/joinIn-contract?token='+token;
+    window.location.href = url;
+  };
+  //安卓
+  window.joinPayNotice = ()=>{
+    var token = getToken.sysParams.token;
+    var url = '/joinMerchant/joinIn-contract?token='+token;
+    window.location.href = url;
+  };
 }
 
 function getApp(params, money) {

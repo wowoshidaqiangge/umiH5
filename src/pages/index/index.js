@@ -9,6 +9,7 @@ class Index extends Component {
     }
 
     render() {
+        getPay();
         // const token = getToken();
         return (
             <div className={styles.normal}>
@@ -21,6 +22,15 @@ class Index extends Component {
             </div>
         )
     }
+}
+function getPay() {
+    window["joinPayNotice"] = () => {
+        //业务逻辑
+        alert("我就是这样支付成功了~~~");
+    };
+    window.joinPayNotice = ()=>{
+        alert("这是安卓需要的");
+    };
 }
 
 //
