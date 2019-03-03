@@ -232,11 +232,11 @@ function getPay() {
   //IOS
   window["joinPayNotice"] = () => {
     //业务逻辑
-    window.location.href = '/joinIn-contract';
+    window.location.href = '/joinMerchant/joinIn-contract';
   };
   //安卓
   window.joinPayNotice = ()=>{
-    window.location.href = '/joinIn-contract';
+    window.location.href = '/joinMerchant/joinIn-contract';
   };
 }
 
