@@ -22,7 +22,10 @@ class Index extends Component {
         )
     }
 }
-
+window["joinPayNotice"] = () => {
+    //业务逻辑
+    alert("我就是这样支付成功了~~~");
+};
 //
 // //获取token的方法
 // function getToken() {
