@@ -108,7 +108,6 @@ class JoinInfo extends Component {
     // localStorage.setItem('params',JSON.stringify(params))
   }
 
-
   render() {
     getPay();//APP调用方法
     const {form} = this.props;
