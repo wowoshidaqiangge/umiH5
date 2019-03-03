@@ -89,16 +89,6 @@ const api = {
 }
 
 
-//app交互
-function toHetong(code){
-  //需要带支付是否成功的状态吗?
-  //成功之后回调合同页面
-  if(code === 1){
-    window.location.href ='/joinIn-contract'
-  }else{
-  }
-}
-
 //封装请求
 const request = async function request(url, params) {
   return axios.post(url, params);
