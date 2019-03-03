@@ -257,11 +257,13 @@ class Bill extends Component {
           </div>
         </div>
         {
-          num === 0 ? void[0] : (num === 1 ? <div className={styles.button}>
-              <Button type="warning" onClick={() => this.returnMoney()}>{returnInfo.return_font}</Button></div> :
-            (num === 3 ? <div className={styles.button}><Button type="warning">{returnInfo.return_font}</Button></div> :
-              (num === 4 ? <div className={styles.button}><Button type="warning">{returnInfo.return_font}</Button>
-              </div> : void[0])))
+          num === 0 ? void[0] :  <div className={styles.button}>
+              <Button type="warning" onClick={() => {
+                if(num === 1){
+                  this.returnMoney()
+                }
+              }}>{returnInfo.return_font}</Button>
+          </div>
         }
 
       </div>
