@@ -29,6 +29,10 @@ function getPay() {
         alert("我就是这样支付成功了~~~");
     };
 }
+function joinPayNotice() {
+    alert("这是安卓的弹出。。。");
+}
+
 //
 // //获取token的方法
 // function getToken() {
