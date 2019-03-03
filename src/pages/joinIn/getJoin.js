@@ -27,13 +27,14 @@ class GetJoin extends Component {
     }
   }
   getImg(){
-    if(this.props.getJoin.isJoin === 1){
+    if(this.props.getJoin.isJoin === 1 || this.props.getJoin.isJoin === 2){
       var doimg = require('../../assets/img/join-look.png');
-    }else if(this.props.getJoin.isJoin === 2){
-      var doimg = require('../../assets/img/join-complete.png');
     }else{
       var doimg = require('../../assets/img/join-do.png');
     }
+  // else if(this.props.getJoin.isJoin === 2){
+  //     var doimg = require('../../assets/img/join-complete.png');
+  //   }
     return doimg;
   }
   render() {
