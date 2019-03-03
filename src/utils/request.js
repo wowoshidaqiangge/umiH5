@@ -103,4 +103,4 @@ const responseCode = function responseCode(data){
   }
 }
 
-export default {api, request,responseCode, sysParams,getToken};
+export default {api, request,responseCode, sysParams};

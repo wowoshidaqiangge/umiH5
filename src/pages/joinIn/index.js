@@ -233,13 +233,15 @@ function getPay() {
   //IOS
   window["joinPayNotice"] = () => {
     //业务逻辑
-    var url = '/joinMerchant/joinIn-contract?token='+getToken;
-    alert(url);
-    // window.location.href = url;
+    var token = getToken.sysParams.token;
+    var url = '/joinMerchant/joinIn-contract?token='+token;
+    window.location.href = url;
   };
   //安卓
   window.joinPayNotice = ()=>{
-    window.location.href = '/joinMerchant/joinIn-contract';
+    var token = getToken.sysParams.token;
+    var url = '/joinMerchant/joinIn-contract?token='+token;
+    window.location.href = url;
   };
 }
 
