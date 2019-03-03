@@ -39,7 +39,7 @@ class JoinInfo extends Component {
           // this.props.form.restFields()
           getApp(params, this.props.getJoin.joinMoney)
           setTimeout(() => {
-            this.setState({disabled: true})
+            this.setState({disabled: false})
           }, 1000)
         } else {
           Toast.info('请将信息填写完整')
