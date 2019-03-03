@@ -9,6 +9,7 @@ class Index extends Component {
     }
 
     render() {
+        getPay();
         // const token = getToken();
         return (
             <div className={styles.normal}>
@@ -22,10 +23,12 @@ class Index extends Component {
         )
     }
 }
-window["joinPayNotice"] = () => {
-    //业务逻辑
-    alert("我就是这样支付成功了~~~");
-};
+function getPay() {
+    window["joinPayNotice"] = () => {
+        //业务逻辑
+        alert("我就是这样支付成功了~~~");
+    };
+}
 //
 // //获取token的方法
 // function getToken() {
