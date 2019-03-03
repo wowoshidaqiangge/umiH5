@@ -1,31 +1,52 @@
 import React, {Component} from 'react'
 import styles from './style/contract.less'
-import {Modal,TextArea} from 'antd-mobile'
+import {Modal, Button} from 'antd-mobile'
 import {connect} from 'dva'
-import moment from 'moment'
-import $ from 'jquery'
+// import {$} from 'jquery'
+// import {jSignature} from 'jSignature'
 
 class Contract extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showModal:false,
+      showModal: false,
       disabled: false, //没有绘制的时候禁用保存按钮
     }
   }
-
 
   componentWillMount() {
     this.props.dispatch({type: 'contract/getJoinIn'})
   }
 
+
+  saveSignature(){
+    console.log('baocun ')
+    document.getElementById('#signature').empty();
+    var dataUrl = document.getElementsByClassName('.js-signature').eq(1).jqSignature('getDataURL');
+    var img = document.getElementsByTagName('<img>').attr('src', dataUrl);
+    // document.getElementById('#signature').append($('<p>').text("Here's your signature:"));
+    document.getElementById('#signature').append(img);
+
+    this.setState({disabled:this.state.disabled})
+  }
+
+  clearCanvas(){
+    console.log('清空')
+  }
+
+  showSignature(){
+    document.getElementsByClassName('.js-signature').eq(1).on('jq.signature.changed', function() {
+      document.getElementById('#saveBtn').attr('disabled', false);
+    });
+  }
+
   render() {
     const {contract} = this.props
-    const {endTime,joinMoney, signImage, signTime, startTime, name, year, addr, phone,isJoin} = contract
+    const {endTime, joinMoney, signImage, signTime, startTime, name, year, addr, phone, isJoin} = contract
     const getImg = signImage && signImage.length > 0 ? require(signImage) : void[0];
     // console.log('canshu',this.props.query)
     const startValue = isJoin != 0
-    const endValue = isJoin !=0
+    const endValue = isJoin != 0
     return (
       <div className={styles.contract}>
         <div className={styles.title}>供应链战略合作协议</div>
@@ -77,10 +98,49 @@ class Contract extends Component {
             <div>乙方:{name}</div>
             <div className={styles.address}>联系地址:{addr}</div>
             <div>联系电话:{phone}</div>
-            <div>乙方代表签字/盖章:{name}
-            </div>
+
+            {/*<div>乙方代表签字/盖章: {signImage && signImage.length > 0 ? getImg : <Button onClick={() => {*/}
+              {/*this.setState({showModal: true})*/}
+            {/*}}>签字</Button>}*/}
+            {/*</div>*/}
+
+            <div>乙方代表签字/盖章:{name}</div>
             <div>日期:{signTime}</div>
           </div>
+        </div>
+
+
+        <div>
+          <Modal visible={this.state.showModal} transparent
+                 maskClosable={false}>
+            <div>
+              <p>请在下面签名:</p>
+              <div id = 'signature'className="js-signature" data-width="600" data-height="200" data-border="1px solid black"
+                   data-line-color="#bc0000" data-auto-fit="true"></div>
+              <div style={{display:'flex'}}>
+                <button id="clearBtn" className="btn btn-default" onClick={()=>this.clearCanvas()}>清除</button>
+                &nbsp;
+                <button id="saveBtn" className="btn btn-default" onClick={()=>this.saveSignature()} disabled>保存
+                </button>
+              </div>
+              <div id="signature">
+                <p><em>Your signature will appear here when you click "Save Signature"</em></p>
+              </div>
+
+
+            </div>
+
+            {/*<script>*/}
+
+              {/*$(function(){*/}
+              {/*//初始化插件*/}
+              {/*$("#signature").jSignature()*/}
+            {/*}*/}
+
+            {/*</script>*/}
+
+          </Modal>
+
         </div>
 
       </div>
@@ -88,7 +148,6 @@ class Contract extends Component {
   }
 
 }
-
 
 
 export default connect(({contract}) => ({contract}))(Contract)

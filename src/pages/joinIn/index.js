@@ -107,7 +107,6 @@ class JoinInfo extends Component {
     // localStorage.setItem('params',JSON.stringify(params))
   }
 
-
   render() {
     const {form} = this.props;
     const {disabled} = this.state;
