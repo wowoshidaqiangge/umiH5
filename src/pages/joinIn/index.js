@@ -3,6 +3,7 @@ import {Button, List, InputItem, Checkbox, Toast} from "antd-mobile"
 import {createForm} from 'rc-form'
 import styles from './style/join.less'
 import {connect} from 'dva'
+import getToken from '../../utils/request';
 
 const AgreeItem = Checkbox.AgreeItem
 const localParams = JSON.parse(localStorage.getItem('params'))
@@ -232,7 +233,7 @@ function getPay() {
   //IOS
   window["joinPayNotice"] = () => {
     //业务逻辑
-    window.location.href = '/joinMerchant/joinIn-contract';
+    window.location.href = '/joinMerchant/joinIn-contract?token='+getToken;
   };
   //安卓
   window.joinPayNotice = ()=>{
