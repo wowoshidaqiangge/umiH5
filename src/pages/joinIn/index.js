@@ -233,7 +233,9 @@ function getPay() {
   //IOS
   window["joinPayNotice"] = () => {
     //业务逻辑
-    window.location.href = '/joinMerchant/joinIn-contract?token='+getToken;
+    var url = '/joinMerchant/joinIn-contract?token='+getToken;
+    alert(url);
+    // window.location.href = url;
   };
   //安卓
   window.joinPayNotice = ()=>{
