@@ -52,8 +52,8 @@ class JoinInfo extends Component {
 
   checkName(rule, value, callback) {
     if (value && value.trim().length > 0) {
-      let reg=/^[\u4e00-\u9fa5a-z]+$/gi
-      if(!reg.test(value)){
+      let reg = /^[\u4e00-\u9fa5a-z]+$/gi
+      if (!reg.test(value)) {
         callback(new Error('请输入正确的中文格式'))
       }
       callback()
@@ -206,8 +206,6 @@ class JoinInfo extends Component {
           <div className={styles.button}>
             <Button type={'primary'} onClick={() => this.handleConfirm()} disabled={disabled}>确认</Button>
           </div>
-
-
         </div>
 
       </div>
@@ -225,6 +223,7 @@ function getClient() {
     return 0;
   }
 }
+
 /**
  * 支付成功，APP通知前端去合同页面
  */
@@ -233,13 +232,13 @@ function getPay() {
   window["joinPayNotice"] = () => {
     //业务逻辑
     var token = getToken.sysParams.token;
-    var url = '/joinMerchant/joinIn-contract?token='+token;
+    var url = '/joinMerchant/joinIn-contract?token=' + token;
     window.location.href = url;
   };
   //安卓
-  window.joinPayNotice = ()=>{
+  window.joinPayNotice = () => {
     var token = getToken.sysParams.token;
-    var url = '/joinMerchant/joinIn-contract?token='+token;
+    var url = '/joinMerchant/joinIn-contract?token=' + token;
     window.location.href = url;
   };
 }

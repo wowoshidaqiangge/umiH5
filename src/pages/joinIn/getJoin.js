@@ -3,7 +3,6 @@ import styles from './style/getJoin.css'
 import {routerRedux} from 'dva/router'
 import {connect} from 'dva'
 
-const doimg = require('../../assets/img/join-do.png');
 const merchantImg = require('../../assets/img/join-Merchant.jpg');
 
 class GetJoin extends Component {
@@ -26,19 +25,20 @@ class GetJoin extends Component {
       dispatch(routerRedux.push({pathname: '/joinIn'}))
     }
   }
-  getImg(){
-    if(this.props.getJoin.isJoin === 1 || this.props.getJoin.isJoin === 2){
+
+  getImg() {
+    if (this.props.getJoin.isJoin === 1 || this.props.getJoin.isJoin === 2) {
       var doimg = require('../../assets/img/join-look.png');
-    }else{
+    } else {
       var doimg = require('../../assets/img/join-do.png');
     }
-  // else if(this.props.getJoin.isJoin === 2){
-  //     var doimg = require('../../assets/img/join-complete.png');
-  //   }
+    // else if(this.props.getJoin.isJoin === 2){
+    //     var doimg = require('../../assets/img/join-complete.png');
+    //   }
     return doimg;
   }
+
   render() {
-    console.log()
     return (
       <div className={styles.imgBanner}>
         <img className={styles.img} src={merchantImg}/>

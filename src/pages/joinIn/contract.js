@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import styles from './style/contract.less'
-import {Modal, Button} from 'antd-mobile'
+import {Modal} from 'antd-mobile'
 import {connect} from 'dva'
 // import {$} from 'jquery'
 // import {jSignature} from 'jSignature'
@@ -18,24 +18,21 @@ class Contract extends Component {
     this.props.dispatch({type: 'contract/getJoinIn'})
   }
 
-
-  saveSignature(){
-    console.log('baocun ')
+  saveSignature() {
     document.getElementById('#signature').empty();
     var dataUrl = document.getElementsByClassName('.js-signature').eq(1).jqSignature('getDataURL');
     var img = document.getElementsByTagName('<img>').attr('src', dataUrl);
     // document.getElementById('#signature').append($('<p>').text("Here's your signature:"));
     document.getElementById('#signature').append(img);
-
-    this.setState({disabled:this.state.disabled})
+    this.setState({disabled: this.state.disabled})
   }
 
-  clearCanvas(){
+  clearCanvas() {
     console.log('清空')
   }
 
-  showSignature(){
-    document.getElementsByClassName('.js-signature').eq(1).on('jq.signature.changed', function() {
+  showSignature() {
+    document.getElementsByClassName('.js-signature').eq(1).on('jq.signature.changed', function () {
       document.getElementById('#saveBtn').attr('disabled', false);
     });
   }
@@ -43,8 +40,6 @@ class Contract extends Component {
   render() {
     const {contract} = this.props
     const {endTime, joinMoney, signImage, signTime, startTime, name, year, addr, phone, isJoin} = contract
-    const getImg = signImage && signImage.length > 0 ? require(signImage) : void[0];
-    // console.log('canshu',this.props.query)
     const startValue = isJoin != 0
     const endValue = isJoin != 0
     return (
@@ -100,7 +95,7 @@ class Contract extends Component {
             <div>联系电话:{phone}</div>
 
             {/*<div>乙方代表签字/盖章: {signImage && signImage.length > 0 ? getImg : <Button onClick={() => {*/}
-              {/*this.setState({showModal: true})*/}
+            {/*this.setState({showModal: true})*/}
             {/*}}>签字</Button>}*/}
             {/*</div>*/}
 
@@ -109,44 +104,40 @@ class Contract extends Component {
           </div>
         </div>
 
-
         <div>
-          <Modal visible={this.state.showModal} transparent
+          <Modal visible={this.state.showModal}
+                 transparent
                  maskClosable={false}>
             <div>
               <p>请在下面签名:</p>
-              <div id = 'signature'className="js-signature" data-width="600" data-height="200" data-border="1px solid black"
+              <div id='signature' className="js-signature" data-width="600" data-height="200"
+                   data-border="1px solid black"
                    data-line-color="#bc0000" data-auto-fit="true"></div>
-              <div style={{display:'flex'}}>
-                <button id="clearBtn" className="btn btn-default" onClick={()=>this.clearCanvas()}>清除</button>
+              <div style={{display: 'flex'}}>
+                <button id="clearBtn" className="btn btn-default" onClick={() => this.clearCanvas()}>清除</button>
                 &nbsp;
-                <button id="saveBtn" className="btn btn-default" onClick={()=>this.saveSignature()} disabled>保存
+                <button id="saveBtn" className="btn btn-default" onClick={() => this.saveSignature()} disabled>保存
                 </button>
               </div>
               <div id="signature">
                 <p><em>Your signature will appear here when you click "Save Signature"</em></p>
               </div>
-
-
             </div>
 
             {/*<script>*/}
 
-              {/*$(function(){*/}
-              {/*//初始化插件*/}
-              {/*$("#signature").jSignature()*/}
+            {/*$(function(){*/}
+            {/*//初始化插件*/}
+            {/*$("#signature").jSignature()*/}
             {/*}*/}
 
             {/*</script>*/}
 
           </Modal>
-
         </div>
-
       </div>
     )
   }
-
 }
 
 

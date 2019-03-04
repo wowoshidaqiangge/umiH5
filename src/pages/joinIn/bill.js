@@ -10,9 +10,7 @@ const yearStyle = {display: 'inline-block', verticalAlign: 'middle', width: '16p
 class Bill extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      showModal: false
-    }
+    this.state = {}
   }
 
   componentWillMount() {
@@ -54,7 +52,7 @@ class Bill extends Component {
     const {dispatch} = this.props
     const params = [];
     dispatch({type: 'bill/returnMoney', payload: params})
-    dispatch({type:'bill/setNum',payload:{num:1}})
+    dispatch({type: 'bill/setNum', payload: {num: 1}})
   }
 
   years() {
@@ -97,11 +95,12 @@ class Bill extends Component {
     return true
   }
 
-  cancel() {}
+  cancel() {
+  }
 
   render() {
     const {bill} = this.props
-    const {joinMoney, allData, monthData, yearValue, returnFont, costData,num} = bill
+    const {joinMoney, allData, monthData, yearValue, returnFont, costData, num} = bill
     const newCols = {
       sales: {
         tickInterval: 20
@@ -115,7 +114,6 @@ class Bill extends Component {
         </p>
     `;
 
-    const str = ['we', 'are', 'the', 'black', 'gold', 'team'];
     const mockData = () => {
       let result = [];
       for (let i = 0, len = 6; i < len; i++) {
@@ -150,7 +148,6 @@ class Bill extends Component {
                   <img src={require('../../assets/img/bill/down.png')}></img>
                 </div>
 
-
                 <div className={styles.picker}>
                   <Picker data={this.month()} value={this.newMonthValue()} cols={1}
                           onChange={(month) => this.onChangeMonth(month)}>
@@ -159,7 +156,6 @@ class Bill extends Component {
                   <img src={require('../../assets/img/bill/down.png')}></img>
                 </div>
               </div>
-
             </div>
 
 
@@ -230,7 +226,6 @@ class Bill extends Component {
             </div>
 
             <div className={styles.content}>
-
               <div className={styles.total}>
                 <div className={styles.title}>总消费(元)</div>
                 <div className={styles.amount}>{allData.all_money === null ? 0.00 : allData.all_money}</div>
@@ -251,16 +246,16 @@ class Bill extends Component {
                 <div className={styles.amount}>{allData.refund_money === null ? 0.00 : allData.refund_money}</div>
               </div>
             </div>
-
           </div>
 
           <div className={styles.link}>
-            点此了解 <Link to='joinIn-contract'>《纳品网加盟商合作服务协议》</Link>
+            点此了解
+            <Link to='joinIn-contract'>《纳品网加盟商合作服务协议》</Link>
           </div>
         </div>
         {
           num === 0 ? void[0] : <div className={styles.button}>
-            <Button type="warning" disabled={num!==1 ? true: false}
+            <Button type="warning" disabled={num !== 1 ? true : false}
                     onClick={() => {
                       if (num === 1) {
                         Modal.alert('退押金', '确定吗???', [
@@ -271,13 +266,6 @@ class Bill extends Component {
                     }}>{returnFont}</Button>
           </div>
         }
-
-
-        <Modal visible={this.state.showModal}>
-          <div>
-            <Button></Button>
-          </div>
-        </Modal>
 
       </div>
     )
