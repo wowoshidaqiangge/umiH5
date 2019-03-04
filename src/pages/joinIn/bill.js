@@ -84,7 +84,7 @@ class Bill extends Component {
   show() {
     const show = []
     this.props.bill.costData.map((item) => {
-      if (item.money === '0.00') {
+      if (item.money === 0.00) {
         show.push(item)
       }
     })
@@ -123,7 +123,7 @@ class Bill extends Component {
         });
       }
       return result;
-    };
+    }
 
     return (
       <div className={styles.bill}>
@@ -160,29 +160,14 @@ class Bill extends Component {
 
 
             <div className={styles.bar}>
-              <Chart height={240} data={costData}
-                     scale={newCols}
-                     padding={['auto', 'auto', 'auto', 'auto']}
-                     forceFit>
+              <Chart height={240} data={costData} scale={newCols} padding={['auto', 'auto', 'auto', 'auto']} forceFit>
                 {/* x轴，横轴，以data数据的xAxis属性值为柱子的值 */}
-                <Axis name="month" color='pink'
-                      grid={null}
-                      line={null}
-                      tickLine={null}
-                />
+                <Axis name="month" color='pink' grid={null} line={null} tickLine={null}/>
                 {/* y轴，纵轴，以data数据的yAxis属性值为柱子的值 */}
-                <Axis name="money"
-                      field
-                      grid={null}
-                      label={null}/>
-                <Tooltip
-                  crosshairs={{
-                    type: "y"
-                  }}
-                  showTitle={false}
-                  itemTpl={tooltipsDisplayTpl}/>
+                <Axis name="money" field grid={null} label={null}/>
+                <Tooltip crosshairs={{type: "y"}} showTitle={false} itemTpl={tooltipsDisplayTpl}/>
                 {/* 几何标记对象，主要用以描述你要画的是什么图形（直方图、折线图、饼状图、区域图）：interval是直方图 */}
-                <Geom type="line" position="month*money" color={'#FFBFC9'}>
+                <Geom type="interval" position="month*money" color={'#FFBFC9'}>
                   <Label content={this.show() ? 'money' : void[0]}/>
                 </Geom>
               </Chart>
