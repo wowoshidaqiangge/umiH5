@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Button, Picker, List} from 'antd-mobile'
+import {Button, Picker, List, Modal} from 'antd-mobile'
 import styles from './style/bill.less'
 import {connect} from 'dva'
 import Link from 'umi/link'
@@ -10,7 +10,9 @@ const yearStyle = {display: 'inline-block', verticalAlign: 'middle', width: '16p
 class Bill extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      showModal: false
+    }
   }
 
   componentWillMount() {
@@ -47,9 +49,12 @@ class Bill extends Component {
     dispatch({type: 'bill/getMonthBill', payload: {year: newYear, is_next: isNext}})
   }
 
+
   returnMoney() {
+    const {dispatch} = this.props
     const params = [];
-    this.props.dispatch({type: 'bill/returnMoney', payload: params})
+    dispatch({type: 'bill/returnMoney', payload: params})
+    dispatch({type:'bill/setNum',payload:{num:1}})
   }
 
   years() {
@@ -63,10 +68,7 @@ class Bill extends Component {
 
   month() {
     const {nextMonth} = this.props.bill
-    const month = [
-      // {label: (<div key= '3'><span style={{ ...yearStyle }}/><span>上半年</span></div>), value: '上半年',},
-      // {label: (<div key= '2'><span style={{ ...yearStyle}}/><span>下半年</span></div>), value: '下半年',},
-    ]
+    const month = []
 
     nextMonth && nextMonth.map((item, index) => {
       let value = item
@@ -81,23 +83,25 @@ class Bill extends Component {
     return newMonthValue
   }
 
-  show(){
+  show() {
     const show = []
-      this.props.bill.costData.map((item)=>{
-      if(item.money === '0.00'){
+    this.props.bill.costData.map((item) => {
+      if (item.money === '0.00') {
         show.push(item)
-      }})
+      }
+    })
 
-    if(show.length === this.props.bill.costData){
+    if (show.length === this.props.bill.costData) {
       return false
     }
     return true
   }
 
+  cancel() {}
+
   render() {
     const {bill} = this.props
-    const {joinMoney, allData, monthData, yearValue, returnInfo, costData} = bill
-    const num = returnInfo.is_return
+    const {joinMoney, allData, monthData, yearValue, returnFont, costData,num} = bill
     const newCols = {
       sales: {
         tickInterval: 20
@@ -114,14 +118,12 @@ class Bill extends Component {
     const str = ['we', 'are', 'the', 'black', 'gold', 'team'];
     const mockData = () => {
       let result = [];
-
       for (let i = 0, len = 6; i < len; i++) {
         result.push({
           xAxis: [i],
           yAxis: Math.floor(Math.random() * 100)
         });
       }
-
       return result;
     };
 
@@ -181,11 +183,11 @@ class Bill extends Component {
                   crosshairs={{
                     type: "y"
                   }}
-                  showTitle={ false }
+                  showTitle={false}
                   itemTpl={tooltipsDisplayTpl}/>
                 {/* 几何标记对象，主要用以描述你要画的是什么图形（直方图、折线图、饼状图、区域图）：interval是直方图 */}
                 <Geom type="line" position="month*money" color={'#FFBFC9'}>
-                  <Label content={this.show()? 'money':void[0] }/>
+                  <Label content={this.show() ? 'money' : void[0]}/>
                 </Geom>
               </Chart>
             </div>
@@ -257,14 +259,25 @@ class Bill extends Component {
           </div>
         </div>
         {
-          num === 0 ? void[0] :  <div className={styles.button}>
-              <Button type="warning" onClick={() => {
-                if(num === 1){
-                  this.returnMoney()
-                }
-              }}>{returnInfo.return_font}</Button>
+          num === 0 ? void[0] : <div className={styles.button}>
+            <Button type="warning" disabled={num!==1 ? true: false}
+                    onClick={() => {
+                      if (num === 1) {
+                        Modal.alert('退押金', '确定吗???', [
+                          {text: '取消', onPress: () => this.cancel(), style: 'default'},
+                          {text: '确定', onPress: () => this.returnMoney()},
+                        ])
+                      }
+                    }}>{returnFont}</Button>
           </div>
         }
+
+
+        <Modal visible={this.state.showModal}>
+          <div>
+            <Button></Button>
+          </div>
+        </Modal>
 
       </div>
     )

@@ -14,7 +14,8 @@ export default {
     yearValue:'',   //默认的年的值
     monthValue:[],  //默认的月份值
     returnInfo:'',  //退款信息
-    // data:[],
+    num:null,       //退款信息的is_return
+    returnFont:'',   //退款消息
   },
   reducers: {
     setState(state, action){
@@ -33,7 +34,9 @@ export default {
             nextMonth:data.data.next_month,
             yearValue: data.data.day_consume[0],
             monthValue: data.data.next_month[0],
-            returnInfo: data.data.return_info
+            returnInfo: data.data.return_info,
+            num:data.data.return_info.is_return,
+            returnFont:data.data.return_info.return_font,
           }})
       }
       sys.responseCode(data)
@@ -43,6 +46,7 @@ export default {
       const {data} = yield call(service.returnMoney, payload)
       if(data.code === 1){
         Toast.success(data.message,3)
+        yield  put ({type:'setState',payload:{returnFont:'已申请退还保证金,客服将在一个月内处理'}})
       }
       sys.responseCode(data)
     },
@@ -53,6 +57,10 @@ export default {
 
     *setMonthValue({payload},{call,put}){
       yield  put ({type:'setState',payload:{monthValue:payload}})
+    },
+
+    *setNum({payload},{call,put}){
+      yield  put ({type:'setState',payload:{num:payload}})
     },
 
     *getMonthBill({payload},{call,put}){
