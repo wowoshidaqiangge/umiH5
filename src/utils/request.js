@@ -1,6 +1,6 @@
 import axios from 'axios'
 import {Toast} from 'antd-mobile'
-const testUrl = 'https://testnp.napin.com/' //api请求路径
+const testUrl = 'https://testnp.napin.com/';//api请求路径
 // const testUrl = 'https://super.napin.com/'; //api请求路径
 //系统请求参数
 const sysParams = {
@@ -14,9 +14,9 @@ const sysParams = {
 //获取token的方法
 function getToken() {
   const token1 = GetQueryString('token');//地址栏
-  const token2 = window.localStorage.getItem('token'); //本地的
+  // const token2 = window.localStorage.getItem('token'); //本地的
   const token3 = getAppToken(); //从app获取到的
-  const final_token = token1 || token2 || token3;
+  const final_token = token1 || token3;//|| token2
   //往本地存一次token  防止跳转页面式获取不到token的问题  暂时不需要了
   // if(!token2 && final_token){
   //   window.localStorage.setItem('token',final_token);
