@@ -21,6 +21,11 @@ class GetJoin extends Component {
   componentDidCatch(error, info) {
     console.log('错误信息~~~~',error, info);
     alert('捕获到异常'+error+'==='+JSON.stringify(info));
+
+    window.onerror = function(errorMessage, scriptURI, lineNumber,columnNumber,errorObj) {
+      // code..
+      alert('this is error'+errorMessage+'=='+scriptURI+'=='+lineNumber+'=='+columnNumber+'=='+errorObj);
+    }
   }
 
   handleNextUrl() {
@@ -59,6 +64,7 @@ class GetJoin extends Component {
     )
   }
 }
+
 
 export default connect(({getJoin}) => ({getJoin}))(GetJoin)
 
