@@ -16,6 +16,13 @@ class GetJoin extends Component {
     dispatch({type: 'getJoin/getJoinIn'})
   }
 
+
+  //捕获异常
+  componentDidCatch(error, info) {
+    console.log('错误信息~~~~',error, info);
+    alert('捕获到异常'+error+'==='+JSON.stringify(info));
+  }
+
   handleNextUrl() {
     const {getJoin, dispatch} = this.props
     const {isJoin} = getJoin
