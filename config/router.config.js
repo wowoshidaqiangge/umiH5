@@ -24,9 +24,16 @@ export default [
         title:"我的纳品账单"
     },
     {
-        path: "/joinIn-getJoin",
-        component: "../pages/joinIn/getJoin.js",
-        name: "加盟",
-        title:"加盟"
-    }
+    path: "/joinIn-getJoin",
+    component: "../pages/joinIn/getJoin.js",
+    name: "加盟",
+    title:"加盟"
+  },
+
+  {
+    path: "/joinIn-points",
+    component: "../pages/points/index.js",
+    name: "积分商城",
+    title:"积分商城"
+  }
 ];

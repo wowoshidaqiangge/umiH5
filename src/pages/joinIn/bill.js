@@ -163,11 +163,12 @@ class Bill extends Component {
           </div>
 
           <div className={styles.month}>
+
             <div className={styles.title}>
               <div className={styles.left}>本月消费分析</div>
             </div>
-            <div className={styles.content}>
 
+            <div className={styles.content}>
               <div className={styles.total}>
                 <div className={styles.title}>总消费(元)</div>
                 <div className={styles.amount}>{monthData.all_money === null ? 0.00 : monthData.all_money}</div>
