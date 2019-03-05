@@ -1,5 +1,4 @@
 import pageRoutes from './config/router.config'
-import "babel-polyfill";//处理低版本问题
 // ref: https://umijs.org/config/
 export default {
   base:'/joinMerchant/',//部署到非根目录时需要配置
