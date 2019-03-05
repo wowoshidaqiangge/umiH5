@@ -27,6 +27,9 @@ export default {
       },
     }],
   ],
+  targets:{
+    ie:11
+  },
   // 路由配置
   routes: pageRoutes,
 }
