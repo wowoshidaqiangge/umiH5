@@ -47,7 +47,6 @@ class Bill extends Component {
     dispatch({type: 'bill/getMonthBill', payload: {year: newYear, is_next: isNext}})
   }
 
-
   returnMoney() {
     const {dispatch} = this.props
     const params = [];
@@ -67,7 +66,6 @@ class Bill extends Component {
   month() {
     const {nextMonth} = this.props.bill
     const month = []
-
     nextMonth && nextMonth.map((item, index) => {
       let value = item
       month.push({label: (<div key={index}><span style={{...yearStyle}}/><span>{item}</span></div>), value: item})
@@ -114,17 +112,6 @@ class Bill extends Component {
         </p>
     `;
 
-    const mockData = () => {
-      let result = [];
-      for (let i = 0, len = 6; i < len; i++) {
-        result.push({
-          xAxis: [i],
-          yAxis: Math.floor(Math.random() * 100)
-        });
-      }
-      return result;
-    }
-
     return (
       <div className={styles.bill}>
         <div className={styles.inner}>
@@ -160,7 +147,7 @@ class Bill extends Component {
 
 
             <div className={styles.bar}>
-              <Chart height={240} data={costData} scale={newCols} padding={['auto', 'auto', 'auto', 'auto']} forceFit>
+              <Chart height={240} data={costData} scale={newCols} padding={['20', 'auto', 'auto', 'auto']} forceFit>
                 {/* x轴，横轴，以data数据的xAxis属性值为柱子的值 */}
                 <Axis name="month" color='pink' grid={null} line={null} tickLine={null}/>
                 {/* y轴，纵轴，以data数据的yAxis属性值为柱子的值 */}
@@ -251,7 +238,6 @@ class Bill extends Component {
                     }}>{returnFont}</Button>
           </div>
         }
-
       </div>
     )
   }

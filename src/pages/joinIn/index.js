@@ -214,9 +214,9 @@ class JoinInfo extends Component {
 }
 
 function getClient() {
-  var u = navigator.userAgent;
-  var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-  var isIos = u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+  const u = navigator.userAgent;
+  const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+  const isIos = u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
   if (isAndroid) {
     return 1;
   } else if (isIos) {
@@ -231,14 +231,14 @@ function getPay() {
   //IOS
   window["joinPayNotice"] = () => {
     //业务逻辑
-    var token = getToken.sysParams.token;
-    var url = '/joinMerchant/joinIn-contract?token=' + token;
+    let token = getToken.sysParams.token;
+    let url = '/joinMerchant/joinIn-contract?token=' + token;
     window.location.href = url;
   };
   //安卓
   window.joinPayNotice = () => {
-    var token = getToken.sysParams.token;
-    var url = '/joinMerchant/joinIn-contract?token=' + token;
+    let token = getToken.sysParams.token;
+    let url = '/joinMerchant/joinIn-contract?token=' + token;
     window.location.href = url;
   };
 }

@@ -20,8 +20,8 @@ class Contract extends Component {
 
   saveSignature() {
     document.getElementById('#signature').empty();
-    var dataUrl = document.getElementsByClassName('.js-signature').eq(1).jqSignature('getDataURL');
-    var img = document.getElementsByTagName('<img>').attr('src', dataUrl);
+    let dataUrl = document.getElementsByClassName('.js-signature').eq(1).jqSignature('getDataURL');
+    let img = document.getElementsByTagName('<img>').attr('src', dataUrl);
     // document.getElementById('#signature').append($('<p>').text("Here's your signature:"));
     document.getElementById('#signature').append(img);
     this.setState({disabled: this.state.disabled})

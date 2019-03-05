@@ -27,10 +27,11 @@ class GetJoin extends Component {
   }
 
   getImg() {
+      let doimg = null
     if (this.props.getJoin.isJoin === 1 || this.props.getJoin.isJoin === 2) {
-      var doimg = require('../../assets/img/join-look.png');
+      doimg = require('../../assets/img/join-look.png');
     } else {
-      var doimg = require('../../assets/img/join-do.png');
+      doimg = require('../../assets/img/join-do.png');
     }
     // else if(this.props.getJoin.isJoin === 2){
     //     var doimg = require('../../assets/img/join-complete.png');

@@ -32,7 +32,7 @@ export default {
             monthData: data.data.month_data,
             dayConsume:data.data.day_consume,
             nextMonth:data.data.next_month,
-            yearValue: data.data.day_consume[0],
+            yearValue: data.data.day_consume[data.data.day_consume.length-1],
             monthValue: data.data.next_month[0],
             returnInfo: data.data.return_info,
             num:data.data.return_info.is_return,
