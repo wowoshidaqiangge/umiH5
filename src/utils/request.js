@@ -86,6 +86,10 @@ const api = {
     getJoinIn: `${testUrl}api/shop/getJoinIn`,         //获取加盟者信息
     joinIn: `${testUrl}api/shop/joinIn`,               //加盟
   },
+  dayNew:{
+    dayNew: `${testUrl}api/shop/dayNew`,               //上新时间
+    dayGoodList:`${testUrl}api/shop/dayGoodList`       //每日商品
+  }
 }
 
 

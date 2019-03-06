@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import styles from './index.less'
-import {Button} from 'antd-mobile'
+import {Button,Modal,Icon,WhiteSpace} from 'antd-mobile'
 
 export default class Points extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      showModal:true
+    }
   }
 
   render() {
@@ -112,6 +114,26 @@ export default class Points extends Component {
 
         </div>
 
+        <div className={styles.modal}>
+          <Modal
+            visible={this.state.showModal}
+            transparent
+            maskClosable={false}>
+            <div style={{backgroundColor:'#F2F8FF',height: '100%'}}
+              // style={{ , overflow: 'scroll' }}
+            >
+              <img style={{paddingTop:'33px'}}
+                   src={require('../../assets/img/points/1.png')}/>
+              <img  src={require('../../assets/img/points/2.png')}/>
+              <div  style={{color:'#FDA102',fontSize:'14px',marginTop:'20px',height:'45px'}}>
+                恭喜你,获得100积分
+              </div>
+            </div>
+            <div>
+              <Icon type='cross-circle'/>
+            </div>
+          </Modal>
+        </div>
       </div>
     )
   }

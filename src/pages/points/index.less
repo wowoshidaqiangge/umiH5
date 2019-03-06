@@ -4,6 +4,7 @@
   height: 100%;
   display:flex;
   flex-direction: column;
+  overflow: scroll;
   .header{
     background-color: #ffffff;
     //border: 1px solid black;
@@ -95,7 +96,7 @@
           text-overflow:ellipsis;
           margin-right: 10px;
           white-space: nowrap;
-          border-bottom: 1px solid #222222;
+          border-bottom: 1px solid #EDEDED;
         }
 
         .middle{
@@ -129,4 +130,29 @@
     }
 
   }
+
+
+
 }
+//.modal{
+  :global{
+    width:225px;
+    height: 280px;
+    //border: 1px solid;
+    .am-modal, .am-modal-transparent{
+      //border: 1px solid;
+      margin: 205px 75px auto 75px;
+      .am-modal-content{
+        width:225px;
+        height:240px;
+        padding-top: 0px;
+        .am-modal-body{
+          padding: 0px 0px ;
+          img{
+            width: 85%;
+          }
+        }
+      }
+    }
+  }
+//}
