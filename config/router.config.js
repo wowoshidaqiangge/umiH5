@@ -30,7 +30,7 @@ export default [
     title: "加盟"
   },
   {
-    path: "/joinIn-points",
+    path: "/points",
     component: "../pages/points/index.js",
     name: "积分商城",
     title: "积分商城"
@@ -42,9 +42,15 @@ export default [
     title: "每日上新"
   },
   {
-    path: "/joinIn-pointsRecord",
+    path: "/pointsRecord",
     component: "../pages/points/record/index.js",
     name: "积分记录",
     title: "积分记录"
+  },
+  {
+    path: "/demo",
+    component: "../pages/new/demo.js",
+    name: "demo",
+    title: "demo"
   }
 ];

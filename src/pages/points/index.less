@@ -105,14 +105,22 @@
           justify-content: space-between;
           padding: 5px 10px;
           //height: 12px;
-          img{
-            width: 5%;
-            height: 5%;
+          .left{
+            flex:5;
+            display: flex;
+            font-size: 12px;
             line-height: 12px;
+            img{
+              width: 60%;
+              height: 60%;
+              line-height: 12px;
+            }
           }
+
           .price{
             font-size: 12px;
             line-height: 12px;
+            flex: 3;
           }
 
         }
@@ -144,10 +152,14 @@
       margin: 205px 75px auto 75px;
       .am-modal-content{
         width:225px;
-        height:240px;
+        height:280px;
         padding-top: 0px;
+        //border: 2px solid black;
+
         .am-modal-body{
+          //border: 2px solid pink;
           padding: 0px 0px ;
+          overflow: hidden;
           img{
             width: 85%;
           }

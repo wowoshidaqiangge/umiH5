@@ -89,6 +89,11 @@ const api = {
   dayNew:{
     dayNew: `${testUrl}api/shop/dayNew`,               //上新时间
     dayGoodList:`${testUrl}api/shop/dayGoodList`       //每日商品
+  },
+  points:{
+    getIntegralLog:`${testUrl}api/Integral/IntegralLog`,                //获取积分记录
+    getIntegralGoodsList:`${testUrl}api/integral/IntegralGoodsList`,    //获取商品列表
+    giveIntegral:`${testUrl}api/integral/giveIntegral`,                 //获取是否展示积分页面
   }
 }
 

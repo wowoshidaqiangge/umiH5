@@ -1,37 +1,46 @@
 import React,{Component} from 'react'
 import { List } from 'antd-mobile'
 import styles from './index.less'
+import {connect} from 'dva'
 
 const Item = List.Item
 const Brief = Item.Brief
 
-export default class PointRecord extends Component{
+class PointRecord extends Component{
   constructor(props) {
     super(props);
     this.state={
-
     }
   }
 
-  render(){
-    return(<div className={styles.recordContainer}>
-        <List className="my-list">
-          <Item multipleLine extra="+50">
-            商品兑换 <Brief>2018-07-07&nbsp;&nbsp;10:44:56</Brief>
-          </Item>
-          <Item multipleLine extra="+50">
-            商品兑换 <Brief>2018-07-07&nbsp;&nbsp;10:44:56</Brief>
-          </Item>
-          <Item multipleLine extra="+50">
-            商品兑换 <Brief>2018-07-07&nbsp;&nbsp;10:44:56</Brief>
-          </Item><Item multipleLine extra="+50">
-          商品兑换 <Brief>2018-07-07&nbsp;&nbsp;10:44:56</Brief>
-        </Item>
+  componentWillMount(){
+    console.log('oooooooooo')
+    this.props.dispatch({type:'record/getIntegralLog'})
+  }
 
-        </List>
+  render(){
+    const {data} = this.props.record
+    let flag = data && data.length>0
+    console.log('data',data.length)
+    return(<div className={styles.recordContainer}>
+        {
+          flag? <List className="my-list">
+            {
+              data && data.length>0? data.map((item,index)=>{
+                return <Item multipleLine extra={item.variable_integral} key={index}>
+                  {item.content} <Brief>{item.create_time}</Brief>
+                </Item>
+              }) :void[0]
+            }
+          </List>: <div className={styles.nothing}>
+            <img src={require('../../../assets/img/nothing.png')}/>
+          </div>
+        }
+
 
       </div>
     )
   }
-
 }
+
+export default connect(({record}) => ({record}))(PointRecord)

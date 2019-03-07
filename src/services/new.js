@@ -11,6 +11,5 @@ export async function getDayNew(){
 
 export async function  getDayGoodList(payload) {
   const arg = {...params,...payload}
-  console.log('arg',arg)
   return axios.post(dayNew.dayGoodList,arg)
 }
