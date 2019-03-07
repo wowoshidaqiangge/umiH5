@@ -68,7 +68,7 @@ export default {
       if(data.code === 1){
         const{goodsList} = yield select(state=>state.dayNew)
         const newGoodsList = goodsList.concat(data.data.list)
-        yield put ({type:'setState',payload: {goodsList:newGoodsList }})
+        yield put ({type:'setState',payload: {goodsList:newGoodsList,allPage:data.data.all_page,curPage:data.data.cur_page }})
       }
     },
   }

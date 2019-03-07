@@ -37,6 +37,18 @@ function getIosToken(){
   window.webkit.messageHandlers.callUserInfo.postMessage({})
 }
 
+function getClient() {
+  const u = navigator.userAgent;
+  const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+  const isIos = u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+  if (isAndroid) {
+    return 1;
+  } else if (isIos) {
+    return 0;
+  }
+}
+
+
 //获取app的token
 function getAppToken() {
   let url = window.location.href
@@ -112,4 +124,4 @@ const responseCode = function responseCode(data){
   }
 }
 
-export default {api, request,responseCode, sysParams};
+export default {api, getClient,request,responseCode, sysParams};

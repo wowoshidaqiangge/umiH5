@@ -3,6 +3,7 @@ import styles from './index.less'
 import {Tabs, PullToRefresh} from 'antd-mobile'
 import {connect} from 'dva'
 import ReactDOM from 'react-dom'
+import sys from '../../utils/request'
 
 class New extends Component {
   constructor(props) {
@@ -12,6 +13,11 @@ class New extends Component {
       height: document.documentElement.clientHeight,
       refreshing: false,
       down: true,
+      limit_id:0,
+      group_id:0,
+      join_id:0,
+      type:1,
+      activity_id:0,
     }
   }
 
@@ -42,15 +48,36 @@ class New extends Component {
     this.props.dispatch({type: 'dayNew/getDayGoodList', payload: {new_id: newId, page: 1}})
   }
 
-  buyGoods(item) {
-    console.log('item', item)
+  openGoods(item) {
+    alert('item', item)
+    const data = sys.getClient()
+    const{limit_id, group_id,join_id,type,activity_id} = this.state
+
+    if(data){
+      //安卓
+      try{
+        // alert('进入安卓操作')
+        window.android.openGoods(type,item.goods_id,join_id,limit_id,group_id,activity_id);
+      }catch(e){
+        // alert('安卓异常'+e)
+      }
+    }else{
+      //ios
+      try{
+        window.webkit.messageHandlers.openGoods.postMessage({type:type,goods_id:item.goods_id,join_id:join_id,
+          limit_id:limit_id,group_id:group_id,activity_id:activity_id})
+      }catch(e){
+        // alert('iso异常'+e)
+      }
+    }
   }
 
   renderContent(goodsList,curPage,allPage) {
-    console.log(curPage,allPage,'page')
+    console.log(curPage,allPage,curPage<allPage,'page')
     return <div>
       {goodsList.map((item, index) => {
         return <div key={index}
+                    onClick={() => this.openGoods(item)}
                     style={{display: 'flex', marginTop: '20px', height: '40vw', backgroundColor: '#fff', borderRadius: '8px 8px 0 0 '}}>
           <div style={{flex: 4, textAlign: 'center', lineHeight: '40vw'}}>
             <img style={{width: '80%', height: '80%'}} src={item.thum_img}/>
@@ -67,14 +94,12 @@ class New extends Component {
               <button style={{
                 background: 'linear-gradient(#59057B,#AB0E86)', border: 'none', height: '9vw',
                 borderRadius: '2vw', color: '#fff', width: '20vw'
-              }} onClick={() => this.buyGoods(item)}>立即购
+              }} >立即购
               </button>
             </div>
           </div>
         </div>
       })}
-
-      {/*<div style={{textAlign:'center'}}>加载更多</div>*/}
       {curPage < allPage ? <div style={{textAlign:'center'}}>加载更多</div>:void[0]}
 
     </div>

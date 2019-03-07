@@ -2,14 +2,20 @@ import React, {Component} from 'react'
 import styles from './index.less'
 import {Button,Modal,Icon} from 'antd-mobile'
 import {connect} from 'dva'
+import sys from '../../utils/request'
 
 class Points extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      showModal:true
+      limit_id:0,
+      group_id:0,
+      join_id:0,
+      type:7,
+      activity_id:0,
     }
   }
+
 
   componentWillMount(){
     const {dispatch} = this.props
@@ -17,8 +23,62 @@ class Points extends Component {
     dispatch({type:'points/giveIntegral'})
   }
 
+  renderGoodsList(goodsList){
+    return <div className={styles.lists}>
+      {goodsList && goodsList.length>0? goodsList.map((item,index )=>{
+        return <div className={styles.list} key={index} onClick={()=>this.openPointGoods(item)}>
+
+          <div className={styles.img}>
+            <img src={item.thum_img}/>
+          </div>
+
+          <div className={styles.title}>{item.name}</div>
+
+          <div className={styles.middle}>
+            <div className={styles.left}>
+              <div style={{width:'20%'}}> <img src={require('../../assets/img/points/jewel.png')}/></div>
+              <div style={{height:'10px'}}>{item.integral}</div>
+            </div>
+
+            <div className={styles.price}>￥{item.goods_price}</div>
+          </div>
+
+          <div className={styles.button}>
+            <Button type="ghost" inline size="small" className="am-button-borderfix">积分兑换</Button>
+          </div>
+        </div>
+      }):void[0]}
+    </div>
+  }
+
+  openPointGoods(item){
+    // console.log('item',item)
+    const data = sys.getClient()
+    const{limit_id, group_id,join_id,type,activity_id} = this.state
+
+    if(data){
+      //安卓
+      try{
+        // alert('进入安卓操作')
+        window.android.openGoods(type,item.id,join_id,limit_id,group_id,activity_id);
+      }catch(e){
+        // alert('安卓异常'+e)
+      }
+
+    }else{
+      //ios
+      try{
+        // alert('进入IOS操作')
+        window.webkit.messageHandlers.openGoods.postMessage({type:type,goods_id:item.id,join_id:join_id,
+          limit_id:limit_id,group_id:group_id,activity_id:activity_id})
+      }catch(e){
+        // alert('iso异常'+e)
+      }
+    }
+  }
+
   render() {
-    const{user,goodsList,modalVisible} = this.props.points
+    const{user,goodsList,modalVisible,integral} = this.props.points
     console.log('visible',modalVisible)
     return (
       <div className={styles.points}>
@@ -44,31 +104,10 @@ class Points extends Component {
         <div className={styles.allGoods}>
           <div className={styles.title}>全部商品</div>
 
-          <div className={styles.lists}>
-            {goodsList && goodsList.length>0? goodsList.map((item,index )=>{
-              return <div className={styles.list} key={index}>
+          {/*<div className={styles.lists}>*/}
+            {this.renderGoodsList(goodsList)}
 
-                <div className={styles.img}>
-                  <img src={item.thum_img}/>
-                </div>
-
-                <div className={styles.title}>{item.name}</div>
-
-                <div className={styles.middle}>
-                  <div className={styles.left}>
-                    <div style={{width:'20%'}}> <img src={require('../../assets/img/points/jewel.png')}/></div>
-                    <div style={{height:'10px'}}>{item.integral}</div>
-                  </div>
-
-                  <div className={styles.price}>￥{item.goods_price}</div>
-                </div>
-
-                <div className={styles.button}>
-                  <Button type="ghost" inline size="small" className="am-button-borderfix">积分兑换</Button>
-                </div>
-              </div>
-            }):void[0]}
-          </div>
+          {/*</div>*/}
         </div>
 
         <div className={styles.modal}>
@@ -83,11 +122,16 @@ class Points extends Component {
                    src={require('../../assets/img/points/1.png')}/>
               <img  src={require('../../assets/img/points/2.png')}/>
               <div  style={{color:'#FDA102',fontSize:'14px',marginTop:'20px',height:'45px'}}>
-                恭喜你,获得100积分
+                恭喜你,获得{integral}积分
               </div>
             </div>
-            <div style={{backgroundColor:'#000000',opacity:'0.1'}}>
-              <Icon type='cross-circle'/>
+
+            {/*以下是icon*/}
+            <div onClick={()=>{this.props.dispatch({type:'points/setState',payload:{modalVisible:false}})}}
+                 style={{marginTop:'10px'}}
+              // style={{backgroundColor:'#000000',opacity:'0.1'}}
+            >
+              <Icon type='cross-circle' style={{color:'white'}} />
             </div>
           </Modal>
         </div>

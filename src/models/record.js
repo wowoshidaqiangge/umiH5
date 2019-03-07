@@ -4,7 +4,7 @@ import sys from '../utils/request'
 export default {
   namespace: 'record',
   state: {
-    data:[],     //积分页面的值
+    dataList:[],     //积分页面的值
   },
 
   reducers: {
@@ -17,7 +17,7 @@ export default {
     *getIntegralLog({},{call,put}){
       const {data} = yield call(service.getIntegralLog)
       if( data.code === '1'){
-        yield put({type:'setState',payload:{data:data.data}})
+        yield put({type:'setState',payload:{dataList:data.data.list}})
       }
       sys.responseCode(data)
     }
