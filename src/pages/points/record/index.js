@@ -1,5 +1,6 @@
 import React,{Component} from 'react'
 import { List,PullToRefresh } from 'antd-mobile'
+
 import styles from './index.less'
 import {connect} from 'dva'
 
@@ -56,39 +57,6 @@ class PointRecord extends Component{
                 <Item multipleLine extra="extra content">
                   Title <Brief>subtitle</Brief>
                 </Item>
-
-                <Item multipleLine extra="extra content">
-                  Title <Brief>subtitle</Brief>
-                </Item>
-
-                <Item multipleLine extra="extra content">
-                  Title <Brief>subtitle</Brief>
-                </Item>
-
-                <Item multipleLine extra="extra content">
-                  Title <Brief>subtitle</Brief>
-                </Item>
-
-                <Item multipleLine extra="extra content">
-                  Title <Brief>subtitle</Brief>
-                </Item>
-
-                <Item multipleLine extra="extra content">
-                  Title <Brief>subtitle</Brief>
-                </Item>
-
-                <Item multipleLine extra="extra content">
-                  Title <Brief>subtitle</Brief>
-                </Item>
-
-                <Item multipleLine extra="extra content">
-                  Title <Brief>subtitle</Brief>
-                </Item>
-
-
-
-
-
 
               </List>
             </PullToRefresh>

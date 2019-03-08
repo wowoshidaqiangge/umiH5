@@ -32,7 +32,7 @@ export default {
       if(data.code === '1'){
         yield put({type:'setState',payload:{integral: data.data.integral,}})
         console.log('Popup',  data.data.Popup === '2')
-        data.data.Popup === '2'?  yield put({type:'setState',payload:{modalVisible: true,}}): void[0]
+        data.data.Popup === '1'?  yield put({type:'setState',payload:{modalVisible: true,}}): void[0]
       }
       sys.responseCode(data)
     }
