@@ -49,7 +49,7 @@ class New extends Component {
   }
 
   openGoods(item) {
-    alert('item', item)
+    // alert('item', item)
     const data = sys.getClient()
     const{limit_id, group_id,join_id,type,activity_id} = this.state
 
@@ -78,7 +78,7 @@ class New extends Component {
       {goodsList.map((item, index) => {
         return <div key={index}
                     onClick={() => this.openGoods(item)}
-                    style={{display: 'flex', marginTop: '20px', height: '40vw', backgroundColor: '#fff', borderRadius: '8px 8px 0 0 '}}>
+                    style={{display: 'flex', marginTop: '20px', height: '40vw', backgroundColor: '#fff', borderRadius: '8px 8px 0 0 ',marginBottom:'6vw'}}>
           <div style={{flex: 4, textAlign: 'center', lineHeight: '40vw'}}>
             <img style={{width: '80%', height: '80%'}} src={item.thum_img}/>
           </div>
@@ -100,7 +100,7 @@ class New extends Component {
           </div>
         </div>
       })}
-      {curPage < allPage ? <div style={{textAlign:'center'}}>加载更多</div>:void[0]}
+      {curPage < allPage ? <div style={{textAlign:'center',display:'none'}}>加载更多</div>:void[0]}
 
     </div>
   }
