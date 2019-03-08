@@ -33,7 +33,7 @@ class PointRecord extends Component{
     console.log('加载更多',page <= allPage)
     if(page <= allPage){
       page++
-      this.props.dispatch({type:'record/getIntegralLog',payload:{page:page.toString()}})
+      this.props.dispatch({type:'record/getMoreIntegralLog',payload:{page:page.toString()}})
     }
   }
 
@@ -41,27 +41,31 @@ class PointRecord extends Component{
     const {dataList,curPage,allPage,} = this.props.record
     let flag = dataList && dataList.length>0
     console.log('data',dataList,dataList.length,flag,curPage,allPage)
-    return(<div className={styles.recordContainer}>
+    return(
+      <React.Fragment>
         {
-          flag?
-            <PullToRefresh  direction='up'
-                            distanceToRefresh={25}  onRefresh={()=>this.loadMore()}
-                            damping={100}>
-              <List className="my-list">
-                {
-                  dataList && dataList.length>0? dataList.map((item,index)=>{
-                    return <Item multipleLine extra={item.variable_integral} key={index}>
-                      {item.content} <Brief>{item.create_time}</Brief>
-                    </Item>
-                  }) :void[0]
-                }
-              </List>
-            </PullToRefresh>
-            : <div className={styles.nothing}>
-              <img src={require('../../../assets/img/nothing.png')}/>
-            </div>
+          flag?  <div className={styles.recordContainer}>
+          <PullToRefresh  direction='up'
+          distanceToRefresh={25}  onRefresh={()=>this.loadMore()}
+          damping={100}>
+          <List className="my-list">
+          {
+            dataList && dataList.length>0? dataList.map((item,index)=>{
+              return <Item multipleLine extra={item.variable_integral} key={index}>
+                {item.content} <Brief>{item.create_time}</Brief>
+              </Item>
+            }) :void[0]
+          }
+          </List>
+          </PullToRefresh>
+          </div>
+          : <div className={styles.nothing}>
+          <img src={require('../../../assets/img/nothing.png')}/>
+          </div>
         }
-      </div>
+
+      </React.Fragment>
+
     )
   }
 }

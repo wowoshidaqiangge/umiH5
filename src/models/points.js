@@ -24,7 +24,8 @@ export default {
       const {data} = yield call (service.getIntegralGoodsList,payload)
       if(data.code === '1'){
         const {goodsList} = yield select(state=>state.points)
-        const newDataList = goodsList.concat(data.data.goods_list)
+        const newDataList = data.data.goods_list
+          // goodsList.concat(data.data.goods_list)
         const user = data.data.user
         yield put({type:'setState',payload:{user:user,goodsList: newDataList,curPage: data.data.cur_page,allPage: data.data.all_page,integralBalance:user.integral_balance}})
       }
@@ -38,7 +39,18 @@ export default {
         data.data.Popup === '1'?  yield put({type:'setState',payload:{modalVisible: true,}}): void[0]
       }
       sys.responseCode(data)
-    }
+    },
+
+    *getMoreIntegralGoodsList({payload},{call,put,select}){
+      const {data} = yield call (service.getIntegralGoodsList,payload)
+      if(data.code === '1'){
+        const {goodsList} = yield select(state=>state.points)
+        const newDataList = goodsList.concat(data.data.goods_list)
+        const user = data.data.user
+        yield put({type:'setState',payload:{user:user,goodsList: newDataList,curPage: data.data.cur_page,allPage: data.data.all_page,integralBalance:user.integral_balance}})
+      }
+      sys.responseCode(data)
+    },
 
 
   }

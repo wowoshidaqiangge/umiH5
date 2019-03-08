@@ -99,7 +99,7 @@ class Points extends Component {
     let page = parseInt(curPage)
     if (page <= allPage) {
       page++
-      dispatch({type: 'points/getIntegralGoodsList', payload: {page: page.toString()}})
+      dispatch({type: 'points/getMoreIntegralGoodsList', payload: {page: page.toString()}})
     }
   }
 
