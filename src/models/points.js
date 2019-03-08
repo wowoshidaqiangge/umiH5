@@ -10,6 +10,7 @@ export default {
     integral:'',          //获赠的积分
     curPage:'',           //当前页数
     allPage:'',           //总页数
+    integralBalance:'',     //积分余额
   },
 
   reducers: {
@@ -24,7 +25,8 @@ export default {
       if(data.code === '1'){
         const {goodsList} = yield select(state=>state.points)
         const newDataList = goodsList.concat(data.data.goods_list)
-        yield put({type:'setState',payload:{user:data.data.user,goodsList: newDataList,curPage: data.data.cur_page,allPage: data.data.all_page}})
+        const user = data.data.user
+        yield put({type:'setState',payload:{user:user,goodsList: newDataList,curPage: data.data.cur_page,allPage: data.data.all_page,integralBalance:user.integral_balance}})
       }
       sys.responseCode(data)
     },

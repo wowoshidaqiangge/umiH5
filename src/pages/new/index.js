@@ -12,18 +12,21 @@ class New extends Component {
       isLoadingMore: false,
       height: document.documentElement.clientHeight,
       refreshing: false,
-      down: true,
-      limit_id:0,
-      group_id:0,
-      join_id:0,
-      type:1,
-      activity_id:0,
+      limit_id: 0,
+      group_id: 0,
+      join_id: 0,
+      type: 1,
+      activity_id: 0,
     }
   }
 
   componentWillMount() {
     const {dispatch} = this.props
-    dispatch({type: 'dayNew/getDayNew', callback: () => {this.getDayGoodList()}})
+    dispatch({
+      type: 'dayNew/getDayNew', callback: () => {
+        this.getDayGoodList()
+      }
+    })
   }
 
   componentDidMount() {
@@ -34,13 +37,13 @@ class New extends Component {
     }), 0);
   }
 
-  loadMore(){
-    const {dispatch,dayNew} = this.props
-    const{newId,page,allPage} = dayNew
-    console.log('allPage',allPage,page+1)
-    dispatch({type:'dayNew/setState',payload:{page:page+1}})
-    console.log('请求更多的数据')
-    dispatch({type:'dayNew/loadMore',payload:{new_id:newId,page:page+1}})
+  loadMore() {
+    const {dispatch, dayNew} = this.props
+    const {newId, page, allPage} = dayNew
+    if(page < allPage){
+      dispatch({type: 'dayNew/setState', payload: {page: page + 1}})
+      dispatch({type: 'dayNew/loadMore', payload: {new_id: newId, page: page + 1}})
+    }
   }
 
   getDayGoodList() {
@@ -51,34 +54,43 @@ class New extends Component {
   openGoods(item) {
     // alert('item', item)
     const data = sys.getClient()
-    const{limit_id, group_id,join_id,type,activity_id} = this.state
+    const {limit_id, group_id, join_id, type, activity_id} = this.state
 
-    if(data){
+    if (data) {
       //安卓
-      try{
+      try {
         // alert('进入安卓操作')
-        window.android.openGoods(type,item.goods_id,join_id,limit_id,group_id,activity_id);
-      }catch(e){
+        window.android.openGoods(type, item.goods_id, join_id, limit_id, group_id, activity_id);
+      } catch (e) {
         // alert('安卓异常'+e)
       }
-    }else{
+    } else {
       //ios
-      try{
-        window.webkit.messageHandlers.openGoods.postMessage({type:type,goods_id:item.goods_id,join_id:join_id,
-          limit_id:limit_id,group_id:group_id,activity_id:activity_id})
-      }catch(e){
+      try {
+        window.webkit.messageHandlers.openGoods.postMessage({
+          type: type, goods_id: item.goods_id, join_id: join_id,
+          limit_id: limit_id, group_id: group_id, activity_id: activity_id
+        })
+      } catch (e) {
         // alert('iso异常'+e)
       }
     }
   }
 
-  renderContent(goodsList,curPage,allPage) {
-    console.log(curPage,allPage,curPage<allPage,'page')
+  renderContent(goodsList, curPage, allPage) {
+    console.log(curPage, allPage, curPage < allPage, 'page')
     return <div>
       {goodsList.map((item, index) => {
         return <div key={index}
                     onClick={() => this.openGoods(item)}
-                    style={{display: 'flex', marginTop: '20px', height: '40vw', backgroundColor: '#fff', borderRadius: '8px 8px 0 0 ',marginBottom:'6vw'}}>
+                    style={{
+                      display: 'flex',
+                      marginTop: '20px',
+                      height: '40vw',
+                      backgroundColor: '#fff',
+                      borderRadius: '8px 8px 0 0 ',
+                      marginBottom: '6vw'
+                    }}>
           <div style={{flex: 4, textAlign: 'center', lineHeight: '40vw'}}>
             <img style={{width: '80%', height: '80%'}} src={item.thum_img}/>
           </div>
@@ -94,13 +106,13 @@ class New extends Component {
               <button style={{
                 background: 'linear-gradient(#59057B,#AB0E86)', border: 'none', height: '9vw',
                 borderRadius: '2vw', color: '#fff', width: '20vw'
-              }} >立即购
+              }}>立即购
               </button>
             </div>
           </div>
         </div>
       })}
-      {curPage < allPage ? <div style={{textAlign:'center',display:'none'}}>加载更多</div>:void[0]}
+      {curPage < allPage ? <div style={{textAlign: 'center', display: 'none'}}>加载更多</div> : void[0]}
 
     </div>
   }
@@ -112,33 +124,33 @@ class New extends Component {
   }
 
   render() {
-    const {tabs, showPage, goodsList,curPage,allPage} = this.props.dayNew
+    const {tabs, showPage, goodsList, curPage, allPage} = this.props.dayNew
     const newTabs = []
     tabs && tabs.length > 0 ? tabs.map((item) => {
       newTabs.push({
         title: <div>
-          <div style={{lineHeight: '20px'}}>{item.start_day}</div>
+          <div style={{lineHeight: '20px',marginTop:'5px'}}>{item.start_day}</div>
           <div style={{fontSize: '15px', lineHeight: '15px', marginTop: '8px', textAlign: 'center'}}>
             {item.start_hour}
           </div>
-        </div>, ...item})
+        </div>, ...item
+      })
     }) : void[0]
-    console.log('ppppp',curPage,allPage)
 
     return (
-      <PullToRefresh   damping={60}
-                       ref={el => this.ptr = el}
-                       style={{height: this.state.height, overflow: 'auto'}}
-                       indicator='上拉可以刷新'
-                       direction='up'
-                       refreshing={this.state.refreshing}
-                       onRefresh={() => {
-                         this.setState({ refreshing: true });
-                         setTimeout(() => {
-                           this.setState({ refreshing: false });
-                         }, 1000);
-                         this.loadMore()
-                       }}
+      <PullToRefresh damping={60}
+                     ref={el => this.ptr = el}
+                     style={{height: this.state.height, overflow: 'auto'}}
+                     indicator='上拉可以刷新'
+                     direction='up'
+                     refreshing={this.state.refreshing}
+                     onRefresh={() => {
+                       this.setState({refreshing: true});
+                       setTimeout(() => {
+                         this.setState({refreshing: false});
+                       }, 1000);
+                       this.loadMore()
+                     }}
       >
         <div className={styles.newContainer}>
           <img src={require('../../assets/img/new/banner.png')}/>
@@ -147,10 +159,9 @@ class New extends Component {
                   onChange={(tab, index) => this.changePage(tab, index)}
                   onTabClick={(tab, index) => this.changePage(tab, index)}
                   renderTabBar={props => <Tabs.DefaultTabBar {...props} page={3}/>}>
-              {this.renderContent(goodsList,curPage,allPage)}
+              {this.renderContent(goodsList, curPage, allPage)}
             </Tabs>
           </div>
-
         </div>
       </PullToRefresh>
     )
