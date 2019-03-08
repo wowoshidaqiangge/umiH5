@@ -45,7 +45,7 @@ class PointRecord extends Component{
       <React.Fragment>
         {
           flag?  <div className={styles.recordContainer}>
-          <PullToRefresh  direction='up'
+          <PullToRefresh  direction='up' style={{height:'100%'}}
           distanceToRefresh={25}  onRefresh={()=>this.loadMore()}
           damping={100}>
           <List className="my-list">

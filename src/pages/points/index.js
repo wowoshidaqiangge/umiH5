@@ -104,11 +104,8 @@ class Points extends Component {
   }
 
   handleClose(integral,integralBalance){
-    console.log(integral,'积分值')
     const newIntegral = parseInt(integral)+integralBalance
     this.props.dispatch({type: 'points/setState', payload: {modalVisible: false,integralBalance: newIntegral}})
-    // // this.props.dispatch({type: 'points/getIntegralGoodsList', payload: {page: '1'}})
-    // this.props.dispatch({type: 'points/giveIntegral'})
   }
 
   render() {
@@ -116,7 +113,7 @@ class Points extends Component {
     return (
       <PullToRefresh damping={60}
                      ref={el => this.ptr = el}
-                     style={{height: this.state.height, overflow: 'auto'}}
+                     style={{height: this.state.height, overflow: 'auto',backgroundColor:' rgb(240,240,240)'}}
                      indicator='上拉可以刷新'
                      direction='up'
                      refreshing={this.state.refreshing}
@@ -146,11 +143,8 @@ class Points extends Component {
 
           <div className={styles.allGoods}>
             <div className={styles.title}>全部商品</div>
-
             {this.renderGoodsList(goodsList)}
-
           </div>
-
 
           <div className={styles.modal}>
             <Modal
