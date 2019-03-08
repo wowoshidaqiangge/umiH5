@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import styles from './index.less'
-import {Button,Modal,Icon} from 'antd-mobile'
+import {Button,Modal,Icon,PullToRefresh} from 'antd-mobile'
 import {connect} from 'dva'
 import sys from '../../utils/request'
 
@@ -16,10 +16,9 @@ class Points extends Component {
     }
   }
 
-
   componentWillMount(){
     const {dispatch} = this.props
-    dispatch({type:'points/getIntegralGoodsList'})
+    dispatch({type:'points/getIntegralGoodsList',payload:{page:'1'}})
     dispatch({type:'points/giveIntegral'})
   }
 
@@ -27,7 +26,6 @@ class Points extends Component {
     return <div className={styles.lists}>
       {goodsList && goodsList.length>0? goodsList.map((item,index )=>{
         return <div className={styles.list} key={index} onClick={()=>this.openPointGoods(item)}>
-
           <div className={styles.img}>
             <img src={item.thum_img}/>
           </div>
@@ -77,9 +75,19 @@ class Points extends Component {
     }
   }
 
+  loadMore(){
+    console.log('llllllll加载更多')
+    const {dispatch,points} = this.props
+    const {curPage,allPage} = points
+    let page = parseInt(curPage)
+    if(page <= allPage){
+      page++
+      dispatch({type:'points/getIntegralGoodsList',payload:{page:page.toString()}})
+    }
+  }
+
   render() {
     const{user,goodsList,modalVisible,integral} = this.props.points
-    console.log('visible',modalVisible)
     return (
       <div className={styles.points}>
         <div className={styles.header}>
@@ -103,11 +111,11 @@ class Points extends Component {
 
         <div className={styles.allGoods}>
           <div className={styles.title}>全部商品</div>
-
-          {/*<div className={styles.lists}>*/}
+          <PullToRefresh  direction='up'
+                          distanceToRefresh={25}  onRefresh={()=>this.loadMore()}
+                          damping={100}>
             {this.renderGoodsList(goodsList)}
-
-          {/*</div>*/}
+          </PullToRefresh>
         </div>
 
         <div className={styles.modal}>
@@ -128,9 +136,7 @@ class Points extends Component {
 
             {/*以下是icon*/}
             <div onClick={()=>{this.props.dispatch({type:'points/setState',payload:{modalVisible:false}})}}
-                 style={{marginTop:'10px'}}
-              // style={{backgroundColor:'#000000',opacity:'0.1'}}
-            >
+                 style={{marginTop:'10px'}}>
               <Icon type='cross-circle' style={{color:'white'}} />
             </div>
           </Modal>

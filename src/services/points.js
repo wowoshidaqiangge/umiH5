@@ -4,8 +4,8 @@ import sys from '../utils/request'
 const params = sys.sysParams
 const api = sys.api
 
-export  async  function getIntegralGoodsList(){
-  const arg = {...params}
+export  async  function getIntegralGoodsList(payload){
+  const arg = {...params,...payload}
   return axios.post(api.points.getIntegralGoodsList,arg)
 }
 

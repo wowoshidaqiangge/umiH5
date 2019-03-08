@@ -180,7 +180,7 @@ class Bill extends Component {
               </div>
 
               <div className={styles.success}>
-                <div className={styles.title}>成功订单(笔)</div>
+                <div className={styles.title}>总订单(笔)</div>
                 <div className={styles.amount}>{monthData.eff_count === null ? 0 : monthData.eff_count}</div>
               </div>
 
@@ -210,7 +210,7 @@ class Bill extends Component {
               </div>
 
               <div className={styles.success}>
-                <div className={styles.title}>成功订单(笔)</div>
+                <div className={styles.title}>总订单(笔)</div>
                 <div className={styles.amount}>{allData.eff_count === null ? 0 : allData.eff_count}</div>
               </div>
 

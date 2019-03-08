@@ -49,6 +49,7 @@ export default {
       if(data.code === 1){
         yield put ({type:'setState',payload: {goodsList: data.data.list,allPage:data.data.all_page,curPage: data.data.cur_page}})
       }
+      sys.responseCode(data)
     },
 
     *changePage({payload,callback},{call,put}){
@@ -58,9 +59,9 @@ export default {
     *updateGoodsList({payload}, {call, put}) {
       const {data} = yield call(service.getDayGoodList, payload)
       if(data.code === 1){
-        // console.log(data.data.all_page,data.data.cur_page,'zzzzzz')
         yield put ({type:'setState',payload: {goodsList: data.data.list,allPage:data.data.all_page,curPage:data.data.cur_page}})
       }
+      sys.responseCode(data)
     },
 
     *loadMore({payload}, {call, put,select}) {
@@ -70,6 +71,7 @@ export default {
         const newGoodsList = goodsList.concat(data.data.list)
         yield put ({type:'setState',payload: {goodsList:newGoodsList,allPage:data.data.all_page,curPage:data.data.cur_page }})
       }
+      sys.responseCode(data)
     },
   }
 }
