@@ -89,7 +89,9 @@ class Points extends Component {
   }
 
   handlePointsRecord() {
-    this.props.dispatch(routerRedux.push('/pointsRecord'))
+    // this.props.dispatch(routerRedux.push('/pointsRecord'))
+    let url = '/joinMerchant/pointsRecord'
+    window.location.pathname= url
   }
 
   loadMore() {
