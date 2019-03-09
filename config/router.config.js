@@ -47,4 +47,10 @@ export default [
     name: "积分记录",
     title: "积分记录"
   },
+  // {
+  //   path: "/demo",
+  //   component: "../pages/demo/index.js",
+  //   name: "demo",
+  //   title: "demo"
+  // },
 ];

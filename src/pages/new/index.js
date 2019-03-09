@@ -148,7 +148,7 @@ class New extends Component {
                        this.setState({refreshing: true});
                        setTimeout(() => {
                          this.setState({refreshing: false});
-                       }, 1000);
+                       }, 1000 );
                        this.loadMore()
                      }}
       >

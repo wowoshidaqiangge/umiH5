@@ -1,13 +1,16 @@
 .recordContainer{
   background-color: rgb(240,240,240);
-  //height: 100%;
   width: 100%;
+  overflow: scroll;
+  height:100%;
   overflow: scroll;
 
   :global{
     .am-list-body{
       border-radius: 5px;
-      //border: 1px solid;
+    }
+    .am-list-body::before,.am-list-body::after{
+      content: none !important;
     }
     .am-list-extra{
       font-size: 17px !important;
@@ -23,5 +26,11 @@
   img{
     margin-top: 50%;
     line-height: 100%;
+    width:50%;
+  }
+  div{
+    color: #999999;
+    text-align: center;
+    padding-top: 28px;
   }
 }

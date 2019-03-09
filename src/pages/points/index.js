@@ -3,7 +3,6 @@ import styles from './index.less'
 import {Button, Modal, Icon, PullToRefresh} from 'antd-mobile'
 import {connect} from 'dva'
 import sys from '../../utils/request'
-import {routerRedux} from 'dva/router'
 import ReactDOM from 'react-dom'
 
 class Points extends Component {
@@ -38,7 +37,9 @@ class Points extends Component {
   renderGoodsList(goodsList) {
     return <div className={styles.lists}>
       {goodsList && goodsList.length > 0 ? goodsList.map((item, index) => {
-        return <div className={styles.list} key={index} onClick={() => this.openPointGoods(item)}>
+        return <div className={styles.list}
+                    key={index}
+                    onClick={() => this.openPointGoods(item)}>
           <div className={styles.img}>
             <img src={item.thum_img}/>
           </div>
@@ -54,8 +55,8 @@ class Points extends Component {
             <div className={styles.price}>￥{item.goods_price}</div>
           </div>
 
-          <div className={styles.button}>
-            <Button type="ghost" inline size="small" className="am-button-borderfix">积分兑换</Button>
+          <div style={{textAlign:'center',marginTop:'2vh'}}>
+            <button className={styles.myButton}>积分兑换</button>
           </div>
         </div>
       }) : void[0]}
@@ -89,13 +90,11 @@ class Points extends Component {
   }
 
   handlePointsRecord() {
-    // this.props.dispatch(routerRedux.push('/pointsRecord'))
     let url = '/joinMerchant/pointsRecord'
     window.location.pathname= url
   }
 
   loadMore() {
-    console.log('llllllll加载更多')
     const {dispatch, points} = this.props
     const {curPage, allPage} = points
     let page = parseInt(curPage)
