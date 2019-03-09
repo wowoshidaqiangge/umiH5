@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import styles from './index.less'
-import {Button, Modal, Icon, PullToRefresh} from 'antd-mobile'
+import { Modal, Icon, PullToRefresh} from 'antd-mobile'
 import {connect} from 'dva'
 import sys from '../../utils/request'
 import ReactDOM from 'react-dom'
@@ -48,7 +48,7 @@ class Points extends Component {
 
           <div className={styles.middle}>
             <div className={styles.left}>
-              <div style={{width: '20%'}}><img src={require('../../assets/img/points/jewel.png')}/></div>
+              <div className={styles.imgContainer}><img src={require('../../assets/img/points/jewel.png')}/></div>
               <div style={{height: '10px'}}>{item.integral}</div>
             </div>
 
@@ -152,9 +152,7 @@ class Points extends Component {
               visible={modalVisible}
               transparent
               maskClosable={false}>
-              <div style={{backgroundColor: '#F2F8FF',borderRadius:'10px'}}
-                // style={{ height: '100%', overflow: 'scroll' }}
-              >
+              <div style={{backgroundColor: '#F2F8FF',borderRadius:'10px'}}>
                 <img style={{paddingTop: '33px'}}
                      src={require('../../assets/img/points/1.png')}/>
                 <img src={require('../../assets/img/points/2.png')}/>
@@ -163,15 +161,14 @@ class Points extends Component {
                 </div>
               </div>
 
-              {/*以下是icon*/}
               <div onClick={() =>this.handleClose(integral,integralBalance) }
                    style={{marginTop: '10px'}}>
                 <Icon type='cross-circle' style={{color: 'white'}}/>
               </div>
             </Modal>
           </div>
-        </div>
 
+        </div>
       </PullToRefresh>
     )
   }
