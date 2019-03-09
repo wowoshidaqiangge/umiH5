@@ -105,7 +105,7 @@ class New extends Component {
               </div>
               <button style={{
                 background: 'linear-gradient(#59057B,#AB0E86)', border: 'none', height: '9vw',
-                borderRadius: '2vw', color: '#fff', width: '20vw'
+                borderRadius: '2vw', color: '#fff', width: '22vw'
               }}>立即购
               </button>
             </div>
