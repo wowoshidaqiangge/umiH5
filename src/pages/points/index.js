@@ -47,10 +47,14 @@ class Points extends Component {
           <div className={styles.title}>{item.name}</div>
 
           <div className={styles.middle}>
-            <div className={styles.left}>
-              <div className={styles.imgContainer}><img src={require('../../assets/img/points/jewel.png')}/></div>
-              <div style={{height: '10px'}}>{item.integral}</div>
-            </div>
+            <span className={styles.imgContainer}>
+              <img  src={require('../../assets/img/points/jewel.png')}/>
+            </span>
+            <span className={styles.integral}>{item.integral}</span>
+            {/*<div className={styles.left}>*/}
+              {/*<div className={styles.imgContainer}><img src={require('../../assets/img/points/jewel.png')}/></div>*/}
+              {/*<div style={{height: '10px'}}>{item.integral}</div>*/}
+            {/*</div>*/}
 
             <span className={styles.price}>￥{item.goods_price}</span>
 
