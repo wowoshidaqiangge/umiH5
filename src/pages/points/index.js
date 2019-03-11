@@ -52,7 +52,9 @@ class Points extends Component {
               <div style={{height: '10px'}}>{item.integral}</div>
             </div>
 
-            <div className={styles.price}>￥{item.goods_price}</div>
+            <span className={styles.price}>￥{item.goods_price}</span>
+
+            {/*<div className={styles.price}>￥{item.goods_price}</div>*/}
           </div>
 
           <div style={{textAlign:'center',marginBottom:'1vh'}}>
