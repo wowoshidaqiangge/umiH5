@@ -25,15 +25,34 @@ class PointRecord extends Component {
     }
   }
 
+  renderNothing() {
+    return <div className={styles.nothing}>
+      <img src={require('../../../assets/img/nothing.png')}/>
+      <div>您暂时还没有积分消费记录</div>
+    </div>
+  }
+
   render() {
-    const {dataList} = this.props.record
+    const {dataList, allPage} = this.props.record
     let flag = dataList && dataList.length > 0
     return (
       <React.Fragment>
         {
-          flag ? <PullToRefresh direction='up' style={{height: '100%',backgroundColor:'rgb(240,240,240)'}}
-                                distanceToRefresh={25} onRefresh={() => this.loadMore()}
-                                damping={100} >
+          flag ? (allPage === 1 ? <div className={styles.recordContainer}>
+              <List className="my-list">
+                {
+                  dataList && dataList.length > 0 ? dataList.map((item, index) => {
+                    return <Item multipleLine extra={item.variable_integral} key={index}>
+                      {item.content} <Brief>{item.create_time}</Brief>
+                    </Item>
+                  }) : void[0]
+                }
+              </List>
+            </div>
+            : <PullToRefresh direction='up' style={{height: '100%', backgroundColor: 'rgb(240,240,240)'}}
+                             distanceToRefresh={25}
+                             onRefresh={() => {this.loadMore()}}
+                             damping={100}>
               <div className={styles.recordContainer}>
                 <List className="my-list">
                   {
@@ -45,11 +64,8 @@ class PointRecord extends Component {
                   }
                 </List>
               </div>
-            </PullToRefresh>
-            : <div className={styles.nothing}>
-              <img src={require('../../../assets/img/nothing.png')}/>
-              <div>您暂时还没有积分消费记录</div>
-            </div>
+            </PullToRefresh>)
+            : this.renderNothing()
         }
       </React.Fragment>
     )
