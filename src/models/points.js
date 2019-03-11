@@ -23,7 +23,6 @@ export default {
     *getIntegralGoodsList({payload},{call,put,select}){
       const {data} = yield call (service.getIntegralGoodsList,payload)
       if(data.code === '1'){
-        const {goodsList} = yield select(state=>state.points)
         const newDataList = data.data.goods_list
           // goodsList.concat(data.data.goods_list)
         const user = data.data.user

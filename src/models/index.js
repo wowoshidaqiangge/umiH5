@@ -1,6 +1,4 @@
 import * as service from '../services/index'
-import {Toast} from 'antd-mobile'
-import sys from "@/utils/request";
 
 export default {
   namespace: 'index',

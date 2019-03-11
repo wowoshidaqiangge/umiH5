@@ -150,7 +150,7 @@ class Points extends Component {
           <div className={styles.modal}>
             <Modal
               visible={modalVisible}
-              transparent
+              transparent = 'true'
               maskClosable={false}>
               <div style={{backgroundColor: '#F2F8FF',borderRadius:'10px'}}>
                 <img style={{paddingTop: '33px'}}
