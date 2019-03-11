@@ -51,10 +51,7 @@ class Points extends Component {
               <img  src={require('../../assets/img/points/jewel.png')}/>
               <span className={styles.integral}>{item.integral}</span>
             </span>
-
             <span className={styles.price}>￥{item.goods_price}</span>
-
-            {/*<div className={styles.price}>￥{item.goods_price}</div>*/}
           </div>
 
           <div style={{textAlign:'center',marginBottom:'1vh'}}>
@@ -128,7 +125,9 @@ class Points extends Component {
           <div className={styles.header}>
             <div className={styles.content} onClick={() => this.handlePointsRecord()}>
               <div className={styles.left}>
-                <img src={user.head_ico}/>
+                <div className={styles.userImg}>
+                  <img src={user.head_ico}/>
+                </div>
                 <span>{user.user_name}</span>
               </div>
 
