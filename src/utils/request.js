@@ -117,9 +117,9 @@ const request = async function request(url, params) {
 
 //封装响应
 const responseCode = function responseCode(data){
-  if(data.code === -1){
+  if(data.code === -1 || data.code === '-1'){
     Toast.fail(data.message,3)
-  }else if(data.code === -2){
+  }else if(data.code === -2 || data.code === '-2'){
     Toast.fail(data.message,3)
   }
 }

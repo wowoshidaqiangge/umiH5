@@ -78,7 +78,6 @@ class New extends Component {
   }
 
   renderContent(goodsList, curPage, allPage) {
-    console.log(curPage, allPage, curPage < allPage, 'page')
     return <div>
       {goodsList.map((item, index) => {
         return <div key={index}
