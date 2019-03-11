@@ -49,8 +49,9 @@ class Points extends Component {
           <div className={styles.middle}>
             <span className={styles.imgContainer}>
               <img  src={require('../../assets/img/points/jewel.png')}/>
+              <span className={styles.integral}>{item.integral}</span>
             </span>
-            <span className={styles.integral}>{item.integral}</span>
+
             <span className={styles.price}>￥{item.goods_price}</span>
 
             {/*<div className={styles.price}>￥{item.goods_price}</div>*/}
