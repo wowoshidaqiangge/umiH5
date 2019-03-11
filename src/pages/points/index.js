@@ -55,7 +55,7 @@ class Points extends Component {
             <div className={styles.price}>￥{item.goods_price}</div>
           </div>
 
-          <div style={{textAlign:'center',marginBottom:'1vh',marginTop:'1vh'}}>
+          <div style={{textAlign:'center',marginBottom:'1vh'}}>
             <button className={styles.myButton}>积分兑换</button>
           </div>
         </div>
