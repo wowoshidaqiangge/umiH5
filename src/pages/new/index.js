@@ -4,6 +4,7 @@ import {Tabs, PullToRefresh} from 'antd-mobile'
 import {connect} from 'dva'
 import ReactDOM from 'react-dom'
 import sys from '../../utils/request'
+// import  wx from 'https://res.wx.qq.com/open/js/jweixin-1.3.2.js'
 
 class New extends Component {
   constructor(props) {
@@ -75,6 +76,8 @@ class New extends Component {
         // alert('iso异常'+e)
       }
     }
+
+    // wx.miniProgram.navigateTo({url: '/pages/detail/main?goods_id='+item.goods_id})
   }
 
   renderContent(goodsList, curPage, allPage) {
@@ -123,6 +126,7 @@ class New extends Component {
   }
 
   render() {
+    // console.log('wx',wx)
     const {tabs, showPage, goodsList, curPage, allPage} = this.props.dayNew
     const newTabs = []
     tabs && tabs.length > 0 ? tabs.map((item) => {
