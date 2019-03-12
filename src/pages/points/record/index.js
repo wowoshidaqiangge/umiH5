@@ -47,6 +47,7 @@ class PointRecord extends Component {
                     </Item>
                   }) : void[0]
                 }
+
               </List>
             </div>
             : <PullToRefresh direction='up' style={{height: '100%', backgroundColor: 'rgb(240,240,240)'}}
