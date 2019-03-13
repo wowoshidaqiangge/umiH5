@@ -53,10 +53,40 @@ getDayGoodList() {
   this.props.dispatch({type: 'dayNew/getDayGoodList', payload: {new_id: newId, page: 1}})
 }
 
+  // openGoods(item) {
+  //   // alert('item', item)
+  //   const data = sys.getClient()
+  //   const {limit_id, group_id, join_id, type, activity_id} = this.state
+  //
+  //   if (data) {
+  //     //安卓
+  //     try {
+  //       // alert('进入安卓操作')
+  //       window.android.openGoods(type, item.goods_id, join_id, limit_id, group_id, activity_id);
+  //     } catch (e) {
+  //       // alert('安卓异常'+e)
+  //     }
+  //   } else {
+  //     //ios
+  //     try {
+  //       window.webkit.messageHandlers.openGoods.postMessage({
+  //         type: type, goods_id: item.goods_id, join_id: join_id,
+  //         limit_id: limit_id, group_id: group_id, activity_id: activity_id
+  //       })
+  //     } catch (e) {
+  //       // alert('iso异常'+e)
+  //     }
+  //   }
+  //
+  //   // wx.miniProgram.navigateTo({url: '/pages/detail/main?goods_id='+item.goods_id})
+  // }
+
   openGoods(item) {
     const data = sys.getClient()
     const envType = sys.isMiniProgram()
-    // console.log('进来了~~',data,envType)
+    const wx = sys.wx
+
+    console.log('进来了~~',data,envType, wx)
     const {limit_id, group_id, join_id, type, activity_id} = this.state
     if (data) {
       //安卓
@@ -64,7 +94,7 @@ getDayGoodList() {
           window.android.openGoods(type, item.goods_id, join_id, limit_id, group_id, activity_id);
       }else if(envType){
         // console.log('安卓微信')
-        window.wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
+        wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
         &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
       }else{
         // console.log('安卓微信222')
@@ -81,7 +111,7 @@ getDayGoodList() {
         })
       }else if(envType){
         // console.log('ios微信')
-        window.wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
+        wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
         &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
       }
       else{

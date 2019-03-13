@@ -22,7 +22,8 @@
     "rc-form": "^2.4.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "react-yield": "0.0.1-dev"
+    "react-yield": "0.0.1-dev",
+    "weixin-js-sdk": "^1.4.0-test"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",

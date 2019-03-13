@@ -1,5 +1,9 @@
 import axios from 'axios'
 import {Toast} from 'antd-mobile'
+import wx from 'weixin-js-sdk'
+
+// const wx = require('weixin-js-sdk')
+
 const testUrl = 'https://testnp.napin.com/';//api请求路径
 // const testUrl = 'https://super.napin.com/'; //api请求路径
 //系统请求参数
@@ -30,10 +34,11 @@ function GetQueryString(name) {
   if (r != null) return unescape(r[2]);
   return null;
 }
+
 /**
  * IOS请求token
  */
-function getIosToken(){
+function getIosToken() {
   window.webkit.messageHandlers.callUserInfo.postMessage({})
 }
 
@@ -69,7 +74,7 @@ function getAppToken() {
       } else {
       }
     }
-  }else if (isiOS) {
+  } else if (isiOS) {
     // alert("555555+++");
     if (window.webkit) {
       getIosToken();
@@ -84,7 +89,7 @@ function getAppToken() {
         platform = tokenObj.platform
       }
     }
-  }else{
+  } else {
     // alert("什么都没得、。、、、");
   }
   return token
@@ -99,31 +104,32 @@ const api = {
     getJoinIn: `${testUrl}api/shop/getJoinIn`,         //获取加盟者信息
     joinIn: `${testUrl}api/shop/joinIn`,               //加盟
   },
-  dayNew:{
+  dayNew: {
     dayNew: `${testUrl}api/shop/dayNew`,               //上新时间
-    dayGoodList:`${testUrl}api/shop/dayGoodList`       //每日商品
+    dayGoodList: `${testUrl}api/shop/dayGoodList`       //每日商品
   },
-  points:{
-    getIntegralLog:`${testUrl}api/Integral/IntegralLog`,                //获取积分记录
-    getIntegralGoodsList:`${testUrl}api/integral/IntegralGoodsList`,    //获取商品列表
-    giveIntegral:`${testUrl}api/integral/giveIntegral`,                 //获取是否展示积分页面
+  points: {
+    getIntegralLog: `${testUrl}api/Integral/IntegralLog`,                //获取积分记录
+    getIntegralGoodsList: `${testUrl}api/integral/IntegralGoodsList`,    //获取商品列表
+    giveIntegral: `${testUrl}api/integral/giveIntegral`,                 //获取是否展示积分页面
   }
 }
 
 //判断是否是小程序的环境
-function  isMiniProgram(){
+function isMiniProgram() {
   var ua = navigator.userAgent.toLowerCase();
-  var envType='#';
-
-  if(ua.match(/MicroMessenger/i) == 'micromessenger'){ //微信环境
-    window.wx.miniProgram.getEnv(function(res) {
+  var envType = null;
+  console.log(wx, 'wwwww')
+  if (ua.match(/MicroMessenger/i) == 'micromessenger') { //微信环境
+    console.log(wx, 'wwwww111')
+     wx.miniProgram.getEnv(function (res) {
       if (res.miniprogram) { // 小程序环境下逻辑
         envType = true
-      }else { //非小程序环境下逻辑
-        envType =  false
+      } else { //非小程序环境下逻辑
+        envType = false
       }
     })
-  }else{ //非微信环境逻辑isMiniProgram
+  } else { //非微信环境逻辑isMiniProgram
     envType = false
   }
   return envType
@@ -136,13 +142,13 @@ const request = async function request(url, params) {
 }
 
 //封装响应
-const responseCode = function responseCode(data){
-  if(data.code === -1 || data.code === '-1'){
-    Toast.fail(data.message,3)
-  }else if(data.code === -2 || data.code === '-2'){
-    Toast.fail(data.message,3)
+const responseCode = function responseCode(data) {
+  if (data.code === -1 || data.code === '-1') {
+    Toast.fail(data.message, 3)
+  } else if (data.code === -2 || data.code === '-2') {
+    Toast.fail(data.message, 3)
   }
 }
 
 
-export default {api, getClient,request,responseCode,isMiniProgram, sysParams};
+export default {api,wx, getClient, request, responseCode, isMiniProgram, sysParams};
