@@ -56,33 +56,36 @@ class New extends Component {
     // alert('item', item)
     const data = sys.getClient()
     const {limit_id, group_id, join_id, type, activity_id} = this.state
-
     if (data) {
       //安卓
-      try {
-        // alert('进入安卓操作')
-        window.android.openGoods(type, item.goods_id, join_id, limit_id, group_id, activity_id);
-      } catch (e) {
-        // alert('安卓异常'+e)
+      if(window.android !=null && typeof window.android != 'undefined'){
+          window.android.openGoods(type, item.goods_id, join_id, limit_id, group_id, activity_id);
+      }else if(sys.isMiniProgram()){
+        window.wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
+        &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
+      }else{
+        this.$router.push({
+          path:'detail',query:{type: type, goods_id: item.goods_id, join_id: join_id, limit_id: limit_id, group_id: group_id, activity_id: activity_id}
+        })
       }
     } else {
       //ios
-      try {
+      if(window.webkit){
         window.webkit.messageHandlers.openGoods.postMessage({
           type: type, goods_id: item.goods_id, join_id: join_id,
           limit_id: limit_id, group_id: group_id, activity_id: activity_id
         })
-      } catch (e) {
-        // alert('iso异常'+e)
+      }else if(sys.isMiniProgram()){
+        window.wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
+        &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
+      }else{
+        this.$router.push({
+          path:'detail',query:{type: type, goods_id: item.goods_id, join_id: join_id, limit_id: limit_id, group_id: group_id, activity_id: activity_id}
+        })
       }
     }
-
-    if(sys.isMiniProgram()){
-      window.wx.miniProgram.navigateTo({url: '/pages/detail/main?goods_id='+item.goods_id})
-    }
-
-    // wx.miniProgram.navigateTo({url: '/pages/detail/main?goods_id='+item.goods_id})
   }
+
 
   renderContent(goodsList, curPage, allPage) {
     return <div>
