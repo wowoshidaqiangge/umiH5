@@ -9,49 +9,49 @@ import router from 'umi/router'
 
 class New extends Component {
   constructor(props) {
-    super(props)
-    this.state = {
-      isLoadingMore: false,
-      height: document.documentElement.clientHeight,
-      refreshing: false,
-      limit_id: 0,
-      group_id: 0,
-      join_id: 0,
-      type: 1,
-      activity_id: 0,
+  super(props)
+  this.state = {
+    isLoadingMore: false,
+    height: document.documentElement.clientHeight,
+    refreshing: false,
+    limit_id: 0,
+    group_id: 0,
+    join_id: 0,
+    type: 1,
+    activity_id: 0,
+  }
+}
+
+componentWillMount() {
+  const {dispatch} = this.props
+  dispatch({
+    type: 'dayNew/getDayNew', callback: () => {
+      this.getDayGoodList()
     }
-  }
+  })
+}
 
-  componentWillMount() {
-    const {dispatch} = this.props
-    dispatch({
-      type: 'dayNew/getDayNew', callback: () => {
-        this.getDayGoodList()
-      }
-    })
-  }
+componentDidMount() {
+  const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
+  setTimeout(() => this.setState({
+    height: hei,
+    // data: this.loadMore(),
+  }), 0);
+}
 
-  componentDidMount() {
-    const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
-    setTimeout(() => this.setState({
-      height: hei,
-      // data: this.loadMore(),
-    }), 0);
+loadMore() {
+  const {dispatch, dayNew} = this.props
+  const {newId, page, allPage} = dayNew
+  if(page < allPage){
+    dispatch({type: 'dayNew/setState', payload: {page: page + 1}})
+    dispatch({type: 'dayNew/loadMore', payload: {new_id: newId, page: page + 1}})
   }
+}
 
-  loadMore() {
-    const {dispatch, dayNew} = this.props
-    const {newId, page, allPage} = dayNew
-    if(page < allPage){
-      dispatch({type: 'dayNew/setState', payload: {page: page + 1}})
-      dispatch({type: 'dayNew/loadMore', payload: {new_id: newId, page: page + 1}})
-    }
-  }
-
-  getDayGoodList() {
-    const {newId} = this.props.dayNew
-    this.props.dispatch({type: 'dayNew/getDayGoodList', payload: {new_id: newId, page: 1}})
-  }
+getDayGoodList() {
+  const {newId} = this.props.dayNew
+  this.props.dispatch({type: 'dayNew/getDayGoodList', payload: {new_id: newId, page: 1}})
+}
 
   openGoods(item) {
     const data = sys.getClient()

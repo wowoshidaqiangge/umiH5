@@ -8,7 +8,7 @@ export default {
     curPage:'',        //当前的页数
     allPage:null,    //总页数
     allCount:null,    //总条数
-    background:false,   //查询数据之前展示的背景
+    // background:false,   //查询数据之前展示的背景
   },
 
   reducers: {
@@ -22,7 +22,8 @@ export default {
       const {data} = yield call(service.getIntegralLog,payload)
       if( data.code === '1'){
         const newDataList = data.data.list
-        yield put({type:'setState',payload:{dataList:newDataList,curPage:data.data.cur_page,allPage:data.data.all_page,allCount:data.data.all_count,background:true}})
+        yield put({type:'setState',payload:{dataList:newDataList,curPage:data.data.cur_page,allPage:data.data.all_page,
+            allCount:data.data.all_count}})
       }
       sys.responseCode(data)
     },

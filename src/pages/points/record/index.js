@@ -34,7 +34,7 @@ class PointRecord extends Component {
 
   render() {
     const {dataList, allPage} = this.props.record
-    let flag = dataList && dataList.length > 0
+    let flag = dataList && dataList.length >= 0
     return (
       <React.Fragment>
         {
