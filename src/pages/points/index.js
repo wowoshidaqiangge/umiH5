@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import styles from './index.less'
-import { Modal, Icon, PullToRefresh} from 'antd-mobile'
+import {Modal, Icon, PullToRefresh} from 'antd-mobile'
 import {connect} from 'dva'
 import sys from '../../utils/request'
 import ReactDOM from 'react-dom'
@@ -34,9 +34,14 @@ class Points extends Component {
     }), 0);
   }
 
-  renderGoodsList(goodsList) {
-    return <div className={styles.lists}>
-      {goodsList && goodsList.length > 0 ? goodsList.map((item, index) => {
+  renderGoodsList() {
+    const {goodsList} = this.props.points
+    let flag = goodsList && goodsList.length <= 0
+    return <div className={flag ? styles.nothing : styles.lists}>
+      {flag ? <div className={styles.waiting}>
+        <img src={require('../../assets/img/waitting.png')}/>
+        <div>商品正在疯狂上架中</div>
+      </div> : goodsList.map((item, index) => {
         return <div className={styles.list}
                     key={index}
                     onClick={() => this.openPointGoods(item)}>
@@ -48,18 +53,19 @@ class Points extends Component {
 
           <div className={styles.middle}>
             <span className={styles.imgContainer}>
-              <img  src={require('../../assets/img/points/jewel.png')}/>
+              <img src={require('../../assets/img/points/jewel.png')}/>
               <span className={styles.integral}>{item.integral}</span>
             </span>
             <span className={styles.price}>￥{item.goods_price}</span>
           </div>
 
-          <div style={{textAlign:'center',marginBottom:'1vh'}}>
+          <div style={{textAlign: 'center', marginBottom: '1vh'}}>
             <button className={styles.myButton}>积分兑换</button>
           </div>
         </div>
-      }) : void[0]}
+      })}
     </div>
+
   }
 
   openPointGoods(item) {
@@ -90,7 +96,7 @@ class Points extends Component {
 
   handlePointsRecord() {
     let url = '/joinMerchant/pointsRecord'
-    window.location.pathname= url
+    window.location.pathname = url
   }
 
   loadMore() {
@@ -103,23 +109,27 @@ class Points extends Component {
     }
   }
 
-  handleClose(integral,integralBalance){
-    const newIntegral = parseInt(integral)+integralBalance
-    this.props.dispatch({type: 'points/setState', payload: {modalVisible: false,integralBalance: newIntegral}})
+  handleClose(integral, integralBalance) {
+    const newIntegral = parseInt(integral) + integralBalance
+    this.props.dispatch({type: 'points/setState', payload: {modalVisible: false, integralBalance: newIntegral}})
   }
 
   render() {
-    const {user, goodsList, modalVisible, integral,integralBalance} = this.props.points
+    const {user, goodsList, modalVisible, integral, integralBalance} = this.props.points
     return (
       <PullToRefresh damping={60}
                      ref={el => this.ptr = el}
-                     style={{height: this.state.height, overflow: 'auto',backgroundColor:' rgb(240,240,240)'}}
+                     style={{height: this.state.height, overflow: 'auto', backgroundColor: ' rgb(240,240,240)'}}
                      indicator='上拉可以刷新'
                      direction='up'
                      refreshing={this.state.refreshing}
-                     onRefresh={() => {this.setState({refreshing: true})
-                       setTimeout(() => {this.setState({refreshing: false})}, 1000)
-                       this.loadMore()}}
+                     onRefresh={() => {
+                       this.setState({refreshing: true})
+                       setTimeout(() => {
+                         this.setState({refreshing: false})
+                       }, 1000)
+                       this.loadMore()
+                     }}
       >
         <div className={styles.points}>
           <div className={styles.header}>
@@ -145,15 +155,15 @@ class Points extends Component {
 
           <div className={styles.allGoods}>
             <div className={styles.title}>全部商品</div>
-            {this.renderGoodsList(goodsList)}
+            {this.renderGoodsList()}
           </div>
 
           <div className={styles.modal}>
             <Modal
               visible={modalVisible}
-              transparent = 'true'
+              transparent='true'
               maskClosable={false}>
-              <div style={{backgroundColor: '#F2F8FF',borderRadius:'10px'}}>
+              <div style={{backgroundColor: '#F2F8FF', borderRadius: '10px'}}>
                 <img style={{paddingTop: '33px'}}
                      src={require('../../assets/img/points/1.png')}/>
                 <img src={require('../../assets/img/points/2.png')}/>
@@ -162,7 +172,7 @@ class Points extends Component {
                 </div>
               </div>
 
-              <div onClick={() =>this.handleClose(integral,integralBalance) }
+              <div onClick={() => this.handleClose(integral, integralBalance)}
                    style={{marginTop: '10px'}}>
                 <Icon type='cross-circle' style={{color: 'white'}}/>
               </div>

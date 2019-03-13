@@ -126,7 +126,6 @@ function  isMiniProgram(){
   }else{ //非微信环境逻辑isMiniProgram
     envType = false
   }
-  alert('小程序环境'+envType)
   return envType
 }
 

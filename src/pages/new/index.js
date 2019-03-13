@@ -4,6 +4,7 @@ import {Tabs, PullToRefresh} from 'antd-mobile'
 import {connect} from 'dva'
 import ReactDOM from 'react-dom'
 import sys from '../../utils/request'
+import router from 'umi/router'
 // import  {wx} from 'https://res.wx.qq.com/open/js/jweixin-1.3.2.js'
 
 class New extends Component {
@@ -53,18 +54,21 @@ class New extends Component {
   }
 
   openGoods(item) {
-    // alert('item', item)
     const data = sys.getClient()
+    const envType = sys.isMiniProgram()
+    console.log('进来了~~',data,envType)
     const {limit_id, group_id, join_id, type, activity_id} = this.state
     if (data) {
       //安卓
       if(window.android !=null && typeof window.android != 'undefined'){
           window.android.openGoods(type, item.goods_id, join_id, limit_id, group_id, activity_id);
-      }else if(sys.isMiniProgram()){
+      }else if(envType){
+        console.log('安卓微信')
         window.wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
         &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
       }else{
-        this.$router.push({
+        console.log('安卓微信222')
+        router.push({
           path:'detail',query:{type: type, goods_id: item.goods_id, join_id: join_id, limit_id: limit_id, group_id: group_id, activity_id: activity_id}
         })
       }
@@ -75,11 +79,14 @@ class New extends Component {
           type: type, goods_id: item.goods_id, join_id: join_id,
           limit_id: limit_id, group_id: group_id, activity_id: activity_id
         })
-      }else if(sys.isMiniProgram()){
+      }else if(envType){
+        console.log('ios微信')
         window.wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
         &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
-      }else{
-        this.$router.push({
+      }
+      else{
+        console.log('ios微信222')
+        router.push({
           path:'detail',query:{type: type, goods_id: item.goods_id, join_id: join_id, limit_id: limit_id, group_id: group_id, activity_id: activity_id}
         })
       }
