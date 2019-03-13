@@ -26,10 +26,10 @@ class Index extends Component {
 function getPay() {
     window["joinPayNotice"] = () => {
         //业务逻辑
-        alert("我就是这样支付成功了~~~");
+        // alert("我就是这样支付成功了~~~");
     };
     window.joinPayNotice = ()=>{
-        alert("这是安卓需要的");
+        // alert("这是安卓需要的");
     };
 }
 

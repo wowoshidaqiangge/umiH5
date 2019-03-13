@@ -28,7 +28,7 @@ class Contract extends Component {
   }
 
   clearCanvas() {
-    console.log('清空')
+    // console.log('清空')
   }
 
   showSignature() {

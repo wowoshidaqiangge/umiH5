@@ -255,7 +255,7 @@ function getApp(params, money) {
       window.android.joinMerchant(params, newMoney);
     } catch (e) {
       // alert("安卓 this is error ");
-      console.log(e)
+      // console.log(e)
     }
   } else {
     //IOS
@@ -264,7 +264,7 @@ function getApp(params, money) {
       ({"join_info": params, "money": money})
     } catch (e) {
       // alert("IOS this is error ");
-      console.log(e)
+      // console.log(e)
     }
   }
 }
