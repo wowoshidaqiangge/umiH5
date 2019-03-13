@@ -58,7 +58,8 @@ class JoinInfo extends Component {
       }
       callback()
     } else {
-      callback(new Error('请输入姓名'))
+      callback()
+      // callback(new Error('请输入姓名'))
     }
   }
 
@@ -96,7 +97,7 @@ class JoinInfo extends Component {
   }
 
   goContract() {
-    const {validateFields, getFieldsValue} = this.props.form
+    // const {validateFields, getFieldsValue} = this.props.form
     this.props.history.push('/joinIn-contract')
     // let params = {
     //   name:getFieldsValue().name,
@@ -136,7 +137,7 @@ class JoinInfo extends Component {
 
               <InputItem {...getFieldProps('ID', {
                 initialValue: localParams && localParams.card ? localParams.card : void(0),
-                rules: [{required: true},
+                rules: [{required: true, message: '请输入身份证号码'},
                   {validator: (rule, value, callback) => this.checkId(rule, value, callback)}]
               })}
                          error={!!getFieldError('ID')}
@@ -147,7 +148,7 @@ class JoinInfo extends Component {
 
               <InputItem {...getFieldProps('companyName', {
                 initialValue: localParams && localParams.companyName ? localParams.companyName : void(0),
-                rules: [{required: true},
+                rules: [{required: true, message: '请输入公司名'},
                   {validator: (rule, value, callback) => this.checkCompanyName(rule, value, callback)}]
               })}
                          error={!!getFieldError('companyName')}
@@ -159,7 +160,7 @@ class JoinInfo extends Component {
 
               <InputItem {...getFieldProps('phone', {
                 initialValue: localParams && localParams.phone ? localParams.phone : void(0),
-                rules: [{required: true},
+                rules: [{required: true, message: '请输入联系电话'},
                   {validator: (rule, value, callback) => this.checkPhone(rule, value, callback)}]
               })}
                          error={!!getFieldError('phone')}
@@ -170,7 +171,7 @@ class JoinInfo extends Component {
 
               <InputItem {...getFieldProps('address', {
                 initialValue: localParams && localParams.addr ? localParams.addr : void(0),
-                rules: [{required: true},
+                rules: [{required: true, message: '请输入联系地址'},
                   {validator: (rule, value, callback) => this.checkAddress(rule, value, callback)}]
               })}
                          error={!!getFieldError('address')}

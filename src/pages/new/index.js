@@ -4,7 +4,7 @@ import {Tabs, PullToRefresh} from 'antd-mobile'
 import {connect} from 'dva'
 import ReactDOM from 'react-dom'
 import sys from '../../utils/request'
-// import  wx from 'https://res.wx.qq.com/open/js/jweixin-1.3.2.js'
+// import  {wx} from 'https://res.wx.qq.com/open/js/jweixin-1.3.2.js'
 
 class New extends Component {
   constructor(props) {
@@ -75,6 +75,10 @@ class New extends Component {
       } catch (e) {
         // alert('iso异常'+e)
       }
+    }
+
+    if(sys.isMiniProgram()){
+      window.wx.miniProgram.navigateTo({url: '/pages/detail/main?goods_id='+item.goods_id})
     }
 
     // wx.miniProgram.navigateTo({url: '/pages/detail/main?goods_id='+item.goods_id})

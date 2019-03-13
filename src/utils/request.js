@@ -89,6 +89,7 @@ function getAppToken() {
   }
   return token
 }
+
 //接口列表
 const api = {
   join: {
@@ -109,6 +110,25 @@ const api = {
   }
 }
 
+//判断是否是小程序的环境
+function  isMiniProgram(){
+  var ua = navigator.userAgent.toLowerCase();
+  var envType='#';
+
+  if(ua.match(/MicroMessenger/i) == 'micromessenger'){ //微信环境
+    window.wx.miniProgram.getEnv(function(res) {
+      if (res.miniprogram) { // 小程序环境下逻辑
+        envType = true
+      }else { //非小程序环境下逻辑
+        envType =  false
+      }
+    })
+  }else{ //非微信环境逻辑isMiniProgram
+    envType = false
+  }
+  return envType
+}
+
 
 //封装请求
 const request = async function request(url, params) {
@@ -124,4 +144,5 @@ const responseCode = function responseCode(data){
   }
 }
 
-export default {api, getClient,request,responseCode, sysParams};
+
+export default {api, getClient,request,responseCode,isMiniProgram, sysParams};
