@@ -56,7 +56,6 @@ function getClient() {
 
 //获取app的token
 function getAppToken() {
-  let url = window.location.href
   let u = navigator.userAgent
   let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1 //android终端
   let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)  //ios终端
@@ -75,24 +74,38 @@ function getAppToken() {
       }
     }
   } else if (isiOS) {
-    // alert("555555+++");
     if (window.webkit) {
       getIosToken();
-      // alert("123+++");
       window['callUserInfo'] = function (res) {
         let tokenStr = res;
         let tokenObj = JSON.parse(tokenStr);
         token = tokenObj.token;
-        // alert("哈哈哈++token:"+token);
         device_id = tokenObj.device_id;
         version = tokenObj.version;
         platform = tokenObj.platform
       }
     }
   } else {
-    // alert("什么都没得、。、、、");
   }
   return token
+}
+
+//判断是否是小程序的环境
+function isMiniProgram() {
+  var ua = navigator.userAgent.toLowerCase();
+  var envType = null;
+  if (ua.match(/MicroMessenger/i) == 'micromessenger') { //微信环境
+     wx.miniProgram.getEnv(function (res) {
+      if (res.miniprogram) { // 小程序环境下逻辑
+        envType = true
+      } else { //非小程序环境下逻辑
+        envType = false
+      }
+    })
+  } else { //非微信环境逻辑isMiniProgram
+    envType = false
+  }
+  return envType
 }
 
 //接口列表
@@ -115,27 +128,6 @@ const api = {
   }
 }
 
-//判断是否是小程序的环境
-function isMiniProgram() {
-  var ua = navigator.userAgent.toLowerCase();
-  var envType = null;
-  console.log(wx, 'wwwww')
-  if (ua.match(/MicroMessenger/i) == 'micromessenger') { //微信环境
-    console.log(wx, 'wwwww111')
-     wx.miniProgram.getEnv(function (res) {
-      if (res.miniprogram) { // 小程序环境下逻辑
-        envType = true
-      } else { //非小程序环境下逻辑
-        envType = false
-      }
-    })
-  } else { //非微信环境逻辑isMiniProgram
-    envType = false
-  }
-  return envType
-}
-
-
 //封装请求
 const request = async function request(url, params) {
   return axios.post(url, params);
@@ -149,6 +141,5 @@ const responseCode = function responseCode(data) {
     Toast.fail(data.message, 3)
   }
 }
-
 
 export default {api,wx, getClient, request, responseCode, isMiniProgram, sysParams};

@@ -73,6 +73,7 @@ class Points extends Component {
     const envType = sys.isMiniProgram()
     const wx = sys.wx
     const {limit_id, group_id, join_id, type, activity_id} = this.state
+    console.log('goodsId',item.id,`goods_id=${item.id}`)
     if (data) {
       //安卓
       try {
@@ -96,7 +97,7 @@ class Points extends Component {
     }
 
     if(envType){
-      wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
+      wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.id}&join_id=${join_id}
       &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
     }
   }

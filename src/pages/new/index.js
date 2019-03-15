@@ -78,8 +78,6 @@ getDayGoodList() {
     }
 
     if(envType){
-      console.log('安卓微信')
-      alert('安卓微信')
       wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
       &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
     }
