@@ -70,6 +70,8 @@ class Points extends Component {
 
   openPointGoods(item) {
     const data = sys.getClient()
+    const envType = sys.isMiniProgram()
+    const wx = sys.wx
     const {limit_id, group_id, join_id, type, activity_id} = this.state
     if (data) {
       //安卓
@@ -91,6 +93,11 @@ class Points extends Component {
       } catch (e) {
         // alert('iso异常'+e)
       }
+    }
+
+    if(envType){
+      wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
+      &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
     }
   }
 
@@ -115,7 +122,7 @@ class Points extends Component {
   }
 
   render() {
-    const {user, goodsList, modalVisible, integral, integralBalance} = this.props.points
+    const {user, modalVisible, integral, integralBalance} = this.props.points
     return (
       <PullToRefresh damping={60}
                      ref={el => this.ptr = el}

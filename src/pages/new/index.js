@@ -4,8 +4,6 @@ import {Tabs, PullToRefresh} from 'antd-mobile'
 import {connect} from 'dva'
 import ReactDOM from 'react-dom'
 import sys from '../../utils/request'
-import router from 'umi/router'
-// import  {wx} from 'https://res.wx.qq.com/open/js/jweixin-1.3.2.js'
 
 class New extends Component {
   constructor(props) {
@@ -54,12 +52,10 @@ getDayGoodList() {
 }
 
   openGoods(item) {
-    // alert('item', item)
     const data = sys.getClient()
     const {limit_id, group_id, join_id, type, activity_id} = this.state
     const envType = sys.isMiniProgram()
     const wx = sys.wx
-    console.log('进来了~~',data,envType, wx)
 
     if (data) {
       //安卓
@@ -89,56 +85,6 @@ getDayGoodList() {
     }
 
   }
-
-  // openGoods(item) {
-  //   const data = sys.getClient()
-  //   const envType = sys.isMiniProgram()
-  //   const wx = sys.wx
-  //   console.log('进来了~~',data,envType, wx)
-  //   const {limit_id, group_id, join_id, type, activity_id} = this.state
-  //
-  //   if (data) {
-  //     //安卓
-  //     if(window.android !=null && typeof window.android != 'undefined'){
-  //         window.android.openGoods(type, item.goods_id, join_id, limit_id, group_id, activity_id);
-  //     }else if(envType){
-  //       console.log('安卓微信')
-  //       alert('安卓微信')
-  //       wx.miniProgram.navigatorTo({url:'/pages/details/main'})
-  //       // wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
-  //       // &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
-  //     }else{
-  //       console.log('安卓微信222')
-  //       alert('安卓微信222')
-  //       // router.push({
-  //       //   path:'detail',query:{type: type, goods_id: item.goods_id, join_id: join_id, limit_id: limit_id, group_id: group_id, activity_id: activity_id}
-  //       // })
-  //     }
-  //   } else {
-  //     //ios
-  //     if(window.webkit){
-  //       window.webkit.messageHandlers.openGoods.postMessage({
-  //         type: type, goods_id: item.goods_id, join_id: join_id,
-  //         limit_id: limit_id, group_id: group_id, activity_id: activity_id
-  //       })
-  //     }else if(envType){
-  //       console.log('ios微信')
-  //       alert('ios微信')
-  //       wx.miniProgram.navigatorTo({url:'/pages/details/main'})
-  //       // wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
-  //       // &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
-  //     }
-  //     else{
-  //       console.log('ios微信222')
-  //       alert('ios微信222')
-  //       wx.miniProgram.navigatorTo({url:'/pages/details/main'})
-  //       // router.push({
-  //       //   path:'detail',query:{type: type, goods_id: item.goods_id, join_id: join_id, limit_id: limit_id, group_id: group_id, activity_id: activity_id}
-  //       // })
-  //     }
-  //   }
-  // }
-
 
   renderContent(goodsList, curPage, allPage) {
     return <div>
@@ -203,7 +149,7 @@ getDayGoodList() {
     return (
       <PullToRefresh damping={60}
                      ref={el => this.ptr = el}
-                     style={{height: this.state.height, overflow: 'auto'}}
+                     style={{height: this.state.height, overflow: 'auto',webkitOverflowscrolling:'touch' }}
                      indicator='上拉可以刷新'
                      direction='up'
                      refreshing={this.state.refreshing}
