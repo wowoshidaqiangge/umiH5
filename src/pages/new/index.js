@@ -7,56 +7,55 @@ import sys from '../../utils/request'
 
 class New extends Component {
   constructor(props) {
-  super(props)
-  this.state = {
-    isLoadingMore: false,
-    height: document.documentElement.clientHeight,
-    refreshing: false,
-    limit_id: 0,
-    group_id: 0,
-    join_id: 0,
-    type: 1,
-    activity_id: 0,
-  }
-}
-
-componentWillMount() {
-  const {dispatch} = this.props
-  dispatch({
-    type: 'dayNew/getDayNew', callback: () => {
-      this.getDayGoodList()
+    super(props)
+    this.state = {
+      isLoadingMore: false,
+      height: document.documentElement.clientHeight,
+      refreshing: false,
+      limit_id: 0,
+      group_id: 0,
+      join_id: 0,
+      type: 1,
+      activity_id: 0,
     }
-  })
-}
-
-componentDidMount() {
-  const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
-  setTimeout(() => this.setState({
-    height: hei,
-    // data: this.loadMore(),
-  }), 0);
-}
-
-loadMore() {
-  const {dispatch, dayNew} = this.props
-  const {newId, page, allPage} = dayNew
-  if(page < allPage){
-    dispatch({type: 'dayNew/setState', payload: {page: page + 1}})
-    dispatch({type: 'dayNew/loadMore', payload: {new_id: newId, page: page + 1}})
   }
-}
 
-getDayGoodList() {
-  const {newId} = this.props.dayNew
-  this.props.dispatch({type: 'dayNew/getDayGoodList', payload: {new_id: newId, page: 1}})
-}
+  componentWillMount() {
+    const {dispatch} = this.props
+    dispatch({
+      type: 'dayNew/getDayNew', callback: () => {
+        this.getDayGoodList()
+      }
+    })
+  }
+
+  componentDidMount() {
+    const hei = this.state.height - ReactDOM.findDOMNode(this.ptr).offsetTop;
+    setTimeout(() => this.setState({
+      height: hei,
+      // data: this.loadMore(),
+    }), 0);
+  }
+
+  loadMore() {
+    const {dispatch, dayNew} = this.props
+    const {newId, page, allPage} = dayNew
+    if (page < allPage) {
+      dispatch({type: 'dayNew/setState', payload: {page: page + 1}})
+      dispatch({type: 'dayNew/loadMore', payload: {new_id: newId, page: page + 1}})
+    }
+  }
+
+  getDayGoodList() {
+    const {newId} = this.props.dayNew
+    this.props.dispatch({type: 'dayNew/getDayGoodList', payload: {new_id: newId, page: 1}})
+  }
 
   openGoods(item) {
     const data = sys.getClient()
     const {limit_id, group_id, join_id, type, activity_id} = this.state
     const envType = sys.isMiniProgram()
     const wx = sys.wx
-
     if (data) {
       //安卓
       try {
@@ -77,9 +76,11 @@ getDayGoodList() {
       }
     }
 
-    if(envType){
-      wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
-      &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
+    if (envType) {
+      wx.miniProgram.navigateTo({
+        url: `../../pages/detail/main?type=${type}&goods_id=${item.goods_id}&join_id=${join_id}
+      &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`
+      })
     }
 
   }
@@ -136,7 +137,7 @@ getDayGoodList() {
     tabs && tabs.length > 0 ? tabs.map((item) => {
       newTabs.push({
         title: <div>
-          <div style={{lineHeight: '20px',marginTop:'5px'}}>{item.start_day}</div>
+          <div style={{lineHeight: '20px', marginTop: '5px'}}>{item.start_day}</div>
           <div style={{fontSize: '15px', lineHeight: '15px', marginTop: '8px', textAlign: 'center'}}>
             {item.start_hour}
           </div>
@@ -147,7 +148,7 @@ getDayGoodList() {
     return (
       <PullToRefresh damping={60}
                      ref={el => this.ptr = el}
-                     style={{height: this.state.height, overflow: 'auto',webkitOverflowscrolling:'touch' }}
+                     style={{height: this.state.height, overflow: 'auto', webkitOverflowscrolling: 'touch'}}
                      indicator='上拉可以刷新'
                      direction='up'
                      refreshing={this.state.refreshing}
@@ -155,7 +156,7 @@ getDayGoodList() {
                        this.setState({refreshing: true});
                        setTimeout(() => {
                          this.setState({refreshing: false});
-                       }, 1000 );
+                       }, 1000);
                        this.loadMore()
                      }}
       >
