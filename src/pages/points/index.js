@@ -95,9 +95,11 @@ class Points extends Component {
       }
     }
 
-    if(envType){
-      wx.miniProgram.navigateTo({url: `../../pages/detail/main?type=${type}&goods_id=${item.id}&join_id=${join_id}
-      &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`})
+    if (envType) {
+      wx.miniProgram.navigateTo({
+        url: `../../pages/detail/main?type=${type}&goods_id=${item.id}&join_id=${join_id}
+      &limit_id=${limit_id}&group_id=${group_id}&activity_id=${activity_id}`
+      })
     }
   }
 

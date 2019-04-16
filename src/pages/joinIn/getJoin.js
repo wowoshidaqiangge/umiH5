@@ -11,11 +11,11 @@ class GetJoin extends Component {
     this.state = {}
   }
 
-  // componentWillMount() {
-  //   console.log('aaaaaaaaaaaaa')
-  //   const {dispatch} = this.props
-  //   dispatch({type: 'getJoin/getJoinIn'})
-  // }
+  componentWillMount() {
+    console.log('aaaaaaaaaaaaa')
+    const {dispatch} = this.props
+    dispatch({type: 'getJoin/getJoinIn'})
+  }
 
 
   //捕获异常
@@ -39,30 +39,29 @@ class GetJoin extends Component {
   //   }
   // }
 
-  // getImg() {
-  //     let doimg = null
-  //   if (this.props.getJoin.isJoin === 1 || this.props.getJoin.isJoin === 2) {
-  //     doimg = require('../../assets/img/join-look.png');
-  //   } else {
-  //     doimg = require('../../assets/img/join-do.png');
-  //   }
-  //   // else if(this.props.getJoin.isJoin === 2){
-  //   //     var doimg = require('../../assets/img/join-complete.png');
-  //   //   }
-  //   return doimg;
-  // }
+  getImg() {
+      let doimg = null
+    if (this.props.getJoin.isJoin === 1 || this.props.getJoin.isJoin === 2) {
+      doimg = require('../../assets/img/join-look.png');
+    } else {
+      doimg = require('../../assets/img/join-do.png');
+    }
+    // else if(this.props.getJoin.isJoin === 2){
+    //     var doimg = require('../../assets/img/join-complete.png');
+    //   }
+    return doimg;
+  }
 
   render() {
     return (
-      <div>hola</div>
-      // {/*<div className={styles.imgBanner}>*/}
-      //   {/*<img className={styles.img} src={merchantImg}/>*/}
-      //   {/*<div className={styles.imgBackground}>*/}
-      //     {/*<div onClick={() => this.handleNextUrl()}>*/}
-      //       {/*<img className={styles.img} src={this.getImg()}/>*/}
-      //     {/*</div>*/}
-      //   {/*</div>*/}
-      // {/*</div>*/}
+      <div className={styles.imgBanner}>
+        <img className={styles.img} src={merchantImg}/>
+        <div className={styles.imgBackground}>
+          <div onClick={() => this.handleNextUrl()}>
+            <img className={styles.img} src={this.getImg()}/>
+          </div>
+        </div>
+      </div>
     )
   }
 }

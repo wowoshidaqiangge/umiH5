@@ -18,7 +18,7 @@ export default {
   },
 
   effects: {
-    *getIntegralLog({payload},{call,put,select}){
+    *getIntegralLog({payload},{call,put,}){
       const {data} = yield call(service.getIntegralLog,payload)
       if( data.code === '1'){
         const newDataList = data.data.list
