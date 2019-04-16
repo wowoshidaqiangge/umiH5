@@ -138,7 +138,9 @@ const responseCode = function responseCode(data) {
   if (data.code === -1 || data.code === '-1') {
     Toast.fail(data.message, 3)
   } else if (data.code === -2 || data.code === '-2') {
-    Toast.fail(data.message, 3)
+    if(data.message){
+      Toast.fail(data.message, 3)
+    }
   }
 }
 

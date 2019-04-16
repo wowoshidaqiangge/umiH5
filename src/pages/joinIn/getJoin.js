@@ -12,35 +12,28 @@ class GetJoin extends Component {
   }
 
   componentWillMount() {
-    console.log('aaaaaaaaaaaaa')
     const {dispatch} = this.props
     dispatch({type: 'getJoin/getJoinIn'})
   }
 
 
-  //捕获异常
-  // componentDidCatch(error, info) {
-  //   // console.log('错误信息~~~~',error, info);
-  //   // alert('捕获到异常'+error+'==='+JSON.stringify(info));
-  //   //
-  //   // window.onerror = function(errorMessage, scriptURI, lineNumber,columnNumber,errorObj) {
-  //   //   // code..
-  //   //   alert('this is error'+errorMessage+'=='+scriptURI+'=='+lineNumber+'=='+columnNumber+'=='+errorObj);
-  //   // }
-  // }
+  componentDidCatch(error, info) {
 
-  // handleNextUrl() {
-  //   const {getJoin, dispatch} = this.props
-  //   const {isJoin} = getJoin
-  //   if (isJoin === 1 || isJoin === 2) {
-  //     dispatch(routerRedux.push({pathname: '/joinIn-contract'}))
-  //   } else if (isJoin === 0) {
-  //     dispatch(routerRedux.push({pathname: '/joinIn'}))
-  //   }
-  // }
+  }
+
+
+  handleNextUrl() {
+    const {getJoin, dispatch} = this.props
+    const {isJoin} = getJoin
+    if (isJoin === 1 || isJoin === 2) {
+      dispatch(routerRedux.push({pathname: '/joinIn-contract'}))
+    } else if (isJoin === 0) {
+      dispatch(routerRedux.push({pathname: '/joinIn'}))
+    }
+  }
 
   getImg() {
-      let doimg = null
+    let doimg = null
     if (this.props.getJoin.isJoin === 1 || this.props.getJoin.isJoin === 2) {
       doimg = require('../../assets/img/join-look.png');
     } else {
