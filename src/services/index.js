@@ -1,8 +1,8 @@
 import axios from 'axios'
 import sys from '../utils/request'
+import {api} from '../utils/requestUrl'
 
 const sysparams = sys.sysParams
-const api = sys.api
 
 export async function joinIn(payload) {
   const param = {...payload,...sysparams}

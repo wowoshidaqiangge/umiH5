@@ -4,8 +4,6 @@ import wx from 'weixin-js-sdk'
 
 // const wx = require('weixin-js-sdk')
 
-const testUrl = 'https://testnp.napin.com/';//api请求路径
-// const testUrl = 'https://super.napin.com/'; //api请求路径
 //系统请求参数
 const sysParams = {
   'time': new Date().getTime(),
@@ -42,15 +40,22 @@ function getIosToken() {
   window.webkit.messageHandlers.callUserInfo.postMessage({})
 }
 
-function getClient() {
-  const u = navigator.userAgent;
-  const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
-  const isIos = u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-  if (isAndroid) {
-    return 1;
-  } else if (isIos) {
-    return 0;
+//判断是否是小程序的环境
+function isMiniProgram() {
+  var ua = navigator.userAgent.toLowerCase();
+  var envType = null;
+  if (ua.match(/MicroMessenger/i) == 'micromessenger') { //微信环境
+    wx.miniProgram.getEnv(function (res) {
+      if (res.miniprogram) { // 小程序环境下逻辑
+        envType = true
+      } else { //非小程序环境下逻辑
+        envType = false
+      }
+    })
+  } else { //非微信环境逻辑isMiniProgram
+    envType = false
   }
+  return envType
 }
 
 
@@ -90,44 +95,6 @@ function getAppToken() {
   return token
 }
 
-//判断是否是小程序的环境
-function isMiniProgram() {
-  var ua = navigator.userAgent.toLowerCase();
-  var envType = null;
-  if (ua.match(/MicroMessenger/i) == 'micromessenger') { //微信环境
-     wx.miniProgram.getEnv(function (res) {
-      if (res.miniprogram) { // 小程序环境下逻辑
-        envType = true
-      } else { //非小程序环境下逻辑
-        envType = false
-      }
-    })
-  } else { //非微信环境逻辑isMiniProgram
-    envType = false
-  }
-  return envType
-}
-
-//接口列表
-const api = {
-  join: {
-    return: `${testUrl}api/shop/applyReturn`,          //申请退还押金
-    getBill: `${testUrl}api/shop/getJoinBill`,         //加盟商账单
-    getMonthBill: `${testUrl}api/shop/getMonthBill`,   //加盟商筛选年月的消费趋势
-    getJoinIn: `${testUrl}api/shop/getJoinIn`,         //获取加盟者信息
-    joinIn: `${testUrl}api/shop/joinIn`,               //加盟
-  },
-  dayNew: {
-    dayNew: `${testUrl}api/shop/dayNew`,               //上新时间
-    dayGoodList: `${testUrl}api/shop/dayGoodList`       //每日商品
-  },
-  points: {
-    getIntegralLog: `${testUrl}api/Integral/IntegralLog`,                //获取积分记录
-    getIntegralGoodsList: `${testUrl}api/integral/IntegralGoodsList`,    //获取商品列表
-    giveIntegral: `${testUrl}api/integral/giveIntegral`,                 //获取是否展示积分页面
-  }
-}
-
 //封装请求
 const request = async function request(url, params) {
   return axios.post(url, params);
@@ -144,4 +111,4 @@ const responseCode = function responseCode(data) {
   }
 }
 
-export default {api,wx, getClient, request, responseCode, isMiniProgram, sysParams};
+export default {wx, request, responseCode, isMiniProgram, sysParams};

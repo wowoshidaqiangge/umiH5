@@ -1,0 +1,254 @@
+.container {
+  //height: 100%;
+  background-color: #f5f5f5;
+  //overflow-y: scroll;
+  .head {
+    //position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 19rem;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    //border: 1px solid;
+    background-image: url('../../assets/img/newDay/new.jpg');
+  }
+
+  .tabs {
+    //margin-top: -0.3rem;
+    //border: 1px solid ;
+    //background-color:#8CA18C;
+    :global {
+      .am-tabs-tab-bar-wrap {
+        height: 4rem;
+      }
+
+      .am-tabs-default-bar, .am-tabs-default-bar-animated, .am-tabs-default-bar-top {
+        background-color: #788E78 !important;
+      }
+
+      .am-tabs-default-bar-top .am-tabs-default-bar-tab::after {
+        content: none;
+      }
+
+      .am-tabs-default-bar-tab {
+        position: relative;
+        display: flex;
+        flex-shrink: 0;
+        justify-content: center;
+        align-items: center;
+        font-size: 15px;
+        /* height: 2rem; */
+        height: unset;
+        line-height: unset;
+      }
+      //.am-tabs-default-bar-tab-active{
+      //  color:#59057b;
+      //  font-weight: bold;
+      //}
+
+      .am-tabs-default-bar-top .am-tabs-default-bar-underline,
+      .am-tabs-default-bar-bottom .am-tabs-default-bar-underline {
+        display: none;
+      }
+
+    }
+  }
+
+  .hotTitle {
+    //border: 1px solid;
+    box-sizing: border-box;
+    display: flex;
+    padding: 0 4%;
+    justify-content: space-between;
+    //margin-top: 19rem;
+    height: 4rem;
+    line-height: 4rem;
+    .hotLeft {
+      box-sizing: border-box;
+      display: flex;
+      div:first-child {
+        font-weight: bold;
+        color: #333;
+        margin-right: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      div:last-child {
+        color: #999;
+      }
+
+    }
+  }
+
+  .hotList {
+    //border: 1px solid red;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    background-color: #8CA18C;
+    width: 100%;
+    .lineChild {
+      background-color: #fff;
+      border-radius: 1rem;
+      margin: 0 3% 1rem 3%;
+      padding: 0.6rem 4%;
+      //border: 1px solid yellow;
+      box-sizing: border-box;
+      display: flex;
+      .lineImg {
+        width: 8rem;
+        //border: 1px solid;
+        img {
+          width: 7rem;
+          border-radius: 1rem;
+        }
+      }
+
+      .details {
+        //border: 1px solid red;
+        width: calc(100% - 8rem);
+        .goodsName {
+          font-size: 0.9rem;
+          color: #333;
+          //width: 100%;
+          height: 2.6rem;
+          //border: 1px solid ;
+          white-space: normal;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box; //将对象作为弹性伸缩盒子模型显示。
+          -webkit-box-orient: vertical; //从上到下垂直排列子元素（设置伸缩盒子的子元素排列方式）
+          -webkit-line-clamp: 1; //这个属性不是css的规范属性，需要组合上面两个属性，表示显示的行数。此处为2行
+          //word-wrap: break-word;//允许单词内断句，首先会尝试挪到下一行，看看下一行的宽度够不够，不够的话就进行单词内的断句
+        }
+
+        .bottomPrice {
+          //border: 1px solid;
+          margin-top: 1rem;
+          display: flex;
+          justify-content: space-between;
+          height: 3.4rem;
+          .leftPrice {
+            width: 35%;
+            .move {
+              font-size: 1.2rem;
+              color: #ED625D;
+            }
+            .market {
+              padding: 0 0.3rem;
+              margin-top: 0.3rem;
+              border-radius: 1.5rem;
+              color: #ED625D;
+              text-align: center;
+              //border: 1px solid ;
+              font-size: 0.7rem;
+            }
+          }
+
+          .status {
+            text-align: center;
+            padding: 0 1rem;
+            line-height: 2.0rem;
+            height: 2.0rem;
+            margin: 0.7rem 0;
+            background-color: #FF5656;
+            color: #fff;
+            border-radius: 1.2rem;
+          }
+        }
+
+      }
+    }
+  }
+
+  .recommendArea {
+    .recommendTitle {
+      height: 3.0rem;
+      line-height: 3.0rem;
+      //border: 1px solid red;
+      width: 100%;
+      text-align: center;
+      font-weight: bold;
+      color: #333;
+      font-size: 1.1rem;
+    }
+
+    .selectedKill {
+      //border: 1px solid;
+      margin-top: 0.5rem;
+      padding: 0 3%;
+      //margin-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      //padding: 0px 18px;
+      .child {
+        margin-bottom: 1rem;
+        width: 48%;
+        background-color: #fff;
+        border-radius: 1rem;
+        //border: 1px solid red;
+        padding: 1rem 1%;
+        .img {
+          width: 100%;
+          text-align: center;
+          img {
+            width: 90%;
+          }
+        }
+
+        .childName {
+          margin: 0.4rem 0 0;
+          font-size: 0.9rem;
+          color: #333;
+          //width: 100%;
+          height: 2.6rem;
+          //border: 1px solid ;
+          //white-space: normal;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box; //将对象作为弹性伸缩盒子模型显示。
+          -webkit-box-orient: vertical; //从上到下垂直排列子元素（设置伸缩盒子的子元素排列方式）
+          -webkit-line-clamp: 2; //这个属性不是css的规范属性，需要组合上面两个属性，表示显示的行数。此处为2行
+          //word-wrap: break-word;//允许单词内断句，首先会尝试挪到下一行，看看下一行的宽度够不够，不够的话就进行单词内的断句
+        }
+
+        .childPrice {
+          text-align: center;
+          height: 2.5rem;
+          line-height: 2.5rem;
+          span:first-child {
+            color: #FF5656;
+            font-size: 1.2rem;
+          }
+          span:last-child {
+            padding-left: 0.5rem;
+            color: #999;
+            text-decoration: line-through;
+          }
+        }
+
+        .out, .going {
+          margin: 0.5rem 20% 0;
+          width: 60%;
+          text-align: center;
+          padding: 0 0.5rem;
+          line-height: 2.0rem;
+          height: 2.0rem;
+          border-radius: 1.2rem;
+        }
+
+        .out {
+          background-color: #EBEBEB;
+          color: #999;
+        }
+
+        .going {
+          background-color: #FF5656;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

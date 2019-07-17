@@ -29,12 +29,12 @@ export default [
     name: "加盟",
     title: "加盟"
   },
-  {
-    path: "/points",
-    component: "../pages/points/index.js",
-    name: "积分商城",
-    title: "积分商城"
-  },
+  // {
+  //   path: "/points",
+  //   component: "../pages/points/index.js",
+  //   name: "积分商城",
+  //   title: "积分商城"
+  // },
   {
     path: "/new",
     component: "../pages/new/index.js",
@@ -47,6 +47,28 @@ export default [
     name: "积分记录",
     title: "积分记录"
   },
+  {
+    path: "/secondKill",
+    component: "../pages/Activity/SecondKill/index.js",
+    name: "限时购",
+    title: "限时购"
+  }, {
+    path: '/limitedPurchase',
+    component:"../pages/Activity/LimitedPurchase/index.js",
+    name:"限量购",
+    title:'限量购'
+  },{
+    path: '/points',
+    component:"../pages/Activity/Points/index.js",
+    name:"积分",
+    title:'积分'
+  },{
+    path: "/newDay",
+    component: "../pages/NewDay/index.js",
+    name: "上新",
+    title: "上新"
+  },
+
   // {
   //   path: "/demo",
   //   component: "../pages/demo/index.js",

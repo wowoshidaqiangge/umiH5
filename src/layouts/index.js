@@ -1,4 +1,5 @@
 import styles from './index.css';
+import 'react-flexible'
 
 function BasicLayout(props) {
   return (
