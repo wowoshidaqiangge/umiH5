@@ -46,7 +46,7 @@ class JoinInfo extends Component {
         }
       })
     } else {
-      Toast.info('请仔细阅读并同意《纳品网加盟合作服务协议》', 3)
+      Toast.info('请仔细阅读并同意《纳品网联盟合作服务协议》', 3)
     }
   }
 
@@ -200,7 +200,7 @@ class JoinInfo extends Component {
             </AgreeItem>
             <div style={{display: 'flex', lineHeight: '35px'}}>
               <div className={styles.read}>请仔细阅读并同意</div>
-              <div className={styles.contract} onClick={() => this.goContract()}>《纳品网加盟合作服务协议》</div>
+              <div className={styles.contract} onClick={() => this.goContract()}>《纳品网联盟合作服务协议》</div>
             </div>
           </div>
 

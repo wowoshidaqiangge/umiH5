@@ -223,7 +223,7 @@ class Bill extends Component {
 
           <div className={styles.link}>
             点此了解
-            <Link to='joinIn-contract'>《纳品网加盟商合作服务协议》</Link>
+            <Link to='joinIn-contract'>《纳品网联盟商合作服务协议》</Link>
           </div>
         </div>
         {
@@ -231,7 +231,7 @@ class Bill extends Component {
             <Button type="warning" disabled={num !== 1 ? true : false}
                     onClick={() => {
                       if (num === 1) {
-                        Modal.alert('退押金', '确定吗???', [
+                        Modal.alert('退押金', '确定吗?', [
                           {text: '取消', onPress: () => this.cancel(), style: 'default'},
                           {text: '确定', onPress: () => this.returnMoney()},
                         ])
