@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'dva'
+import 'react-flexible'
 import styles from './index.less'
 import Loading from "@/components/Loading";
 import NoGoods from "@/components/NoGoods";
@@ -22,11 +23,10 @@ class LimitedPurchase extends Component {
   renderList() {
     const {banner, hotActivityList, hotActivityName, activityFont, recommendName, recommendList, startTime, nowTime, endTime} = this.props
     let res = Number(startTime) - Number(nowTime) > 0 ? getCountDown(startTime) : getCountDown(endTime)
-    return <div className={styles.container} style={{backgroundColor: '#6160FB'}}>
+    return <div className={styles.container}>
       <div
         className={styles.head}
         style={{
-          display: 'inline-block',
           background: `url("${banner.image ? banner.image : ''}") center center / cover no-repeat`,
         }}
       />

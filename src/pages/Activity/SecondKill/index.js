@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'dva'
 import wx from 'weixin-js-sdk'
+import 'react-flexible'
 import styles from '../index.less'
 import NoGoods from '../../../components/NoGoods'
 import Loading from '../../../components/Loading'
@@ -55,8 +56,8 @@ class SecondKill extends Component {
           display: 'inline-block',
           background: `url("${banner.image ? banner.image : ''}") center center / cover no-repeat`,
         }}
-      >
-      </div>
+      />
+
 
       <div className={styles.hotTitle}>
         <div className={styles.hotLeft}>

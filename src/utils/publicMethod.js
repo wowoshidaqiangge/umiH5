@@ -25,7 +25,7 @@ export function getCountDown(timestamp) {
     }
     // const countDownTime = hour + ":" + min + ":" + sec
     // $("#countDown1").html(countDownTime);
-    d === 0 ? $("#countDown1").html(`<div>${hour}</div>:<div>${min}</div>:<div>${sec}</div>`) :
+    d === 0 ? $("#countDown1").html(`<div>${hour}</div><div>:</div><div>${min}</div><div>:</div><div>${sec}</div>`) :
       $("#day").html(`<div>${d}</div><div>天</div><div>${hour}</div><div>:</div><div>${min}</div><div>:</div><div>${sec}</div>`)
   }, 1000);
 }

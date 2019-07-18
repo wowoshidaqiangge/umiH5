@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'dva'
 import {Carousel} from 'antd-mobile'
+import 'react-flexible'
 import styles from './index.less'
 import NoGoods from '../../../components/NoGoods'
 import Loading from "@/components/Loading";
@@ -52,7 +53,7 @@ class Points extends Component {
         {hotActivityList.map((item, index) => (
           <div onClick={()=>this.handleOpenGoods(item.goods_id)}
             key={item.goods_id}
-            style={{height: imgHeight, top: slideIndex === index ? -10 : 0}}
+            style={{height: imgHeight, top: slideIndex === index ? -13 : 0}}
             className={styles.imgContainer}>
             <img src={item.goods_img} onLoad={() => {
               window.dispatchEvent(new Event('resize'))
@@ -70,7 +71,7 @@ class Points extends Component {
         recommendList.length === 0 ? '' : <div className={styles.recommendArea}>
           <div className={styles.selectedKill}>
             {recommendList.length > 0 && recommendList.map((item) => {
-              return <div className={styles.child} onClick={()=>this.handleOpenGoods(item.goods_id)}>
+              return <div className={styles.child}  key={item.goods_id} onClick={()=>this.handleOpenGoods(item.goods_id)}>
                 <div className={styles.img}>
                   <img src={item.goods_img}/>
                 </div>

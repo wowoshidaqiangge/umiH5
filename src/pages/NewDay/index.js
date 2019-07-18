@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'dva'
 import {Tabs} from 'antd-mobile'
+import 'react-flexible'
 // import Loading from "@/components/Loading"
 // import NoGoods from "@/components/NoGoods"
 import styles from "./index.less";
@@ -63,7 +64,6 @@ class NewDay extends Component {
   renderList() {
     const {timeTabs, goodsList,} = this.props
     let newArr = []
-    const length = timeTabs.length
     timeTabs.length > 0 && timeTabs.map((item) => {
       let newItem = Object.assign({key: item.new_id, is_select: item.is_select}, {
         title:
@@ -71,7 +71,7 @@ class NewDay extends Component {
             width: '100%',
             backgroundColor: item.is_select === 1 ? "#FFCA10" : '#788E78', textAlign: "center"
           }}>
-            <div style={{color: "#fff", fontWeight: 'bold', lineHeight: '2.5rem', height: '50%'}}>{item.new_title}</div>
+            <div style={{color: "#fff", fontWeight: 'bold', lineHeight: '1.45rem', height: '50%'}}>{item.new_title}</div>
             <div style={{color: "#fff", height: '50%'}}>{item.new_time}</div>
           </div>
       })

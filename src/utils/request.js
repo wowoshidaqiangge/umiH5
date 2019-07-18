@@ -2,8 +2,6 @@ import axios from 'axios'
 import {Toast} from 'antd-mobile'
 import wx from 'weixin-js-sdk'
 
-// const wx = require('weixin-js-sdk')
-
 //系统请求参数
 const sysParams = {
   'time': new Date().getTime(),

@@ -7,7 +7,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 19rem;
+    height: 8rem;
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
@@ -21,7 +21,7 @@
     //background-color:#8CA18C;
     :global {
       .am-tabs-tab-bar-wrap {
-        height: 4rem;
+        height: 2rem;
       }
 
       .am-tabs-default-bar, .am-tabs-default-bar-animated, .am-tabs-default-bar-top {
@@ -57,14 +57,14 @@
   }
 
   .hotTitle {
-    //border: 1px solid;
+    border: 1px solid;
     box-sizing: border-box;
     display: flex;
     padding: 0 4%;
     justify-content: space-between;
     //margin-top: 19rem;
-    height: 4rem;
-    line-height: 4rem;
+    height: 2rem;
+    line-height: 2rem;
     .hotLeft {
       box-sizing: border-box;
       display: flex;
@@ -73,46 +73,49 @@
         color: #333;
         margin-right: 0.5rem;
         font-size: 1.1rem;
+        border: 1px solid black;
       }
 
       div:last-child {
         color: #999;
       }
-
     }
   }
 
   .hotList {
     //border: 1px solid red;
-    padding-top: 0.6rem;
-    padding-bottom: 0.6rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
     background-color: #8CA18C;
     width: 100%;
     .lineChild {
+      width: calc(100% - 0.6rem);
+      height: 3.4rem;
       background-color: #fff;
-      border-radius: 1rem;
-      margin: 0 3% 1rem 3%;
-      padding: 0.6rem 4%;
+      border-radius: 0.2rem;
+      margin: 0.3rem;
+      padding: 0.3rem;
       //border: 1px solid yellow;
       box-sizing: border-box;
       display: flex;
+      justify-content: space-between;
       .lineImg {
-        width: 8rem;
+        width: 2.8rem;
         //border: 1px solid;
         img {
-          width: 7rem;
-          border-radius: 1rem;
+          width:2.8rem;
+          border-radius: 0.2rem;
         }
       }
 
       .details {
         //border: 1px solid red;
-        width: calc(100% - 8rem);
+        width: calc(100% - 3rem);
         .goodsName {
-          font-size: 0.9rem;
+          font-size: 0.32rem;
           color: #333;
           //width: 100%;
-          height: 2.6rem;
+          height: 1rem;
           //border: 1px solid ;
           white-space: normal;
           overflow: hidden;
@@ -125,15 +128,17 @@
 
         .bottomPrice {
           //border: 1px solid;
-          margin-top: 1rem;
+          margin-top: 0.4rem;
           display: flex;
           justify-content: space-between;
-          height: 3.4rem;
+          height: 1.4rem;
           .leftPrice {
-            width: 35%;
+            //width: 35%;
             .move {
-              font-size: 1.2rem;
+              font-size: 0.37rem;
               color: #ED625D;
+              height: 0.6rem;
+              line-height: 0.6rem;
             }
             .market {
               padding: 0 0.3rem;
@@ -141,20 +146,21 @@
               border-radius: 1.5rem;
               color: #ED625D;
               text-align: center;
-              //border: 1px solid ;
-              font-size: 0.7rem;
+              border: 1px solid ;
+              font-size: 0.27rem;
             }
           }
 
           .status {
+            font-size: 0.32rem;
             text-align: center;
-            padding: 0 1rem;
-            line-height: 2.0rem;
-            height: 2.0rem;
-            margin: 0.7rem 0;
+            padding: 0 0.5rem;
+            line-height:0.8rem;
+            height: 0.8rem;
+            margin: 0.3rem 0;
             background-color: #FF5656;
             color: #fff;
-            border-radius: 1.2rem;
+            border-radius: 0.32rem;
           }
         }
 
