@@ -25,12 +25,15 @@ export default {
         const resData = data.data
         yield put({
           type: 'setState', payload: {
-            timeTabs:resData,
-            newId: resData[0].new_id,
+            timeTabs:resData.length>0?resData:[],
+            newId: resData.length>0?resData[0].new_id:'',
             spin: false,
           }
         })
-        yield put({type: 'newGoods', payload: {new_id: resData[0].new_id}})
+        if(resData.length>0){
+          yield put({type: 'newGoods', payload: {new_id: resData[0].new_id}})
+        }
+
       }
     },
 

@@ -6,6 +6,7 @@ import 'react-flexible'
 // import NoGoods from "@/components/NoGoods"
 import styles from "./index.less";
 import {openGoods} from "@/utils/publicMethod";
+import NoGoods from "@/components/NoGoods";
 
 class NewDay extends Component {
   constructor(props) {
@@ -62,7 +63,7 @@ class NewDay extends Component {
   }
 
   renderList() {
-    const {timeTabs, goodsList,} = this.props
+    const {timeTabs, goodsList} = this.props
     let newArr = []
     timeTabs.length > 0 && timeTabs.map((item) => {
       let newItem = Object.assign({key: item.new_id, is_select: item.is_select}, {
@@ -93,10 +94,13 @@ class NewDay extends Component {
   }
 
   render() {
-    const {spin} = this.props
+    const {spin,timeTabs} = this.props
+
+    const flag = timeTabs.length===0
+    // console.log('ttttt',timeTabs,flag)
     return (
       <Fragment>
-        {spin ? '' : this.renderList()}
+        {spin ? '' : flag ? <NoGoods/> : this.renderList()}
         {/*{spin ? <Loading/> : this.renderList()}*/}
 
       </Fragment>
