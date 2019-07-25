@@ -102,7 +102,6 @@ class NewDay extends Component {
       <Fragment>
         {spin ? '' : flag ? <NoGoods/> : this.renderList()}
         {/*{spin ? <Loading/> : this.renderList()}*/}
-
       </Fragment>
     )
   }

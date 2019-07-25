@@ -27,10 +27,8 @@ export default {
   effects: {
     * activityList({payload}, {call, put}) {
       const {data} = yield call(service.activityList, payload)
-
       if (data.code === 1) {
         const resData = data.data
-        console.log('aaa', resData.banner)
         yield put({
           type: 'setState', payload: {
             banner: resData.banner,

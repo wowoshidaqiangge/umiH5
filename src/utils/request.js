@@ -6,7 +6,7 @@ import wx from 'weixin-js-sdk'
 const sysParams = {
   'time': new Date().getTime(),
   'platform': 'h5',
-  'token': getToken(),
+  // 'token': getToken(),
   'version': '1.0.1',
   'device_id': '123456'
 };
