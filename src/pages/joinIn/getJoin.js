@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import styles from './style/getJoin.css'
-import {routerRedux} from 'dva/router'
+import router from 'umi/router'
 import {connect} from 'dva'
+import 'react-flexible'
+import styles from './style/getJoin.css'
 
 const merchantImg = require('../../assets/img/join-Merchant.jpg');
 
@@ -11,54 +12,41 @@ class GetJoin extends Component {
     this.state = {}
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {dispatch} = this.props
     dispatch({type: 'getJoin/getJoinIn'})
   }
 
 
-  componentDidCatch(error, info) {
-
-  }
-
-
   handleNextUrl() {
-    const {getJoin, dispatch} = this.props
+    const {getJoin} = this.props
     const {isJoin} = getJoin
     if (isJoin === 1 || isJoin === 2) {
-      dispatch(routerRedux.push({pathname: '/joinIn-contract'}))
+      router.push('/joinIn-contract')
+      // dispatch(routerRedux.push({pathname: '/joinIn-contract'}))
     } else if (isJoin === 0) {
-      dispatch(routerRedux.push({pathname: '/joinIn'}))
+      router.push('/joinIn')
+      // dispatch(routerRedux.push({pathname: '/joinIn'}))
     }
-  }
-
-  getImg() {
-    let doimg = null
-    if (this.props.getJoin.isJoin === 1 || this.props.getJoin.isJoin === 2) {
-      doimg = require('../../assets/img/join-look.png');
-    } else {
-      doimg = require('../../assets/img/join-do.png');
-    }
-    // else if(this.props.getJoin.isJoin === 2){
-    //     var doimg = require('../../assets/img/join-complete.png');
-    //   }
-    return doimg;
   }
 
   render() {
+    const {getJoin} = this.props
+    const {isJoin} = getJoin
     return (
       <div className={styles.imgBanner}>
         <img className={styles.img} src={merchantImg}/>
         <div className={styles.imgBackground}>
           <div onClick={() => this.handleNextUrl()}>
-            <img className={styles.img} src={this.getImg()}/>
+            <img className={styles.img} src={isJoin === 1 ||
+            isJoin === 2 ? require('../../assets/img/join-look.png') : require('../../assets/img/join-do.png')}/>
+
           </div>
         </div>
       </div>
     )
   }
 }
-
 
 export default connect(({getJoin}) => ({getJoin}))(GetJoin)
 

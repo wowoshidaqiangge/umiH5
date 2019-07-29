@@ -14,7 +14,7 @@ class Contract extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.dispatch({type: 'contract/getJoinIn'})
   }
 

@@ -112,7 +112,7 @@ class SecondKill extends Component {
                 <div className={styles.img}>
                   <img src={item.goods_img}/>
                 </div>
-                <div className={styles.childName}>{item.goods_name}</div>
+                <div className={styles.childName} style={{ WebkitBoxOrient: "vertical" }}>{item.goods_name}</div>
                 <div className={styles.childPrice}>
                   <span>￥{item.move_price}</span>
                   <span>￥{item.market_price}</span>

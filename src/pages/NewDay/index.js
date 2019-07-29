@@ -31,7 +31,7 @@ class NewDay extends Component {
             <img src={item.goods_img}/>
           </div>
           <div className={styles.details}>
-            <div className={styles.goodsName}>{item.goods_name}</div>
+            <div className={styles.goodsName} style={{ WebkitBoxOrient: "vertical" }}>{item.goods_name}</div>
             <div className={styles.bottomPrice}>
               <div className={styles.leftPrice}>
                 <div className={styles.move}>￥{item.goods_price}</div>
@@ -95,9 +95,8 @@ class NewDay extends Component {
 
   render() {
     const {spin,timeTabs} = this.props
-
     const flag = timeTabs.length===0
-    // console.log('ttttt',timeTabs,flag)
+
     return (
       <Fragment>
         {spin ? '' : flag ? <NoGoods/> : this.renderList()}

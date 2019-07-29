@@ -8,6 +8,8 @@
 }
 .imgBackground{
   background-image: url("../../../assets/img/join-btn-back.png");
-  margin-top: -4px;
-  padding: 5px;
+  /*margin-top: -0.rem;*/
+  /*padding: 5px;*/
+  padding: 0.2rem;
+  /*border:1px solid;*/
 }

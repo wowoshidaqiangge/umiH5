@@ -13,7 +13,7 @@ class Bill extends Component {
     this.state = {}
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {dispatch} = this.props
     dispatch({type: 'bill/getJoinBill'})
   }
@@ -110,7 +110,7 @@ class Bill extends Component {
             <span class="chart-tooptip-right">{money}</span>
             <span>{value}</span>
         </p>
-    `;
+    `
 
     return (
       <div className={styles.bill}>

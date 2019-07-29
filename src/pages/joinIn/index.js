@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
 import {Button, List, InputItem, Checkbox, Toast} from "antd-mobile"
+import {connect} from 'dva'
+import router from 'umi/router'
 import {createForm} from 'rc-form'
 import styles from './style/join.less'
-import {connect} from 'dva'
-import getToken from '../../utils/request';
+import {getToken} from "@/utils/requestMethod";
+
+// import getToken from '../../utils/request';
 
 const AgreeItem = Checkbox.AgreeItem
 const localParams = JSON.parse(localStorage.getItem('params'))
@@ -17,7 +20,7 @@ class JoinInfo extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {dispatch} = this.props
     dispatch({type: 'getJoin/getJoinIn'})
   }
@@ -96,25 +99,13 @@ class JoinInfo extends Component {
     }
   }
 
-  goContract() {
-    // const {validateFields, getFieldsValue} = this.props.form
-    this.props.history.push('/joinIn-contract')
-    // let params = {
-    //   name:getFieldsValue().name,
-    //   addr:getFieldsValue().address,
-    //   phone:getFieldsValue().phone,
-    //   card:getFieldsValue().ID,
-    //   companyName:getFieldsValue().companyName,
-    // }
-    // localStorage.setItem('params',JSON.stringify(params))
-  }
-
   render() {
     getPay();//APP调用方法
-    const {form} = this.props;
+    const {form,getJoin} = this.props;
+    const{joinMoney}=getJoin
     const {disabled} = this.state;
     const {getFieldProps, getFieldError} = form;
-    const getMoney = '￥' + this.props.getJoin.joinMoney;
+    const getMoney = '￥' + joinMoney;
     return (
       <div className={styles.joinInfo}>
         <div>
@@ -200,12 +191,20 @@ class JoinInfo extends Component {
             </AgreeItem>
             <div style={{display: 'flex', lineHeight: '35px'}}>
               <div className={styles.read}>请仔细阅读并同意</div>
-              <div className={styles.contract} onClick={() => this.goContract()}>《纳品网联盟合作服务协议》</div>
+              <div className={styles.contract}
+                   onClick={() => router.push('/joinIn-contract')}>
+                《纳品网联盟合作服务协议》
+              </div>
             </div>
           </div>
 
           <div className={styles.button}>
-            <Button type={'primary'} onClick={() => this.handleConfirm()} disabled={disabled}>确认</Button>
+            <Button
+              type={'primary'}
+              onClick={() => this.handleConfirm()}
+              disabled={disabled}>
+              确认
+            </Button>
           </div>
         </div>
 
@@ -229,16 +228,17 @@ function getClient() {
  * 支付成功，APP通知前端去合同页面
  */
 function getPay() {
+  const token = getToken()
   //IOS
   window["joinPayNotice"] = () => {
     //业务逻辑
-    let token = getToken.sysParams.token;
+    // let token = getToken.sysParams.token;
     let url = '/joinMerchant/joinIn-contract?token=' + token;
     window.location.href = url;
   };
   //安卓
   window.joinPayNotice = () => {
-    let token = getToken.sysParams.token;
+    // let token = getToken.sysParams.token;
     let url = '/joinMerchant/joinIn-contract?token=' + token;
     window.location.href = url;
   };
@@ -248,11 +248,13 @@ function getApp(params, money) {
   let client = getClient();
   params = JSON.stringify(params);
   let newMoney = '' + money;
+
   if (client) {
 
     //安卓
     try {
-      window.android.joinMerchant(params, newMoney);
+      const payload= JSON.stringify({'join_info':params})
+      window.android.joinMerchant(payload, newMoney,'3');
     } catch (e) {
       // alert("安卓 this is error ");
       // console.log(e)
@@ -261,7 +263,7 @@ function getApp(params, money) {
     //IOS
     try {
       window.webkit.messageHandlers.joinMerchant.postMessage
-      ({"join_info": params, "money": money})
+      ({'join_info': params, 'money': money,'type':'3'})
     } catch (e) {
       // alert("IOS this is error ");
       // console.log(e)

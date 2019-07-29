@@ -46,8 +46,5 @@ export default {
         })
       }
     }
-
   }
-
-
 }

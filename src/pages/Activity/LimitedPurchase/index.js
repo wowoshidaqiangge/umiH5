@@ -73,7 +73,7 @@ class LimitedPurchase extends Component {
                   <img src={item.goods_img}/>
                 </div>
                 <div className={styles.details}>
-                  <div className={styles.goodsName}>{item.goods_name}</div>
+                  <div className={styles.goodsName} style={{ WebkitBoxOrient: "vertical" }}>{item.goods_name}</div>
                   <div className={styles.bottomPrice}>
                     <div className={styles.leftPrice}>
                       <div className={styles.move}>￥{item.move_price}</div>

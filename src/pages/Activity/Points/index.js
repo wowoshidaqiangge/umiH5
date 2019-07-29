@@ -75,7 +75,7 @@ class Points extends Component {
                 <div className={styles.img}>
                   <img src={item.goods_img}/>
                 </div>
-                <div className={styles.childName}>{item.goods_name}</div>
+                <div className={styles.childName} style={{ WebkitBoxOrient: "vertical" }}>{item.goods_name}</div>
                 <div className={styles.childStatus}>{item.status}</div>
                 <div className={styles.going}>
                   立即兑换
