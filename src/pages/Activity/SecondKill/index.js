@@ -6,6 +6,9 @@ import styles from '../index.less'
 import NoGoods from '../../../components/NoGoods'
 import Loading from '../../../components/Loading'
 import {getCountDown,getClient} from "@/utils/publicMethod";
+window.num=1
+// localStorage.setItem('num',1)
+
 
 class SecondKill extends Component {
   constructor(props) {

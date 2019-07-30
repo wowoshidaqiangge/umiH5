@@ -1,4 +1,5 @@
 import * as service from '../services/activity'
+import {getToken} from "@/utils/requestMethod";
 
 export default {
   namespace: 'activity',
@@ -14,7 +15,8 @@ export default {
     activity: {},
     nowTime:'',
     startTime:'',
-    endTime:''
+    endTime:'',
+    access:''
 
   },
 
@@ -46,5 +48,19 @@ export default {
         })
       }
     }
-  }
+  },
+  subscriptions: {
+    setup({dispatch, history}) {
+      return history.listen(({pathname}) => {
+
+        if (pathname === '/secondKill') {
+          let token = getToken()
+          dispatch({type:'setState',payload:{'access':token}})
+          // console.log('pppp', JSON.stringify(payload) === '{}')
+
+        }
+      })
+    },
+  },
+
 }

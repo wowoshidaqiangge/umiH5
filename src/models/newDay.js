@@ -32,7 +32,6 @@ export default {
         if(resData.length>0){
           yield put({type: 'newGoods', payload: {new_id: resData[0].new_id}})
         }
-
       }
     },
 

@@ -69,11 +69,15 @@ function getIosToken() {
   window.webkit.messageHandlers.callUserInfo.postMessage({})
 }
 
-export function request(url, params, method) {
-  const accessToken = getToken()
-  alert('iosToken')
+
+
+export function request(url, params, method,token) {
+  alert('1')
+  const accessToken =  token
+  alert('iosToken2')
   alert(accessToken)
   if (method === 'get') {
+    alert('get')
     return axios({
       url,
       method,
@@ -88,6 +92,7 @@ export function request(url, params, method) {
       return res
     })
   } else {
+    alert('post')
     return axios({
       url,
       method,
@@ -101,4 +106,104 @@ export function request(url, params, method) {
       return res
     })
   }
+  alert('outEnd')
 }
+
+// function double(res) {
+//   axios({
+//     url,
+//     method,
+//     data: {
+//       ...params,
+//     },
+//     headers: {
+//       'access-token': accessToken !== undefined ? accessToken : ''
+//     },
+//   }).then(res => {
+//     alert(2, res)
+//     return res
+//   })
+// }
+// export function request(url, params, method) {
+//   const accessToken = getToken()
+//
+// // return new Promise((resolve,reject)=>{
+// //
+// //   alert(accessToken)
+// //     resolve(accessToken)
+// //
+// // }).then((accessToken)=>{
+//   alert(accessToken)
+//   // if (accessToken && accessToken !== undefined) {
+//   //   if (method === 'get') {
+//   //     alert(3,accessToken)
+//   //     return axios({
+//   //       url,
+//   //       method,
+//   //       params: {
+//   //         ...params,
+//   //       },
+//   //       headers: {
+//   //         'Content-Type': 'application/json;charset=utf-8',
+//   //         'access-token': accessToken !== undefined ? accessToken : ''
+//   //       }
+//   //     }).then(res => {
+//   //       alert(4, res)
+//   //       return res
+//   //     })
+//   //   } else {
+//   //     alert(1,accessToken)
+//   //     return axios({
+//   //       url,
+//   //       method,
+//   //       data: {
+//   //         ...params,
+//   //       },
+//   //       headers: {
+//   //         'access-token': accessToken !== undefined ? accessToken : ''
+//   //       },
+//   //     }).then(res => {
+//   //       alert(2, res)
+//   //       return res
+//   //     })
+//   //   }
+//   // }
+// // })
+//
+//   alert(accessToken)
+//
+//   if (accessToken && accessToken !== undefined) {
+//     if (method === 'get') {
+//       alert(3)
+//       return axios({
+//         url,
+//         method,
+//         params: {
+//           ...params,
+//         },
+//         headers: {
+//           'Content-Type': 'application/json;charset=utf-8',
+//           'access-token': accessToken !== undefined ? accessToken : ''
+//         }
+//       }).then(res => {
+//         alert(4, res)
+//         return res
+//       })
+//     } else {
+//       alert(1)
+//       return axios({
+//         url,
+//         method,
+//         data: {
+//           ...params,
+//         },
+//         headers: {
+//           'access-token': accessToken !== undefined ? accessToken : ''
+//         },
+//       }).then(res => {
+//         alert(2, res)
+//         return res
+//       })
+//     }
+//   }
+// }
