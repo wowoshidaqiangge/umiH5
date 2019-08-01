@@ -228,19 +228,21 @@ function getClient() {
  * 支付成功，APP通知前端去合同页面
  */
 function getPay() {
-  const token = getToken()
+  // const token = getToken()
   //IOS
   window["joinPayNotice"] = () => {
     //业务逻辑
     // let token = getToken.sysParams.token;
-    let url = '/joinMerchant/joinIn-contract?token=' + token;
-    window.location.href = url;
+    // let url = '/joinMerchant/joinIn-contract?token=' + token;
+    // window.location.href = url;
+    router.push('/joinMerchant/joinIn-contract')
   };
   //安卓
   window.joinPayNotice = () => {
     // let token = getToken.sysParams.token;
-    let url = '/joinMerchant/joinIn-contract?token=' + token;
-    window.location.href = url;
+    // let url = '/joinMerchant/joinIn-contract?token=' + token;
+    // window.location.href = url;
+    router.push('/joinMerchant/joinIn-contract')
   };
 }
 

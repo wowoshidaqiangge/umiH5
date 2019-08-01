@@ -9,10 +9,6 @@ import {openGoods} from "@/utils/publicMethod";
 import NoGoods from "@/components/NoGoods";
 
 class NewDay extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const {dispatch} = this.props
     dispatch({type: 'newDay/newList'})
@@ -72,8 +68,10 @@ class NewDay extends Component {
             width: '100%',
             backgroundColor: item.is_select === 1 ? "#FFCA10" : '#788E78', textAlign: "center"
           }}>
-            <div style={{color: "#fff", fontWeight: 'bold', lineHeight: '1.45rem', height: '50%'}}>{item.new_title}</div>
-            <div style={{color: "#fff", height: '50%'}}>{item.new_time}</div>
+            <div style={{color: "#fff", fontWeight: 'bold', lineHeight: '1rem', height: '1rem'}}>{item.new_title}</div>
+            <div style={{color: "#fff", height: '1rem'}}>{item.new_time}</div>
+            {/*<div style={{color: "#fff", fontWeight: 'bold', lineHeight: '1.45rem', height: '50%'}}>{item.new_title}</div>*/}
+            {/*<div style={{color: "#fff", height: '50%'}}>{item.new_time}</div>*/}
           </div>
       })
       newArr.push(newItem)

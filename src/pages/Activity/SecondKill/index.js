@@ -6,8 +6,6 @@ import styles from '../index.less'
 import NoGoods from '../../../components/NoGoods'
 import Loading from '../../../components/Loading'
 import {getCountDown,getClient} from "@/utils/publicMethod";
-window.num=1
-// localStorage.setItem('num',1)
 
 
 class SecondKill extends Component {
@@ -51,7 +49,6 @@ class SecondKill extends Component {
 
   renderList() {
     const {banner, hotActivityList, hotActivityName, activityFont, recommendName, recommendList, startTime, nowTime, endTime} = this.props
-    console.log(hotActivityList)
     let res = Number(startTime) - Number(nowTime) > 0 ? getCountDown(startTime) : getCountDown(endTime)
     return <div className={styles.container}>
       <div

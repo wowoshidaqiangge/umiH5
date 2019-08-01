@@ -9,9 +9,6 @@ export const sysParams = {
 }
 
 
-
-
-
 function GetQueryString(name) {
   var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
   var r = window.location.search.substr(1).match(reg);
@@ -28,16 +25,14 @@ export function request(url, params, method) {
     getAppToken(url, params, method,data=>{
       resolve(data)
     })
-
   })
-
 }
 
 
 // 获取app的token
 export function getAppToken(url, params, method,callback) {
   let num = 0
-  
+
   let u = navigator.userAgent
   let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1 //android终端
   let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)  //ios终端
@@ -55,8 +50,8 @@ export function getAppToken(url, params, method,callback) {
         if(token!==undefined){
           postman(url, params, method,token,data=>{
             let result = data
-                typeof callback === 'function' && callback.call(window,result);
-                return result;
+            typeof callback === 'function' && callback.call(window,result);
+            return result;
           })
         }
       } else {
@@ -70,7 +65,6 @@ export function getAppToken(url, params, method,callback) {
         let tokenStr = res;
         let tokenObj = JSON.parse(tokenStr);
         token = tokenObj.token;
-     
         device_id = tokenObj.device_id;
         version = tokenObj.version;
         platform = tokenObj.platform
@@ -78,8 +72,8 @@ export function getAppToken(url, params, method,callback) {
           if(num<1){
             postman(url, params, method,token,data=>{
               let result = data
-                  typeof callback === 'function' && callback.call(window,result);
-                  return result;
+              typeof callback === 'function' && callback.call(window,result);
+              return result;
             })
           }
           num++
@@ -87,10 +81,7 @@ export function getAppToken(url, params, method,callback) {
       }
     }
   }
-
 }
-
-
 
 export function postman(url, params, method,accessToken,callback){
   if (method === 'get') {
@@ -106,12 +97,12 @@ export function postman(url, params, method,accessToken,callback){
       }
     }).then(res => {
       let result = res
-    
+
       typeof callback === 'function' && callback.call(window,result);
       return result;
     })
   } else {
-  
+
     return axios({
       url,
       method,
