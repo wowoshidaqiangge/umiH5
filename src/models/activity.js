@@ -49,18 +49,18 @@ export default {
       }
     }
   },
-  subscriptions: {
-    setup({dispatch, history}) {
-      return history.listen(({pathname}) => {
+  // subscriptions: {
+  //   setup({dispatch, history}) {
+  //     return history.listen(({pathname}) => {
 
-        if (pathname === '/secondKill') {
-          let token = getToken()
-          dispatch({type:'setState',payload:{'access':token}})
-          // console.log('pppp', JSON.stringify(payload) === '{}')
+  //       if (pathname === '/secondKill') {
+  //         let token = getToken()
+  //         dispatch({type:'setState',payload:{'access':token}})
+  //         // console.log('pppp', JSON.stringify(payload) === '{}')
 
-        }
-      })
-    },
-  },
+  //       }
+  //     })
+  //   },
+  // },
 
 }

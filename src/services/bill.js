@@ -4,16 +4,16 @@
 
 import {api} from '../utils/requestUrl'
 import{request,sysParams}  from '../utils/requestMethod'
-import {getToken} from "../utils/requestMethod";
+
 
 
 export async function getJoinBill() {
   const arg = {...sysParams}
-  let token = getToken()
-  if(getToken!==undefined){
 
-    return request(api.join.getBill,arg,'get',token)
-  }
+
+
+    return request(api.join.getBill,arg,'get',)
+  
 
 }
 
