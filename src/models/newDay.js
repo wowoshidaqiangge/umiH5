@@ -19,11 +19,9 @@ export default {
 
   effects: {
     * newList({payload}, {call, put}) {
-
       const {data} = yield call(service.newList, payload)
       if (data.code === 1) {
         const resData = data.data
-
         yield put({
           type: 'setState', payload: {
             timeTabs:resData.length>0?resData:[],

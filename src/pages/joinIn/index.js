@@ -234,15 +234,14 @@ function getPay() {
     //业务逻辑
     // let token = getToken.sysParams.token;
     // let url = '/joinMerchant/joinIn-contract?token=' + token;
-    // window.location.href = url;
-    router.push('/joinMerchant/joinIn-contract')
+    window.location.href = '/joinIn-contract';
   };
   //安卓
   window.joinPayNotice = () => {
     // let token = getToken.sysParams.token;
     // let url = '/joinMerchant/joinIn-contract?token=' + token;
     // window.location.href = url;
-    router.push('/joinMerchant/joinIn-contract')
+    window.location.href = '/joinIn-contract';
   };
 }
 
