@@ -116,7 +116,7 @@ class Bill extends Component {
       <div className={styles.bill}>
         <div className={styles.inner}>
           <div className={styles.header}>
-            <img src={require('../../assets/img/bill/join-banner.png')}></img>
+            <img src={require('../../assets/img/bill/earn.png')}></img>
             <div className={styles.headerBottom}>
               <div className={styles.pay}>{joinMoney}</div>
               <div className={styles.payInfo}>已缴纳的保证金(元)</div>
