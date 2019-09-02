@@ -20,9 +20,11 @@ class Points extends Component {
     const {dispatch} = this.props
     dispatch({type: 'activity/activityList', payload: {act_type: '3'}})
   }
-  handleOpenGoods(goodsId){
+
+  handleOpenGoods(goodsId) {
     openGoods(goodsId)
   }
+
   renderList() {
     const {slideIndex, imgHeight} = this.state
     const {banner, hotActivityList, hotActivityName, recommendList} = this.props
@@ -51,10 +53,10 @@ class Points extends Component {
         dots={false}
       >
         {hotActivityList.map((item, index) => (
-          <div onClick={()=>this.handleOpenGoods(item.goods_id)}
-            key={item.goods_id}
-            style={{height: imgHeight, top: slideIndex === index ? -13 : 0}}
-            className={styles.imgContainer}>
+          <div onClick={() => this.handleOpenGoods(item.goods_id)}
+               key={item.goods_id}
+               style={{height: imgHeight, top: slideIndex === index ? -13 : 0}}
+               className={styles.imgContainer}>
             <img src={item.goods_img} onLoad={() => {
               window.dispatchEvent(new Event('resize'))
               this.setState({imgHeight: 'auto'})
@@ -71,11 +73,12 @@ class Points extends Component {
         recommendList.length === 0 ? '' : <div className={styles.recommendArea}>
           <div className={styles.selectedKill}>
             {recommendList.length > 0 && recommendList.map((item) => {
-              return <div className={styles.child}  key={item.goods_id} onClick={()=>this.handleOpenGoods(item.goods_id)}>
+              return <div className={styles.child} key={item.goods_id}
+                          onClick={() => this.handleOpenGoods(item.goods_id)}>
                 <div className={styles.img}>
                   <img src={item.goods_img}/>
                 </div>
-                <div className={styles.childName} style={{ WebkitBoxOrient: "vertical" }}>{item.goods_name}</div>
+                <div className={styles.childName} style={{WebkitBoxOrient: "vertical"}}>{item.goods_name}</div>
                 <div className={styles.childStatus}>{item.status}</div>
                 <div className={styles.going}>
                   立即兑换

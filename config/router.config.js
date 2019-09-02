@@ -12,19 +12,19 @@ export default [
     title: "联盟"
   },
   {
-    path: "/joinIn-contract",
+    path: "/joinInContract",
     component: "../pages/joinIn/contract.js",
     name: "纳品网联盟合作服务协议",
     title: "纳品网联盟合作服务协议"
   },
   {
-    path: "/joinIn-bill",
+    path: "/joinInBill",
     component: "../pages/joinIn/bill.js",
     name: "我的纳品账单",
     title: "我的纳品账单"
   },
   {
-    path: "/joinIn-getJoin",
+    path: "/joinInGetJoin",
     component: "../pages/joinIn/getJoin.js",
     name: "联盟",
     title: "联盟"
@@ -50,8 +50,8 @@ export default [
   {
     path: "/secondKill",
     component: "../pages/Activity/SecondKill/index.js",
-    name: "限时购",
-    title: "限时购"
+    name: "爆款专区",
+    title: "爆款专区"
   }, {
     path: '/limitedPurchase',
     component:"../pages/Activity/LimitedPurchase/index.js",
@@ -64,7 +64,8 @@ export default [
     title:'积分'
   },{
     path: "/newDay",
-    component: "../pages/NewDay/index.js",
+    // component: "../pages/NewDay/index.js",
+    component: "../pages/text/index.js",
     name: "上新",
     title: "上新"
   },

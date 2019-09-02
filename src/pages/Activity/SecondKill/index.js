@@ -1,11 +1,11 @@
 import React, {Component, Fragment} from 'react'
 import {connect} from 'dva'
-import wx from 'weixin-js-sdk'
+
 import 'react-flexible'
 import styles from '../index.less'
 import NoGoods from '../../../components/NoGoods'
 import Loading from '../../../components/Loading'
-import {getCountDown,getClient} from "@/utils/publicMethod";
+import {getCountDown,openGoods} from "@/utils/publicMethod";
 
 
 class SecondKill extends Component {
@@ -19,32 +19,7 @@ class SecondKill extends Component {
   }
 
   openGoods(goodsId) {
-      const client = getClient()
-      if (client == 0) {//ios
-        if (window.webkit) {
-          window.webkit.messageHandlers.openGoods.postMessage({
-            goods_id: goodsId
-          })
-        } else {
-          wx.navigateTo({
-            url: `/pages/detail/index?id=${goodsId}`,
-          })
-        }
-      } else if (client == 1) {//安卓
-        if (window.android != null && typeof window.android != 'undefined') {
-          window.android.openGoods( goodsId )
-          return
-        } else {
-          wx.navigateTo({
-            url: `/pages/detail/index?id=${goodsId}`,
-          })
-        }
-      } else if (client == 2) {//微信
-        //跳转到小程序
-        wx.miniProgram.navigateTo({
-          url: `/pages/detail/index?id=${goodsId}`
-        });
-      }
+      openGoods(goodsId)
   }
 
   renderList() {

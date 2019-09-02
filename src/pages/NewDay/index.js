@@ -15,6 +15,7 @@ class NewDay extends Component {
   }
 
   handleOpenGoods(goodsId) {
+    alert('clickGoods')
     openGoods(goodsId)
   }
 

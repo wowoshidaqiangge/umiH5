@@ -40,8 +40,8 @@ function getIosToken() {
 
 //判断是否是小程序的环境
 function isMiniProgram() {
-  var ua = navigator.userAgent.toLowerCase();
-  var envType = null;
+  const ua = navigator.userAgent.toLowerCase();
+  let envType = null;
   if (ua.match(/MicroMessenger/i) == 'micromessenger') { //微信环境
     wx.miniProgram.getEnv(function (res) {
       if (res.miniprogram) { // 小程序环境下逻辑

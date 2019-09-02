@@ -16,19 +16,20 @@ export default {
       dll: false,
       routes: {
         exclude: [
-        
+
           /models\//,
           /services\//,
           /model\.(t|j)sx?$/,
           /service\.(t|j)sx?$/,
-        
+
           /components\//,
         ],
       },
     }],
   ],
   targets:{
-    ie:11
+      ie:11, safari: 10,
+      chrome: 49, firefox: 45, edge: 13, ios: 10
   },
   // 路由配置
   routes: pageRoutes,

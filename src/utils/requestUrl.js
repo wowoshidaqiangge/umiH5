@@ -1,6 +1,6 @@
 
-const testUrl ='https://api.napin.com/'
-// const testUrl = 'https://testnew.napin.com/';//api请求路径
+// const testUrl ='https://api.napin.com/'
+const testUrl = 'https://testnew.napin.com/';//api请求路径
 const oldTestUrl = 'https://testnp.napin.com/';//api请求路径
 
 //接口列表

@@ -1,4 +1,5 @@
 import $ from 'jquery'
+// import $ from 'zepto'
 import wx from 'weixin-js-sdk'
 
 /**
@@ -38,13 +39,13 @@ export function getClient() {
   const u = navigator.userAgent;
   const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
   const isIos = u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
-  const isWechat = u.toLowerCase().indexOf('micromessenger') != -1;
-  if (isWechat) {
-    return 2;
+  const isWechat = u.toLowerCase().indexOf('micromessenger') !== -1;
+  if (isIos) {
+    return 0
   } else if (isAndroid) {
-    return 1;
-  } else if (isIos) {
-    return 0;
+    return 1
+  } else if (isWechat) {
+    return 2
   }
 }
 
@@ -52,31 +53,48 @@ export function getClient() {
  *
  */
 
-export function openGoods(goodsId){
-  const client = getClient()
-  if (client == 0) {//ios
+export function openGoods(goodsId) {
+  const u = navigator.userAgent;
+  const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+  const isIos = u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+  const isWechat = u.toLowerCase().indexOf('micromessenger') !== -1
+  alert(`iswechart${isWechat}`)
+  // const client = getClient()
+  if (isIos && isWechat===false) {//ios
     if (window.webkit) {
       window.webkit.messageHandlers.openGoods.postMessage({
         goods_id: goodsId
       })
     } else {
       wx.navigateTo({
-        url: `/pages/detail/index?id=${goodsId}`,
+        url: `/pages/details/index?id=${goodsId}`,
       })
     }
-  } else if (client == 1) {//安卓
+  } else if (isAndroid && isWechat===false) {//安卓
     if (window.android != null && typeof window.android != 'undefined') {
-      window.android.openGoods( goodsId )
+      window.android.openGoods(goodsId)
       return
     } else {
       wx.navigateTo({
-        url: `/pages/detail/index?id=${goodsId}`,
+        url: `/pages/details/index?id=${goodsId}`,
       })
     }
-  } else if (client == 2) {//微信
+  } else if (isWechat) {//微信
+    alert('进入微信'+goodsId)
     //跳转到小程序
-    wx.miniProgram.navigateTo({
-      url: `/pages/detail/index?id=${goodsId}`
-    });
+    // wx.navigateTo({ url: `/pages/details/index?id=${goodsId}`})
+    wx.miniProgram.getEnv(function(res){
+      alert('res'+res.miniprogram)
+      if(res.miniprogram){
+        wx.miniProgram.navigateTo({ url: `../details/index?id=${goodsId}`,success:function () {
+            alert('success')
+          },fail:function (result) {
+            alert(result)
+          }})
+      }
+    })
+    // wx.miniProgram.navigateTo({
+    //   url: `/pages/details/index?id=${goodsId}`
+    // });
   }
 }
