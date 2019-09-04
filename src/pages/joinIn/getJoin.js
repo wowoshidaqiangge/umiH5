@@ -13,6 +13,9 @@ class GetJoin extends Component {
   }
 
   componentDidMount() {
+    alert('join pages ...')
+    console.log("join pages ...")
+    debugger
     const {dispatch} = this.props
     dispatch({type: 'getJoin/getJoinIn'})
   }
