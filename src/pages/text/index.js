@@ -8,12 +8,14 @@ export default  class Test extends Component {
 
     }
   }
-
+  componentDidMount(){
+  
+  }
 
   render() {
 
     return (
-     <div>hola test</div>
+     <div>hola test1</div>
     )
   }
 }

@@ -4,7 +4,7 @@ import {connect} from 'dva'
 import router from 'umi/router'
 import {createForm} from 'rc-form'
 import styles from './style/join.less'
-import {getToken} from "@/utils/requestMethod";
+// import {getToken} from "@/utils/requestMethod";
 
 // import getToken from '../../utils/request';
 
@@ -192,7 +192,7 @@ class JoinInfo extends Component {
             <div style={{display: 'flex', lineHeight: '35px'}}>
               <div className={styles.read}>请仔细阅读并同意</div>
               <div className={styles.contract}
-                   onClick={() => router.push('/joinIn-contract')}>
+                   onClick={() => router.push('/joinInContract')}>
                 《纳品网联盟合作服务协议》
               </div>
             </div>

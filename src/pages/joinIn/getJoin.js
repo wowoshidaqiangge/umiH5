@@ -13,19 +13,18 @@ class GetJoin extends Component {
   }
 
   componentDidMount() {
-    alert('join pages ...')
-    console.log("join pages ...")
-    debugger
+  
     const {dispatch} = this.props
     dispatch({type: 'getJoin/getJoinIn'})
   }
 
 
   handleNextUrl() {
+   
     const {getJoin} = this.props
     const {isJoin} = getJoin
     if (isJoin === 1 || isJoin === 2) {
-      router.push('/joinIn-contract')
+      router.push('/joinInContract')
       // dispatch(routerRedux.push({pathname: '/joinIn-contract'}))
     } else if (isJoin === 0) {
       router.push('/joinIn')

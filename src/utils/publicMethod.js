@@ -58,7 +58,7 @@ export function openGoods(goodsId) {
   const isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
   const isIos = u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
   const isWechat = u.toLowerCase().indexOf('micromessenger') !== -1
-  alert(`iswechart${isWechat}`)
+  
   // const client = getClient()
   if (isIos && isWechat===false) {//ios
     if (window.webkit) {
@@ -80,14 +80,14 @@ export function openGoods(goodsId) {
       })
     }
   } else if (isWechat) {//微信
-    alert('进入微信'+goodsId)
+    
     //跳转到小程序
     // wx.navigateTo({ url: `/pages/details/index?id=${goodsId}`})
     wx.miniProgram.getEnv(function(res){
-      alert('res'+res.miniprogram)
+    
       if(res.miniprogram){
         wx.miniProgram.navigateTo({ url: `../details/index?id=${goodsId}`,success:function () {
-            alert('success')
+           alert('success')
           },fail:function (result) {
             alert(result)
           }})

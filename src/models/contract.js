@@ -1,5 +1,5 @@
 import * as service from '../services/contract'
-import sys from "@/utils/request";
+// import sys from "@/utils/request";
 
 
 export default {
@@ -40,7 +40,7 @@ export default {
           }
         })
       }
-      sys.responseCode(data)
+      // sys.responseCode(data)
     },
   },
   subscriptions: {

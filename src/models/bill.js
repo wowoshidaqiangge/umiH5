@@ -1,6 +1,6 @@
 import * as service from '../services/bill'
 import {Toast} from 'antd-mobile'
-import sys from '../utils/request'
+// import sys from '../utils/request'
 
 export default {
   namespace: 'bill',
@@ -39,7 +39,7 @@ export default {
             returnFont:data.data.return_info.return_font,
           }})
       }
-      sys.responseCode(data)
+      // sys.responseCode(data)
     },
 
     *returnMoney({payload}, {call, put}){
@@ -48,7 +48,7 @@ export default {
         Toast.success(data.message,3)
         yield  put ({type:'setState',payload:{returnFont:'已申请退还保证金,客服将在一个月内处理'}})
       }
-      sys.responseCode(data)
+      // sys.responseCode(data)
     },
 
     *setYearValue({payload},{call,put}){
@@ -68,7 +68,7 @@ export default {
       if(data.code === 1){
         yield put({type: 'setState', payload: {costData: data.data}})
       }
-      sys.responseCode(data)
+      // sys.responseCode(data)
     }
 
   },

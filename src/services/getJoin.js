@@ -1,5 +1,5 @@
 import {api} from '../utils/requestUrl'
-import{request,sysParams}  from '../utils/requestMethod'
+import {request, sysParams} from "@/utils/requestMethod";
 
 export async function getJoinIn() {
   const arg = {...sysParams}

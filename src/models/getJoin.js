@@ -1,11 +1,11 @@
 import * as service from '../services/getJoin'
-import sys from '../utils/request'
+// import sys from '../utils/request'
 
 
 export default {
   namespace: 'getJoin',
   state: {
-    isJoin: '',     //是否加盟
+    isJoin: 0,     //是否加盟
     joinMoney:''    //加盟金额
   },
   reducers: {
@@ -17,13 +17,14 @@ export default {
     * getJoinIn({}, {call, put}) {
       const {data} = yield call(service.getJoinIn)
       if (data.code === 1) {
+        
         yield  put({
           type: 'setState', payload: {
             isJoin: data.data.is_join,joinMoney: data.data.join_money
           }
         })
       }
-      sys.responseCode(data)
+      // sys.responseCode(data)
     },
   },
   subscriptions: {

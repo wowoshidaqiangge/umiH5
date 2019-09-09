@@ -1,9 +1,7 @@
-// import axios from 'axios'
-// import sys from '../utils/request'
-// import {api} from '../utils/requestUrl'
+
 
 import {api} from '../utils/requestUrl'
-import {request, sysParams} from '../utils/requestMethod'
+import {request, sysParams} from "@/utils/requestMethod";
 
 
 export async function getJoinBill() {

@@ -29,24 +29,7 @@ export default [
     name: "联盟",
     title: "联盟"
   },
-  // {
-  //   path: "/points",
-  //   component: "../pages/points/index.js",
-  //   name: "积分商城",
-  //   title: "积分商城"
-  // },
-  {
-    path: "/new",
-    component: "../pages/new/index.js",
-    name: "每日上新",
-    title: "每日上新"
-  },
-  {
-    path: "/pointsRecord",
-    component: "../pages/points/record/index.js",
-    name: "积分记录",
-    title: "积分记录"
-  },
+
   {
     path: "/secondKill",
     component: "../pages/Activity/SecondKill/index.js",
@@ -64,8 +47,8 @@ export default [
     title:'积分'
   },{
     path: "/newDay",
-    // component: "../pages/NewDay/index.js",
-    component: "../pages/text/index.js",
+    component: "../pages/NewDay/index.js",
+    // component: "../pages/text/index.js",
     name: "上新",
     title: "上新"
   },

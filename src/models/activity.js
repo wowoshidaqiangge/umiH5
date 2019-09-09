@@ -1,5 +1,5 @@
 import * as service from '../services/activity'
-import {getToken} from "@/utils/requestMethod";
+
 
 export default {
   namespace: 'activity',

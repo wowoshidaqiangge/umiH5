@@ -31,18 +31,21 @@ export function request(url, params, method) {
 
 // 获取app的token
 export function getAppToken(url, params, method,callback) {
+
   let num = 0
 
   let u = navigator.userAgent
-  alert (`uuuu ${navigator.userAgent}`)
+
   const isWechat = u.toLowerCase().indexOf('micromessenger') != -1
-  alert (`isWechat${isWechat}`)
+
   let isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1 //android终端
   let isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)  //ios终端
   let token, device_id, version, platform,res = '';
   if (isAndroid && isWechat===false) {
+   
     //需要一个android的开发环境
     if (window.android) {
+     
       if (window.android != null && typeof (window.android) !== undefined) {
         let tokenStr = window.android.callUserInfo()   //安卓自带方法获取用户信息
         let tokenObj = JSON.parse(tokenStr)            //将字符串转为json对象
@@ -50,23 +53,23 @@ export function getAppToken(url, params, method,callback) {
         device_id = tokenObj.device_id
         version = tokenObj.version
         platform = tokenObj.platform
-        alert (`android1${token}`)
+      
         if(token!==undefined){
-          alert (`getToken`)
+        
           postman(url, params, method,token,data=>{
             let result = data
             typeof callback === 'function' && callback.call(window,result);
             return result;
           })
         }
-      } else {
-        alert ('window.android2')
       }
     }
   } else if (isiOS && isWechat === false) {
+   
     if (window.webkit) {
-      alert ('window.IOS1')
+     
       window.webkit.messageHandlers.callUserInfo.postMessage({})
+     
       window['callUserInfo'] = function (res) {
         let tokenStr = res;
         let tokenObj = JSON.parse(tokenStr);
@@ -75,7 +78,7 @@ export function getAppToken(url, params, method,callback) {
         version = tokenObj.version;
         platform = tokenObj.platform
         if(token!==undefined){
-          alert ('window.IOS1!=undefiend')
+      
           if(num<1){
             postman(url, params, method,token,data=>{
               let result = data
@@ -86,20 +89,18 @@ export function getAppToken(url, params, method,callback) {
           num++
         }
       }
-    }else{
-      alert ('window.IOS2')
     }
   }
   else if(isWechat){
-    alert('isWechart')
+  
     if(localStorage.getItem('storage_token')){
-      alert('token1')
+  
       token = localStorage.getItem('storage_token')
     }else if(GetQueryString('token')){
-      alert('token2')
+  
       token = GetQueryString('token')
     }
-    alert(`isWeChart=token=${token}`)
+  
     // token =  localStorage.getItem('storage_token') || GetQueryString('token');//地址栏 //本地的
     // if(token!==undefined){
       postman(url, params, method,token,data=>{
@@ -112,7 +113,7 @@ export function getAppToken(url, params, method,callback) {
 }
 
 export function postman(url, params, method,accessToken,callback){
-  alert (`postman`)
+
   if (method === 'get') {
     return axios({
       url,
@@ -128,7 +129,7 @@ export function postman(url, params, method,accessToken,callback){
       let result = res
 
       typeof callback === 'function' && callback.call(window,result);
-      alert(`result${result}`)
+   
       return result;
     })
   } else {
@@ -145,7 +146,7 @@ export function postman(url, params, method,accessToken,callback){
     }).then(res => {
       let result = res
       typeof callback === 'function' && callback.call(window,result);
-      alert(`postresult${result}`)
+    
       return result;
     })
   }
